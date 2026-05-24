@@ -4,6 +4,7 @@ import connectPg from "connect-pg-simple";
 import authRouter from "./routes/auth.js";
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(express.json());
 
 const pgStore = connectPg(session);
@@ -22,7 +23,8 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: false,
+      secure: true,
+      sameSite: "none",
       maxAge: sessionTtl,
     },
   })
