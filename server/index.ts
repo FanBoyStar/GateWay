@@ -14,7 +14,7 @@ app.use(
     secret: process.env.SESSION_SECRET || "passgen-dev-secret-change-in-prod",
     store: new pgStore({
       conString: process.env.DATABASE_URL,
-      createTableIfMissing: false,
+      createTableIfMissing: true,
       ttl: sessionTtl,
       tableName: "sessions",
     }),

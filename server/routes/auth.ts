@@ -36,12 +36,18 @@ router.post("/sign-up", async (req, res) => {
     }).returning();
 
     req.session.userId = user.id;
-    return res.json({
-      id: user.id,
-      email: user.email,
-      full_name: user.fullName,
-      organization_id: user.organizationId,
-      onboarding_completed: user.onboardingCompleted,
+    req.session.save((err) => {
+      if (err) {
+        console.error("Session save error:", err);
+        return res.status(500).json({ error: "Sign up failed" });
+      }
+      return res.json({
+        id: user.id,
+        email: user.email,
+        full_name: user.fullName,
+        organization_id: user.organizationId,
+        onboarding_completed: user.onboardingCompleted,
+      });
     });
   } catch (err) {
     console.error("Sign-up error:", err);
@@ -67,12 +73,18 @@ router.post("/sign-in", async (req, res) => {
     }
 
     req.session.userId = user.id;
-    return res.json({
-      id: user.id,
-      email: user.email,
-      full_name: user.fullName,
-      organization_id: user.organizationId,
-      onboarding_completed: user.onboardingCompleted,
+    req.session.save((err) => {
+      if (err) {
+        console.error("Session save error:", err);
+        return res.status(500).json({ error: "Sign in failed" });
+      }
+      return res.json({
+        id: user.id,
+        email: user.email,
+        full_name: user.fullName,
+        organization_id: user.organizationId,
+        onboarding_completed: user.onboardingCompleted,
+      });
     });
   } catch (err) {
     console.error("Sign-in error:", err);
