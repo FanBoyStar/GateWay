@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { OrganizationSetupModal } from '@/components/OrganizationSetupModal';
+import Landing from '@/pages/Landing';
 import SignUp from '@/pages/SignUp';
 import SignIn from '@/pages/SignIn';
 import Dashboard from '@/pages/Dashboard';
@@ -46,6 +47,7 @@ export default function App() {
   return (
     <>
       <Routes>
+        <Route path="/" element={user ? <Navigate to="/dashboard" replace /> : <Landing />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route
@@ -56,12 +58,11 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/" element={<Navigate to={user ? '/dashboard' : '/sign-in'} replace />} />
       </Routes>
 
-      {user && !user.is_onboarded && (
+      {user && !user.is_onboarded && showOrgModal && (
         <OrganizationSetupModal
-          open={showOrgModal}
+          open={true}
           onComplete={() => setShowOrgModal(false)}
         />
       )}
