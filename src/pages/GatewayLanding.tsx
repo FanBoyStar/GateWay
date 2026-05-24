@@ -184,6 +184,64 @@ body {
   box-shadow: 0 0 14px var(--color-primary-soft);
 }
 
+/* ── Hamburger button ── */
+.gw-hamburger {
+  display: none;
+  flex-direction: column; justify-content: center; align-items: center;
+  width: 36px; height: 36px; border-radius: 10px; gap: 5px;
+  background: var(--color-surface-2); border: 1px solid var(--color-border);
+  cursor: pointer; flex-shrink: 0;
+  transition: background 200ms, border-color 200ms;
+}
+.gw-hamburger:hover { background: var(--color-surface); border-color: var(--color-border-active); }
+.gw-hamburger span {
+  display: block; width: 18px; height: 2px; border-radius: 2px;
+  background: var(--color-text-secondary);
+  transition: transform 250ms, opacity 250ms, width 250ms;
+}
+.gw-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.gw-hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+.gw-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile menu panel ── */
+.gw-mobile-menu {
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 199;
+  background: var(--color-nav-bg);
+  backdrop-filter: blur(24px) saturate(1.4);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 16px 20px;
+  flex-direction: column;
+  transform: translateY(-110%);
+  transition: transform 300ms cubic-bezier(.16,1,.3,1);
+}
+.gw-mobile-menu.open {
+  transform: translateY(0);
+}
+.gw-mobile-menu-spacer {
+  height: 60px;
+}
+.gw-mobile-menu-links {
+  list-style: none; display: flex; flex-direction: column; gap: 2px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 14px;
+}
+.gw-mobile-menu-links a {
+  display: block; padding: 12px 4px;
+  font-size: 16px; font-weight: 500; color: var(--color-text-secondary);
+  text-decoration: none; border-radius: 10px;
+  transition: color 150ms;
+}
+.gw-mobile-menu-links a:hover { color: var(--color-text-primary); }
+.gw-mobile-menu-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 4px 4px 0;
+}
+.gw-mobile-menu-label {
+  font-size: 13px; color: var(--color-text-muted);
+}
+
 /* ── Dark mode orb boost ── */
 [data-gw-theme="dark"] .gw-orb-1 { background: rgba(232,24,109,0.30); }
 [data-gw-theme="dark"] .gw-orb-2 { background: rgba(99,68,212,0.20); }
@@ -1051,11 +1109,13 @@ body {
 
 /* ══════════ RESPONSIVE — MOBILE ══════════ */
 @media (max-width: 640px) {
-  /* Nav — keep everything on one line */
-  .gw-nav { padding: 12px 16px; gap: 8px; }
-  .gw-nav-cta { padding: 9px 14px; font-size: 12px; gap: 4px; }
-  .gw-theme-toggle { width: 32px; height: 32px; flex-shrink: 0; }
-  .gw-logo { font-size: 17px; }
+  /* Nav — hamburger layout */
+  .gw-nav { padding: 12px 16px; gap: 0; }
+  .gw-nav-cta { padding: 10px 18px; font-size: 13px; gap: 5px; }
+  .gw-logo { font-size: 17px; flex: 1; }
+  .gw-theme-toggle { display: none; }
+  .gw-hamburger { display: flex; }
+  .gw-mobile-menu { display: flex; }
 
   /* Hero */
   .gw-hero { padding: 90px 20px 60px; min-height: auto; }
@@ -1603,6 +1663,7 @@ export default function GatewayLanding() {
   const [isDark, setIsDark] = useState(() => {
     try { return localStorage.getItem("gw-theme") === "dark"; } catch { return false; }
   });
+  const [menuOpen, setMenuOpen] = useState(false);
   const revealRefs = useRef<Element[]>([]);
   const stepTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -1682,6 +1743,22 @@ export default function GatewayLanding() {
       </div>
 
       {/* ── Nav ── */}
+      {/* Mobile menu panel — slides down behind nav bar */}
+      <div className={`gw-mobile-menu${menuOpen ? " open" : ""}`}>
+        <div className="gw-mobile-menu-spacer" />
+        <ul className="gw-mobile-menu-links">
+          <li><a href="#features" onClick={() => setMenuOpen(false)}>Features</a></li>
+          <li><a href="#how-it-works" onClick={() => setMenuOpen(false)}>How it works</a></li>
+          <li><a href="#templates" onClick={() => setMenuOpen(false)}>Templates</a></li>
+        </ul>
+        <div className="gw-mobile-menu-footer">
+          <span className="gw-mobile-menu-label">{isDark ? "Dark mode" : "Light mode"}</span>
+          <button className="gw-theme-toggle" onClick={toggleTheme} title={isDark ? "Switch to light mode" : "Switch to dark mode"}>
+            {isDark ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+        </div>
+      </div>
+
       <nav className="gw-nav">
         <a className="gw-logo" href="#">
           <div className="gw-logo-mark">
@@ -1697,6 +1774,13 @@ export default function GatewayLanding() {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button className="gw-theme-toggle" onClick={toggleTheme} title={isDark ? "Switch to light mode" : "Switch to dark mode"}>
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+          <button
+            className={`gw-hamburger${menuOpen ? " open" : ""}`}
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label="Toggle menu"
+          >
+            <span /><span /><span />
           </button>
           <a href="/sign-up" className="gw-nav-cta">
             Get Started <ArrowUpRight size={14} />
