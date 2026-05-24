@@ -131,7 +131,7 @@ body {
 .gw-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 48px;
+  padding: 28px 72px;
   background: var(--color-nav-bg);
   backdrop-filter: blur(20px) saturate(1.4);
   border-bottom: 1px solid var(--color-border);
@@ -218,10 +218,10 @@ body {
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 0;
-  padding: 140px 0 80px;
-  max-width: 1300px;
+  padding: 160px 0 120px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding-left: 48px; padding-right: 48px;
+  padding-left: 72px; padding-right: 72px;
 }
 .gw-hero-left { display: flex; flex-direction: column; align-items: flex-start; }
 .gw-hero-right {
@@ -253,18 +253,18 @@ body {
   display: inline-flex; align-items: center; gap: 7px;
   background: var(--color-primary-soft);
   border: 1px solid rgba(232,24,109,0.3);
-  border-radius: 50px; padding: 5px 14px;
+  border-radius: 50px; padding: 6px 16px;
   font-size: 11px; font-weight: 600; letter-spacing: 0.07em;
   color: var(--color-primary); text-transform: uppercase;
-  margin-bottom: 28px;
+  margin-bottom: 48px;
   animation: fadeUp 0.5s ease both;
 }
 
 .gw-headline {
   font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(40px, 5.5vw, 72px);
-  font-weight: 800; line-height: 1.02;
-  letter-spacing: -0.035em;
+  font-size: clamp(48px, 6.5vw, 88px);
+  font-weight: 800; line-height: 1.0;
+  letter-spacing: -0.04em;
   animation: fadeUp 0.5s 0.08s ease both;
 }
 .gw-headline .grad {
@@ -290,19 +290,19 @@ body {
 }
 
 .gw-sub {
-  font-size: 17px; font-weight: 400; line-height: 1.65;
+  font-size: 19px; font-weight: 400; line-height: 1.65;
   color: var(--color-text-secondary);
-  max-width: 460px;
-  margin-top: 20px;
+  max-width: 500px;
+  margin-top: 32px;
   animation: fadeUp 0.5s 0.16s ease both;
 }
 .gw-hero-ctas {
-  display: flex; gap: 12px; flex-wrap: wrap;
-  margin-top: 40px;
+  display: flex; gap: 14px; flex-wrap: wrap;
+  margin-top: 56px;
   animation: fadeUp 0.5s 0.24s ease both;
 }
 .gw-hero-meta {
-  display: flex; gap: 20px; margin-top: 32px; flex-wrap: wrap;
+  display: flex; gap: 24px; margin-top: 52px; flex-wrap: wrap;
   animation: fadeUp 0.5s 0.32s ease both;
 }
 .gw-hero-meta-item {
@@ -617,37 +617,37 @@ body {
 /* ══════════ SECTION BASE ══════════ */
 .gw-section {
   position: relative; z-index: 1;
-  padding: 96px 48px;
+  padding: 160px 72px;
 }
-.gw-section-inner { max-width: 1200px; margin: 0 auto; }
+.gw-section-inner { max-width: 1296px; margin: 0 auto; }
 .gw-eyebrow {
   display: inline-flex; align-items: center; gap: 7px;
   font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--color-primary);
-  margin-bottom: 14px;
+  margin-bottom: 24px;
 }
 .gw-section-title {
   font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(28px, 4vw, 48px);
-  font-weight: 800; line-height: 1.06;
-  letter-spacing: -0.025em;
+  font-size: clamp(36px, 5vw, 62px);
+  font-weight: 800; line-height: 1.04;
+  letter-spacing: -0.03em;
 }
 .gw-section-sub {
-  font-size: 16px; line-height: 1.65; color: var(--color-text-secondary);
-  max-width: 500px; margin-top: 14px;
+  font-size: 18px; line-height: 1.65; color: var(--color-text-secondary);
+  max-width: 560px; margin-top: 22px;
 }
 
 /* ══════════ FEATURE GRID ══════════ */
 .gw-features-bg { background: var(--color-surface-2); }
 .gw-feature-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px; margin-top: 52px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px; margin-top: 80px;
 }
 .gw-feat-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: 16px; padding: 28px;
+  border-radius: 20px; padding: 40px;
   transition: border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
   cursor: default; position: relative; overflow: hidden;
 }
@@ -663,28 +663,28 @@ body {
   box-shadow: 0 8px 28px rgba(0,0,0,0.08), 0 0 0 1px rgba(232,24,109,0.15);
 }
 .gw-feat-icon {
-  width: 46px; height: 46px; border-radius: 13px;
+  width: 52px; height: 52px; border-radius: 15px;
   background: var(--color-primary-soft);
   border: 1px solid rgba(232,24,109,0.2);
   display: flex; align-items: center; justify-content: center;
-  color: var(--color-primary); margin-bottom: 20px;
+  color: var(--color-primary); margin-bottom: 28px;
   position: relative;
 }
 .gw-feat-title {
-  font-family: "Space Grotesk", sans-serif; font-size: 17px; font-weight: 700;
-  margin-bottom: 9px; letter-spacing: -0.01em;
+  font-family: "Space Grotesk", sans-serif; font-size: 18px; font-weight: 700;
+  margin-bottom: 12px; letter-spacing: -0.015em;
 }
-.gw-feat-body { font-size: 14px; color: var(--color-text-secondary); line-height: 1.65; }
+.gw-feat-body { font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; }
 
 /* ══════════ HOW IT WORKS ══════════ */
 .gw-how-layout {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 80px; margin-top: 56px; align-items: start;
+  gap: 120px; margin-top: 88px; align-items: start;
 }
 .gw-steps { display: flex; flex-direction: column; gap: 0; }
 .gw-step {
-  display: flex; gap: 20px; position: relative;
-  padding-bottom: 32px; cursor: default;
+  display: flex; gap: 24px; position: relative;
+  padding-bottom: 48px; cursor: default;
 }
 .gw-step:last-child { padding-bottom: 0; }
 /* connector line */
@@ -713,11 +713,11 @@ body {
 }
 .gw-step-body { padding-top: 8px; }
 .gw-step-title {
-  font-family: "Space Grotesk", sans-serif; font-size: 16px; font-weight: 700;
-  margin-bottom: 6px; transition: color 300ms;
+  font-family: "Space Grotesk", sans-serif; font-size: 18px; font-weight: 700;
+  margin-bottom: 8px; transition: color 300ms;
 }
 .gw-step.active-step .gw-step-title { color: var(--color-primary); }
-.gw-step-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; }
+.gw-step-desc { font-size: 15px; color: var(--color-text-secondary); line-height: 1.65; }
 .gw-step-num {
   font-family: "JetBrains Mono", monospace; font-size: 10px;
   color: var(--color-text-muted); margin-bottom: 4px;
@@ -829,12 +829,12 @@ body {
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
   background: var(--color-surface);
-  padding: 0 48px;
+  padding: 0 72px;
   display: grid; grid-template-columns: repeat(4, 1fr);
   overflow: hidden;
 }
 .gw-stat-item {
-  padding: 36px 24px;
+  padding: 60px 32px;
   border-right: 1px solid var(--color-border);
   display: flex; flex-direction: column; gap: 4px;
   position: relative;
@@ -847,22 +847,22 @@ body {
 }
 .gw-stat-item:hover::after { opacity: 1; }
 .gw-stat-num {
-  font-family: "Space Grotesk", sans-serif; font-size: 36px; font-weight: 800;
-  letter-spacing: -0.03em; line-height: 1;
+  font-family: "Space Grotesk", sans-serif; font-size: 52px; font-weight: 800;
+  letter-spacing: -0.04em; line-height: 1;
   background: linear-gradient(135deg, var(--color-stat-grad-start) 0%, var(--color-stat-grad-end) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.gw-stat-label { font-size: 13px; color: var(--color-text-muted); }
+.gw-stat-label { font-size: 14px; color: var(--color-text-muted); margin-top: 6px; }
 
 /* ══════════ TEMPLATES ══════════ */
 .gw-templates-header {
   display: flex; align-items: flex-end; justify-content: space-between;
-  flex-wrap: wrap; gap: 20px; margin-bottom: 52px;
+  flex-wrap: wrap; gap: 24px; margin-bottom: 80px;
 }
 .gw-template-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: 40px;
 }
 .gw-tpl-wrap {
   display: flex; flex-direction: column; gap: 14px; align-items: stretch;
@@ -923,7 +923,7 @@ body {
 /* ══════════ CTA SECTION ══════════ */
 .gw-cta-section {
   position: relative; z-index: 1;
-  padding: 140px 48px; text-align: center; overflow: hidden;
+  padding: 200px 72px; text-align: center; overflow: hidden;
 }
 .gw-cta-radial {
   position: absolute; inset: 0; pointer-events: none;
@@ -942,9 +942,9 @@ body {
 
 .gw-cta-title {
   font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(32px, 5vw, 60px); font-weight: 800;
-  line-height: 1.04; letter-spacing: -0.03em;
-  max-width: 760px; margin: 0 auto; position: relative; z-index: 1;
+  font-size: clamp(42px, 6.5vw, 80px); font-weight: 800;
+  line-height: 1.02; letter-spacing: -0.035em;
+  max-width: 900px; margin: 0 auto; position: relative; z-index: 1;
 }
 .gw-cta-grad {
   background: linear-gradient(120deg, var(--color-primary) 0%, #c4176a 50%, var(--color-accent) 100%);
@@ -952,17 +952,17 @@ body {
   background-clip: text;
 }
 .gw-cta-sub {
-  font-size: 17px; color: var(--color-text-secondary);
-  max-width: 460px; margin: 20px auto 0; line-height: 1.65;
+  font-size: 19px; color: var(--color-text-secondary);
+  max-width: 520px; margin: 28px auto 0; line-height: 1.65;
   position: relative; z-index: 1;
 }
 .gw-cta-actions {
-  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-  margin-top: 44px; position: relative; z-index: 1;
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  margin-top: 56px; position: relative; z-index: 1;
 }
 .gw-cta-checks {
-  display: flex; align-items: center; justify-content: center; gap: 28px;
-  margin-top: 28px; flex-wrap: wrap; position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center; gap: 32px;
+  margin-top: 36px; flex-wrap: wrap; position: relative; z-index: 1;
 }
 .gw-cta-check {
   display: flex; align-items: center; gap: 6px;
@@ -974,9 +974,9 @@ body {
   position: relative; z-index: 1;
   border-top: 1px solid var(--color-border);
   background: var(--color-surface);
-  padding: 40px 48px;
+  padding: 60px 72px;
   display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 16px;
+  flex-wrap: wrap; gap: 20px;
 }
 .gw-footer-logo {
   font-family: "Space Grotesk", sans-serif; font-size: 16px; font-weight: 800;
