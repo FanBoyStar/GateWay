@@ -270,44 +270,18 @@ body {
 }
 .btn-ghost:hover { background: var(--color-surface-2); border-color: var(--color-primary); }
 
-/* ══════════ HERO ══════════ */
+/* ══════════ HERO V2 — CENTERED ══════════ */
 .gw-hero {
   position: relative; z-index: 1;
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 0;
-  padding: 160px 0 120px;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding-left: 72px; padding-right: 72px;
+  padding: 160px 24px 80px;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
 }
-.gw-hero-left { display: flex; flex-direction: column; align-items: flex-start; }
-.gw-hero-right {
-  display: flex; align-items: center; justify-content: center;
-  position: relative;
+.gw-hero-text {
+  max-width: 860px; width: 100%;
+  display: flex; flex-direction: column; align-items: center;
 }
-
-/* editorial slash divider — Guasco reference */
-.gw-hero-slash {
-  position: absolute; left: -1px; top: 0; bottom: 0;
-  width: 1px; overflow: visible;
-}
-.gw-hero-slash::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg,
-    transparent 0%,
-    var(--color-primary) 30%,
-    var(--color-accent) 70%,
-    transparent 100%
-  );
-  opacity: 0.5;
-}
+.gw-hero-left, .gw-hero-right, .gw-hero-slash, .gw-bg-letter { display: none; }
 
 .gw-badge {
   display: inline-flex; align-items: center; gap: 7px;
@@ -316,7 +290,7 @@ body {
   border-radius: 50px; padding: 6px 16px;
   font-size: 11px; font-weight: 600; letter-spacing: 0.07em;
   color: var(--color-primary); text-transform: uppercase;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
   animation: fadeUp 0.5s ease both;
 }
 
@@ -333,32 +307,16 @@ body {
   background-clip: text;
 }
 
-/* Guasco-style large decorative letter behind headline */
-.gw-bg-letter {
-  position: absolute;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 320px; font-weight: 800;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(232,24,109,0.06);
-  letter-spacing: -0.05em;
-  line-height: 1;
-  top: 50%; left: -32px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  user-select: none;
-  z-index: -1;
-}
-
 .gw-sub {
   font-size: 19px; font-weight: 400; line-height: 1.65;
   color: var(--color-text-secondary);
-  max-width: 500px;
-  margin-top: 32px;
+  max-width: 580px; margin: 28px auto 0;
   animation: fadeUp 0.5s 0.16s ease both;
 }
 .gw-hero-ctas {
   display: flex; gap: 14px; flex-wrap: wrap;
-  margin-top: 56px;
+  justify-content: center;
+  margin-top: 48px;
   animation: fadeUp 0.5s 0.24s ease both;
 }
 .gw-hero-meta {
@@ -387,6 +345,126 @@ body {
 .gw-scroll-line {
   width: 40px; height: 1px;
   background: linear-gradient(90deg, var(--color-primary), transparent);
+}
+
+/* ══════════ SCROLL SHOWCASE ══════════ */
+.gw-showcase-track {
+  position: relative; z-index: 1;
+  height: 270vh;
+}
+.gw-showcase-sticky {
+  position: sticky; top: 0;
+  height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.gw-showcase-inner {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+/* ── Phone mockup ── */
+.gw-phone-wrap {
+  perspective: 1400px;
+  perspective-origin: 50% 40%;
+}
+.gw-phone {
+  width: 276px; height: 564px;
+  border-radius: 46px;
+  background: #0e0e16;
+  border: 2px solid rgba(255,255,255,0.09);
+  box-shadow:
+    0 0 0 6px #1a1a26,
+    0 0 0 9px rgba(255,255,255,0.04),
+    0 60px 120px rgba(0,0,0,0.65),
+    0 0 80px rgba(232,24,109,0.14);
+  position: relative; overflow: hidden;
+  transform-origin: 50% 30%;
+  will-change: transform;
+}
+.gw-phone::after {
+  content: '';
+  position: absolute; inset: 0; border-radius: 46px;
+  background: linear-gradient(140deg, rgba(232,24,109,0.07) 0%, transparent 55%);
+  pointer-events: none; z-index: 3;
+}
+.gw-phone-notch {
+  position: absolute; top: 14px; left: 50%;
+  transform: translateX(-50%);
+  width: 82px; height: 24px;
+  background: #0e0e16;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.07);
+  z-index: 10;
+}
+.gw-phone-screen {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px 14px 22px;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+/* side buttons */
+.gw-phone-btn-r {
+  position: absolute; right: -10px; top: 130px;
+  width: 4px; height: 60px; border-radius: 2px;
+  background: #1c1c28; border: 1px solid rgba(255,255,255,0.05);
+}
+.gw-phone-btn-l1 {
+  position: absolute; left: -10px; top: 110px;
+  width: 4px; height: 36px; border-radius: 2px;
+  background: #1c1c28; border: 1px solid rgba(255,255,255,0.05);
+}
+.gw-phone-btn-l2 {
+  position: absolute; left: -10px; top: 158px;
+  width: 4px; height: 52px; border-radius: 2px;
+  background: #1c1c28; border: 1px solid rgba(255,255,255,0.05);
+}
+/* ── Feature bubbles ── */
+.gw-bubble {
+  position: absolute;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-active);
+  border-radius: 40px;
+  padding: 9px 15px 9px 10px;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 500; color: var(--color-text-primary);
+  white-space: nowrap;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.14), 0 0 0 1px rgba(232,24,109,0.07);
+  opacity: 0;
+  transform: scale(0.82) translateY(12px);
+  transition: opacity 500ms cubic-bezier(.16,1,.3,1), transform 500ms cubic-bezier(.16,1,.3,1);
+  pointer-events: none; z-index: 10;
+}
+.gw-bubble.gw-bubble-visible {
+  opacity: 1; transform: scale(1) translateY(0);
+}
+.gw-bubble-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+/* Bubble positions — desktop */
+.gw-bubble-0 { left: calc(50% - 246px); top: calc(50% - 96px); }
+.gw-bubble-1 { left: calc(50% + 152px); top: calc(50% - 118px); }
+.gw-bubble-2 { left: calc(50% - 232px); top: calc(50% + 68px); }
+.gw-bubble-3 { left: calc(50% + 144px); top: calc(50% + 88px); }
+/* ── Showcase tagline ── */
+.gw-showcase-tagline {
+  position: relative; z-index: 1;
+  text-align: center;
+  padding: 80px 24px 120px;
+}
+.gw-showcase-tagline-text {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(28px, 4.5vw, 52px);
+  font-weight: 800; line-height: 1.1; letter-spacing: -0.03em;
+  max-width: 700px; margin: 0 auto;
+}
+.gw-showcase-tagline-sub {
+  font-size: 18px; color: var(--color-text-secondary);
+  max-width: 480px; margin: 20px auto 0; line-height: 1.65;
 }
 
 /* ══════════ PASS CARD SYSTEM ══════════ */
@@ -1118,15 +1196,34 @@ body {
   .gw-mobile-menu { display: flex; }
 
   /* Hero */
-  .gw-hero { padding: 90px 20px 60px; min-height: auto; }
-  .gw-badge { margin-bottom: 24px; font-size: 10px; }
+  .gw-hero { padding: 90px 20px 40px; }
+  .gw-badge { margin-bottom: 20px; font-size: 10px; }
   .gw-headline { font-size: clamp(34px, 9vw, 52px); }
   .gw-sub { font-size: 16px; max-width: 100%; margin-top: 18px; }
   .gw-hero-ctas { flex-direction: column; width: 100%; margin-top: 32px; gap: 10px; }
   .btn-primary { width: 100%; justify-content: center; padding: 14px 24px; font-size: 14px; }
   .btn-ghost { width: 100%; justify-content: center; padding: 13px 24px; font-size: 14px; }
   .gw-hero-meta { gap: 12px; margin-top: 32px; }
-  .gw-scroll-hint { left: 16px; }
+  .gw-scroll-hint { left: 50%; transform: translateX(-50%); }
+
+  /* Showcase */
+  .gw-showcase-track { height: 300vh; }
+  .gw-phone { width: 220px; height: 448px; border-radius: 36px;
+    box-shadow: 0 0 0 5px #1a1a26, 0 0 0 7px rgba(255,255,255,0.04), 0 40px 80px rgba(0,0,0,0.65); }
+  .gw-phone::after { border-radius: 36px; }
+  .gw-phone-notch { width: 66px; height: 18px; top: 10px; }
+  .gw-phone-screen { padding: 46px 10px 18px; }
+  .pc { width: min(190px, 76vw); }
+  .pc-carousel { width: min(190px, 76vw); height: 260px; }
+  .gw-bubble { font-size: 11px; padding: 7px 12px 7px 8px; gap: 6px; }
+  .gw-bubble-icon { width: 22px; height: 22px; }
+  /* reposition bubbles for narrow screens */
+  .gw-bubble-0 { left: calc(50% - 176px); top: calc(50% - 178px); }
+  .gw-bubble-1 { left: calc(50% + 28px);  top: calc(50% - 196px); }
+  .gw-bubble-2 { left: calc(50% - 168px); top: calc(50% + 152px); }
+  .gw-bubble-3 { left: calc(50% + 20px);  top: calc(50% + 168px); }
+  .gw-showcase-tagline { padding: 48px 20px 80px; }
+  .gw-showcase-tagline-sub { font-size: 15px; }
 
   /* Stats — 2-col, compact */
   .gw-stats { grid-template-columns: 1fr 1fr; padding: 0; }
@@ -1664,6 +1761,8 @@ export default function GatewayLanding() {
     try { return localStorage.getItem("gw-theme") === "dark"; } catch { return false; }
   });
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const showcaseRef = useRef<HTMLDivElement>(null);
   const revealRefs = useRef<Element[]>([]);
   const stepTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -1685,6 +1784,21 @@ export default function GatewayLanding() {
   useEffect(() => {
     stepTimerRef.current = setInterval(() => setActiveStep(s => (s + 1) % 4), 2200);
     return () => { if (stepTimerRef.current) clearInterval(stepTimerRef.current); };
+  }, []);
+
+  // scroll progress for showcase
+  useEffect(() => {
+    const onScroll = () => {
+      if (!showcaseRef.current) return;
+      const rect = showcaseRef.current.getBoundingClientRect();
+      const trackH = showcaseRef.current.offsetHeight - window.innerHeight;
+      const scrolled = -rect.top;
+      const p = Math.min(1, Math.max(0, scrolled / (trackH || 1)));
+      setScrollProgress(p);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   // intersection observer reveal
@@ -1789,17 +1903,11 @@ export default function GatewayLanding() {
       </nav>
 
       {/* ════════════════════════════════
-          HERO
+          HERO — CENTERED
       ════════════════════════════════ */}
       <section style={{ position: "relative", zIndex: 1 }}>
-        {/* cityscape background layer */}
-        <div className="gw-cityscape">
-          <CityscapeSVG dark={isDark} />
-        </div>
         <div className="gw-hero">
-          {/* left */}
-          <div className="gw-hero-left">
-            <div className="gw-bg-letter font-syne">G</div>
+          <div className="gw-hero-text">
             <div className="gw-badge"><Zap size={10} />Free for all events</div>
             <h1 className="gw-headline font-syne">
               Beautiful Event<br />
@@ -1814,37 +1922,94 @@ export default function GatewayLanding() {
               <a href="/passes/demo" className="btn-ghost"><QrCode size={16} />See a Demo Pass</a>
             </div>
             <div className="gw-hero-meta">
-              {[
+              {([
                 [<CheckCircle size={13}/>, "No credit card"],
                 [<Shield size={13}/>, "Data stays local"],
                 [<Zap size={13}/>, "Works instantly"],
-              ].map(([icon, txt], i) => (
+              ] as [React.ReactNode, string][]).map(([icon, txt], i) => (
                 <div key={i} className="gw-hero-meta-item" style={{ color: "var(--color-success)" }}>
                   {icon}
-                  <span style={{ color: "var(--color-text-muted)" }}>{txt as string}</span>
+                  <span style={{ color: "var(--color-text-muted)" }}>{txt}</span>
                 </div>
               ))}
             </div>
           </div>
-
-          {/* right — floating pass */}
-          <div className="gw-hero-right">
-            <div className="gw-hero-slash" />
-            <div className="gw-pass-scene">
-              <div className="gw-pass-aura" />
-              {/* main pass carousel */}
-              <div className="gw-pass-main" style={{ filter: "drop-shadow(0 32px 72px rgba(232,24,109,0.22))" }}>
-                <HeroPassCarousel />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="gw-scroll-hint">
-          <div className="gw-scroll-line" />
-          <span>Scroll to explore</span>
         </div>
       </section>
+
+      {/* ════════════════════════════════
+          SCROLL SHOWCASE — Phone mockup
+      ════════════════════════════════ */}
+      {(() => {
+        // phone tilt: first 55% of scroll = tilt → flat
+        const tilt = Math.max(0, 1 - scrollProgress / 0.55);
+        const rotX  = 32 * tilt;
+        const rotZ  = -6 * tilt;
+        const sc    = 0.76 + 0.24 * (1 - tilt);
+        const ty    = -28 * tilt;
+        const phoneStyle: React.CSSProperties = {
+          transform: `rotateX(${rotX}deg) rotateZ(${rotZ}deg) scale(${sc}) translateY(${ty}px)`,
+          transition: "transform 60ms linear",
+        };
+        const bubbles = [
+          { icon: <QrCode size={14}/>,      label: "QR verified entry",  threshold: 0.42, x: -230, y: -90,  delay: 0   },
+          { icon: <Zap size={14}/>,         label: "Instant delivery",   threshold: 0.52, x:  185, y: -110, delay: 80  },
+          { icon: <Star size={14}/>,        label: "Custom branding",    threshold: 0.64, x: -215, y:  80,  delay: 160 },
+          { icon: <Shield size={14}/>,      label: "Any event type",     threshold: 0.74, x:  175, y:  100, delay: 240 },
+        ];
+        return (
+          <>
+            <div className="gw-showcase-track" ref={showcaseRef}>
+              <div className="gw-showcase-sticky">
+                <div className="gw-showcase-inner">
+                  {/* Phone */}
+                  <div className="gw-phone-wrap">
+                    <div className="gw-phone" style={phoneStyle}>
+                      <div className="gw-phone-notch" />
+                      <div className="gw-phone-btn-r" />
+                      <div className="gw-phone-btn-l1" />
+                      <div className="gw-phone-btn-l2" />
+                      <div className="gw-phone-screen">
+                        <HeroPassCarousel />
+                      </div>
+                    </div>
+                  </div>
+                  {/* Feature bubbles */}
+                  {bubbles.map((b, i) => (
+                    <div
+                      key={i}
+                      className={`gw-bubble gw-bubble-${i}${scrollProgress >= b.threshold ? " gw-bubble-visible" : ""}`}
+                      style={{
+                        transitionDelay: scrollProgress >= b.threshold ? `${b.delay}ms` : "0ms",
+                      }}
+                    >
+                      <div className="gw-bubble-icon">{b.icon}</div>
+                      {b.label}
+                    </div>
+                  ))}
+                </div>
+                {/* scroll hint at bottom of sticky view */}
+                <div className="gw-scroll-hint" style={{ bottom: 24, left: "50%", transform: "translateX(-50%)", opacity: tilt > 0.3 ? 1 : 0, transition: "opacity 400ms" }}>
+                  <div className="gw-scroll-line" />
+                  <span>Scroll to explore</span>
+                  <div className="gw-scroll-line" style={{ transform: "scaleX(-1)" }} />
+                </div>
+              </div>
+            </div>
+
+            {/* Tagline below showcase */}
+            <div className="gw-showcase-tagline gw-reveal" ref={ref}>
+              <p className="gw-showcase-tagline-text font-syne">
+                Gateway makes your passes<br />
+                <span style={{ color: "var(--color-primary)" }}>professional in minutes.</span>
+              </p>
+              <p className="gw-showcase-tagline-sub">
+                Every pass is scan-ready, beautifully branded, and delivered instantly to your guests.
+              </p>
+            </div>
+          </>
+        );
+      })()}
 
       {/* ════════════════════════════════
           STATS STRIP
