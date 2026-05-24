@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "@supabase/supabase-js": "^2.106.1",
     "@tailwindcss/vite": "^4.2.1",
     "@tanstack/react-query": "^5.100.14",
     "@types/bcrypt": "^6.0.0",
