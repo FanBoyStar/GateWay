@@ -1283,6 +1283,12 @@ export default function GatewayLanding() {
     });
   };
 
+  // Apply theme attribute to <html> so CSS vars cascade from :root correctly
+  useEffect(() => {
+    document.documentElement.setAttribute("data-gw-theme", isDark ? "dark" : "light");
+    return () => { document.documentElement.removeAttribute("data-gw-theme"); };
+  }, [isDark]);
+
   // auto-advance steps
   useEffect(() => {
     stepTimerRef.current = setInterval(() => setActiveStep(s => (s + 1) % 4), 2200);
@@ -1325,7 +1331,7 @@ export default function GatewayLanding() {
   ];
 
   return (
-    <div data-gw-theme={isDark ? "dark" : "light"} style={{ minHeight: "100vh", background: "var(--color-bg)", transition: "background 300ms" }}>
+    <>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
 
       {/* ── Background ── */}
@@ -1617,6 +1623,6 @@ export default function GatewayLanding() {
           © {new Date().getFullYear()} Gateway. All rights reserved.
         </div>
       </footer>
-    </div>
+    </>
   );
 }
