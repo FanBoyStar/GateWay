@@ -12,20 +12,20 @@ const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono&display=swap');
 
 :root {
-  --color-bg:             #0D0D12;
-  --color-surface:        #15151E;
-  --color-surface-2:      #1E1E2C;
-  --color-border:         rgba(255,255,255,0.08);
-  --color-border-active:  rgba(255,255,255,0.18);
+  --color-bg:             #F8F8FC;
+  --color-surface:        #FFFFFF;
+  --color-surface-2:      #F0F0F7;
+  --color-border:         rgba(0,0,0,0.07);
+  --color-border-active:  rgba(0,0,0,0.13);
   --color-primary:        #E8186D;
-  --color-primary-soft:   rgba(232,24,109,0.15);
-  --color-primary-glow:   rgba(232,24,109,0.35);
-  --color-accent:         #7B5CF0;
-  --color-accent-soft:    rgba(123,92,240,0.15);
-  --color-success:        #22C55E;
-  --color-text-primary:   #FFFFFF;
-  --color-text-secondary: rgba(255,255,255,0.55);
-  --color-text-muted:     rgba(255,255,255,0.30);
+  --color-primary-soft:   rgba(232,24,109,0.10);
+  --color-primary-glow:   rgba(232,24,109,0.22);
+  --color-accent:         #6344D4;
+  --color-accent-soft:    rgba(99,68,212,0.10);
+  --color-success:        #16A34A;
+  --color-text-primary:   #0D0D12;
+  --color-text-secondary: rgba(13,13,18,0.55);
+  --color-text-muted:     rgba(13,13,18,0.38);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,6 +38,7 @@ body {
   cursor: default;
 }
 
+
 /* ── Typography helpers ── */
 .font-syne  { font-family: "Space Grotesk", sans-serif; }
 .font-mono  { font-family: "JetBrains Mono", monospace; }
@@ -47,24 +48,24 @@ body {
   position: fixed; inset: 0; z-index: 0;
   pointer-events: none; overflow: hidden;
 }
-/* large orbs */
+/* large orbs — toned down for light mode */
 .gw-orb {
   position: absolute; border-radius: 50%;
-  filter: blur(90px);
+  filter: blur(110px);
   animation: orbFloat var(--dur, 20s) ease-in-out infinite alternate;
 }
 .gw-orb-1 {
-  width: 700px; height: 700px; top: -240px; right: -160px;
-  background: var(--color-primary-glow); --dur: 22s;
+  width: 600px; height: 600px; top: -200px; right: -120px;
+  background: rgba(232,24,109,0.10); --dur: 22s;
 }
 .gw-orb-2 {
-  width: 550px; height: 550px; bottom: 20%; left: -180px;
-  background: rgba(123,92,240,0.20); --dur: 28s;
+  width: 450px; height: 450px; bottom: 20%; left: -140px;
+  background: rgba(99,68,212,0.08); --dur: 28s;
   animation-delay: -10s;
 }
 .gw-orb-3 {
-  width: 400px; height: 400px; bottom: -100px; right: 15%;
-  background: rgba(232,24,109,0.12); --dur: 24s;
+  width: 350px; height: 350px; bottom: -80px; right: 15%;
+  background: rgba(232,24,109,0.07); --dur: 24s;
   animation-delay: -5s;
 }
 @keyframes orbFloat {
@@ -74,7 +75,7 @@ body {
   100% { transform: translate(20px,-18px) scale(1.03); }
 }
 
-/* diagonal editorial grid lines — inspired by Guasco's bow slashes */
+/* diagonal editorial grid lines — very subtle in light mode */
 .gw-diag-lines {
   position: absolute; inset: 0;
   background-image:
@@ -82,22 +83,22 @@ body {
       -32deg,
       transparent,
       transparent 140px,
-      rgba(232,24,109,0.025) 140px,
-      rgba(232,24,109,0.025) 141px
+      rgba(232,24,109,0.012) 140px,
+      rgba(232,24,109,0.012) 141px
     );
 }
 
-/* kinetic sweep streaks */
+/* kinetic sweep streaks — very subtle in light mode */
 .gw-streak {
   position: absolute; height: 1px; pointer-events: none;
-  background: linear-gradient(90deg, transparent, var(--color-primary-soft), transparent);
+  background: linear-gradient(90deg, transparent, rgba(232,24,109,0.12), transparent);
   animation: streak var(--spd, 7s) linear infinite;
   animation-delay: var(--del, 0s);
 }
 @keyframes streak {
   0%   { transform: translateX(-120vw) skewX(-18deg); opacity: 0; }
-  15%  { opacity: 1; }
-  85%  { opacity: 0.4; }
+  15%  { opacity: 0.5; }
+  85%  { opacity: 0.18; }
   100% { transform: translateX(200vw) skewX(-18deg); opacity: 0; }
 }
 
@@ -106,7 +107,7 @@ body {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 48px;
-  background: rgba(13,13,18,0.75);
+  background: rgba(248,248,252,0.82);
   backdrop-filter: blur(20px) saturate(1.4);
   border-bottom: 1px solid var(--color-border);
   transition: padding 250ms;
@@ -222,7 +223,7 @@ body {
   animation: fadeUp 0.5s 0.08s ease both;
 }
 .gw-headline .grad {
-  background: linear-gradient(120deg, var(--color-primary) 0%, #ff6ba8 50%, var(--color-accent) 100%);
+  background: linear-gradient(120deg, var(--color-primary) 0%, #d4176a 60%, var(--color-accent) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
@@ -233,7 +234,7 @@ body {
   font-family: "Space Grotesk", sans-serif;
   font-size: 320px; font-weight: 800;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(232,24,109,0.07);
+  -webkit-text-stroke: 1px rgba(232,24,109,0.06);
   letter-spacing: -0.05em;
   line-height: 1;
   top: 50%; left: -32px;
@@ -288,13 +289,13 @@ body {
   position: relative;
   animation: fadeUp 0.8s 0.3s ease both;
 }
-/* large ambient glow behind everything */
+/* ambient glow behind pass — toned down for light mode */
 .gw-pass-aura {
   position: absolute;
   inset: -60px;
   background: radial-gradient(ellipse at 50% 50%,
-    var(--color-primary-glow) 0%,
-    rgba(123,92,240,0.15) 40%,
+    rgba(232,24,109,0.12) 0%,
+    rgba(99,68,212,0.06) 45%,
     transparent 70%
   );
   border-radius: 50%;
@@ -331,15 +332,15 @@ body {
   50%      { transform: rotate(6deg) scale(0.88) translateY(-12px); }
 }
 
-/* ── pass card itself ── */
+/* ── pass card itself — always dark ── */
 .pc {
   border-radius: 20px; overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px var(--color-border-active);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.10);
   width: 320px;
 }
 .pc-top {
   height: 136px; position: relative; overflow: hidden;
-  background: var(--color-bg);
+  background: #0D0D12;
 }
 .pc-top-stripe {
   position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
@@ -383,18 +384,18 @@ body {
 .pc-perf::before, .pc-perf::after {
   content: ''; position: absolute; top: -12px;
   width: 24px; height: 24px; border-radius: 50%;
-  background: var(--color-bg);
+  background: #15151E;
 }
 .pc-perf::before { left: -13px; }
 .pc-perf::after  { right: -13px; }
 
 .pc-bottom {
-  background: var(--color-surface); padding: 18px 20px 18px 24px;
+  background: #15151E; padding: 18px 20px 18px 24px;
   display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: end;
 }
 .pc-name {
   font-family: "Space Grotesk", sans-serif; font-size: 15px; font-weight: 700;
-  color: var(--color-text-primary);
+  color: #FFFFFF;
 }
 .pc-vip {
   display: inline-flex; align-items: center; gap: 4px;
@@ -402,10 +403,10 @@ body {
   border-radius: 50px; padding: 2px 9px;
   font-size: 10px; font-weight: 600; margin-top: 3px;
 }
-.pc-info { font-size: 11px; color: var(--color-text-muted); margin-top: 10px; line-height: 1.7; }
+.pc-info { font-size: 11px; color: rgba(255,255,255,0.38); margin-top: 10px; line-height: 1.7; }
 .pc-id {
   font-family: "JetBrains Mono", monospace;
-  font-size: 10px; color: var(--color-text-muted);
+  font-size: 10px; color: rgba(255,255,255,0.30);
   letter-spacing: 0.03em; margin-top: 6px;
 }
 .pc-qr {
@@ -455,14 +456,14 @@ body {
 }
 
 /* ══════════ FEATURE GRID ══════════ */
-.gw-features-bg { background: var(--color-surface); }
+.gw-features-bg { background: var(--color-surface-2); }
 .gw-feature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px; margin-top: 52px;
 }
 .gw-feat-card {
-  background: var(--color-bg);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 16px; padding: 28px;
   transition: border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
@@ -470,14 +471,14 @@ body {
 }
 .gw-feat-card::before {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, var(--color-primary-soft) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(232,24,109,0.05) 0%, transparent 60%);
   opacity: 0; transition: opacity 200ms;
 }
 .gw-feat-card:hover::before { opacity: 1; }
 .gw-feat-card:hover {
-  border-color: var(--color-border-active);
+  border-color: rgba(232,24,109,0.25);
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.28), 0 0 0 1px var(--color-border-active);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08), 0 0 0 1px rgba(232,24,109,0.15);
 }
 .gw-feat-icon {
   width: 46px; height: 46px; border-radius: 13px;
@@ -556,7 +557,7 @@ body {
 }
 .gw-how-screen.active-screen {
   border-color: var(--color-primary);
-  box-shadow: 0 0 40px var(--color-primary-glow), 0 20px 60px rgba(0,0,0,0.3);
+  box-shadow: 0 0 28px rgba(232,24,109,0.18), 0 8px 32px rgba(0,0,0,0.08);
   transform: translateY(-4px);
 }
 .gw-how-screen-title {
@@ -666,7 +667,7 @@ body {
 .gw-stat-num {
   font-family: "Space Grotesk", sans-serif; font-size: 36px; font-weight: 800;
   letter-spacing: -0.03em; line-height: 1;
-  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-text-secondary) 100%);
+  background: linear-gradient(135deg, #0D0D12 0%, rgba(13,13,18,0.6) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
@@ -686,13 +687,13 @@ body {
 }
 .gw-tpl-card {
   border-radius: 18px; overflow: hidden;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px var(--color-border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 0 0 1px var(--color-border);
   transition: transform 300ms cubic-bezier(.34,1.56,.64,1), box-shadow 300ms;
   cursor: default;
 }
 .gw-tpl-card:hover {
   transform: translateY(-6px) rotate(-0.5deg) scale(1.01);
-  box-shadow: 0 28px 64px rgba(0,0,0,0.5), 0 0 0 1px var(--color-border-active);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.14), 0 0 0 1px rgba(232,24,109,0.2);
 }
 .gw-tpl-top { height: 110px; position: relative; overflow: hidden; }
 .gw-tpl-bottom { padding: 16px 18px; display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
@@ -712,13 +713,13 @@ body {
   width: 24px; height: 24px; border-radius: 50%;
 }
 
-/* Classic */
-.tpl-classic .gw-tpl-top { background: var(--color-bg); }
+/* Classic — always dark card */
+.tpl-classic .gw-tpl-top { background: #0D0D12; }
 .tpl-classic .gw-tpl-top::after { content: ''; position: absolute; left: 0; inset-block: 0; width: 4px; background: var(--color-primary); box-shadow: 0 0 16px var(--color-primary-glow); }
-.tpl-classic .gw-tpl-bottom { background: var(--color-surface); }
-.tpl-classic .gw-tpl-perf::before, .tpl-classic .gw-tpl-perf::after { background: var(--color-bg); }
-.tpl-classic .gw-tpl-name { color: var(--color-text-primary); }
-.tpl-classic .gw-tpl-id { color: var(--color-text-muted); }
+.tpl-classic .gw-tpl-bottom { background: #15151E; }
+.tpl-classic .gw-tpl-perf::before, .tpl-classic .gw-tpl-perf::after { background: #15151E; }
+.tpl-classic .gw-tpl-name { color: #FFFFFF; }
+.tpl-classic .gw-tpl-id { color: rgba(255,255,255,0.35); }
 
 /* Minimal */
 .tpl-minimal .gw-tpl-top { background: #FAFAFA; border-bottom: 1px solid #E8E8F0; }
@@ -745,13 +746,13 @@ body {
 .gw-cta-radial {
   position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 60% at 50% 60%, var(--color-primary-soft), transparent),
-    radial-gradient(ellipse 40% 40% at 20% 40%, var(--color-accent-soft), transparent);
+    radial-gradient(ellipse 70% 60% at 50% 60%, rgba(232,24,109,0.06), transparent),
+    radial-gradient(ellipse 40% 40% at 20% 40%, rgba(99,68,212,0.05), transparent);
 }
 /* editorial slash lines in CTA */
 .gw-cta-slash-l, .gw-cta-slash-r {
   position: absolute; top: 0; bottom: 0; width: 1px;
-  background: linear-gradient(180deg, transparent, var(--color-primary-soft), transparent);
+  background: linear-gradient(180deg, transparent, rgba(232,24,109,0.12), transparent);
   opacity: 0.6;
 }
 .gw-cta-slash-l { left: 15%; transform: skewX(-8deg); }
@@ -764,7 +765,7 @@ body {
   max-width: 760px; margin: 0 auto; position: relative; z-index: 1;
 }
 .gw-cta-grad {
-  background: linear-gradient(120deg, var(--color-primary) 0%, #ff6ba8 40%, var(--color-accent) 100%);
+  background: linear-gradient(120deg, var(--color-primary) 0%, #c4176a 50%, var(--color-accent) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
@@ -877,9 +878,9 @@ function CityscapeSVG() {
       <defs>
         {/* fade-to-transparent gradient so cityscape blends into hero */}
         <linearGradient id="skyFade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#0D0D12" stopOpacity="0" />
-          <stop offset="55%" stopColor="#0D0D12" stopOpacity="0.45" />
-          <stop offset="100%" stopColor="#0D0D12" stopOpacity="1" />
+          <stop offset="0%" stopColor="#F8F8FC" stopOpacity="0" />
+          <stop offset="55%" stopColor="#F8F8FC" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#F8F8FC" stopOpacity="1" />
         </linearGradient>
         {/* primary-color window glow */}
         <filter id="winGlow" x="-50%" y="-50%" width="200%" height="200%">
@@ -892,70 +893,70 @@ function CityscapeSVG() {
         </filter>
       </defs>
 
-      {/* ── Building silhouettes — black fills ── */}
+      {/* ── Building silhouettes — soft gray fills for light mode ── */}
 
-      {/* Far background layer — shorter, more muted */}
+      {/* Far background layer — lighter, more muted */}
       {/* bg block left */}
-      <rect x="0"   y="280" width="90"  height="140" fill="#0a0a0f" />
-      <rect x="85"  y="300" width="60"  height="120" fill="#0a0a0f" />
-      <rect x="140" y="260" width="80"  height="160" fill="#0a0a0f" />
-      <rect x="215" y="295" width="50"  height="125" fill="#0a0a0f" />
-      <rect x="260" y="270" width="70"  height="150" fill="#0a0a0f" />
+      <rect x="0"   y="280" width="90"  height="140" fill="#D8D8E8" />
+      <rect x="85"  y="300" width="60"  height="120" fill="#D8D8E8" />
+      <rect x="140" y="260" width="80"  height="160" fill="#D8D8E8" />
+      <rect x="215" y="295" width="50"  height="125" fill="#D8D8E8" />
+      <rect x="260" y="270" width="70"  height="150" fill="#D8D8E8" />
       {/* bg block right */}
-      <rect x="1100" y="290" width="80"  height="130" fill="#0a0a0f" />
-      <rect x="1175" y="265" width="65"  height="155" fill="#0a0a0f" />
-      <rect x="1235" y="285" width="90"  height="135" fill="#0a0a0f" />
-      <rect x="1320" y="270" width="60"  height="150" fill="#0a0a0f" />
-      <rect x="1375" y="295" width="65"  height="125" fill="#0a0a0f" />
+      <rect x="1100" y="290" width="80"  height="130" fill="#D8D8E8" />
+      <rect x="1175" y="265" width="65"  height="155" fill="#D8D8E8" />
+      <rect x="1235" y="285" width="90"  height="135" fill="#D8D8E8" />
+      <rect x="1320" y="270" width="60"  height="150" fill="#D8D8E8" />
+      <rect x="1375" y="295" width="65"  height="125" fill="#D8D8E8" />
 
       {/* Mid layer — main body buildings */}
       {/* Left cluster */}
-      <rect x="0"   y="220" width="100" height="200" fill="#0D0D12" />
-      <rect x="95"  y="240" width="75"  height="180" fill="#0D0D12" />
-      <rect x="165" y="200" width="55"  height="220" fill="#0D0D12" />
-      <rect x="215" y="230" width="85"  height="190" fill="#0D0D12" />
-      <rect x="295" y="210" width="65"  height="210" fill="#0D0D12" />
-      <rect x="355" y="250" width="90"  height="170" fill="#0D0D12" />
-      <rect x="440" y="230" width="55"  height="190" fill="#0D0D12" />
-      <rect x="490" y="260" width="70"  height="160" fill="#0D0D12" />
+      <rect x="0"   y="220" width="100" height="200" fill="#C8C8DC" />
+      <rect x="95"  y="240" width="75"  height="180" fill="#C8C8DC" />
+      <rect x="165" y="200" width="55"  height="220" fill="#C8C8DC" />
+      <rect x="215" y="230" width="85"  height="190" fill="#C8C8DC" />
+      <rect x="295" y="210" width="65"  height="210" fill="#C8C8DC" />
+      <rect x="355" y="250" width="90"  height="170" fill="#C8C8DC" />
+      <rect x="440" y="230" width="55"  height="190" fill="#C8C8DC" />
+      <rect x="490" y="260" width="70"  height="160" fill="#C8C8DC" />
 
       {/* Center cluster — tallest buildings */}
-      <rect x="555" y="150" width="80"  height="270" fill="#0D0D12" />
-      <rect x="630" y="130" width="60"  height="290" fill="#0D0D12" />
+      <rect x="555" y="150" width="80"  height="270" fill="#B8B8D0" />
+      <rect x="630" y="130" width="60"  height="290" fill="#B8B8D0" />
       {/* Central spire tower */}
-      <rect x="685" y="60"  width="30"  height="360" fill="#0D0D12" />
-      <polygon points="700,30 685,80 715,80" fill="#0D0D12" />
+      <rect x="685" y="60"  width="30"  height="360" fill="#AEAEC8" />
+      <polygon points="700,30 685,80 715,80" fill="#AEAEC8" />
       {/* Antenna */}
-      <rect x="698" y="10"  width="4"   height="50"  fill="#0D0D12" />
+      <rect x="698" y="10"  width="4"   height="50"  fill="#9898B8" />
       {/* Tower observation deck */}
-      <rect x="680" y="120" width="40"  height="18"  fill="#0D0D12" />
-      <rect x="676" y="138" width="48"  height="8"   fill="#0D0D12" />
+      <rect x="680" y="120" width="40"  height="18"  fill="#9898B8" />
+      <rect x="676" y="138" width="48"  height="8"   fill="#9898B8" />
 
-      <rect x="710" y="140" width="70"  height="280" fill="#0D0D12" />
-      <rect x="775" y="160" width="55"  height="260" fill="#0D0D12" />
-      <rect x="825" y="120" width="45"  height="300" fill="#0D0D12" />
+      <rect x="710" y="140" width="70"  height="280" fill="#B8B8D0" />
+      <rect x="775" y="160" width="55"  height="260" fill="#B8B8D0" />
+      <rect x="825" y="120" width="45"  height="300" fill="#B0B0CC" />
       {/* Slender skyscraper */}
-      <rect x="865" y="80"  width="35"  height="340" fill="#0D0D12" />
-      <polygon points="882,55 865,90 900,90" fill="#0D0D12" />
-      <rect x="895" y="170" width="65"  height="250" fill="#0D0D12" />
+      <rect x="865" y="80"  width="35"  height="340" fill="#AEAEC8" />
+      <polygon points="882,55 865,90 900,90" fill="#AEAEC8" />
+      <rect x="895" y="170" width="65"  height="250" fill="#B8B8D0" />
 
       {/* Right cluster */}
-      <rect x="955" y="200" width="90"  height="220" fill="#0D0D12" />
-      <rect x="1040" y="220" width="70" height="200" fill="#0D0D12" />
-      <rect x="1105" y="190" width="80" height="230" fill="#0D0D12" />
-      <rect x="1180" y="215" width="60" height="205" fill="#0D0D12" />
-      <rect x="1235" y="230" width="95" height="190" fill="#0D0D12" />
-      <rect x="1325" y="210" width="65" height="210" fill="#0D0D12" />
-      <rect x="1385" y="240" width="55" height="180" fill="#0D0D12" />
+      <rect x="955" y="200" width="90"  height="220" fill="#C8C8DC" />
+      <rect x="1040" y="220" width="70" height="200" fill="#C8C8DC" />
+      <rect x="1105" y="190" width="80" height="230" fill="#C8C8DC" />
+      <rect x="1180" y="215" width="60" height="205" fill="#C8C8DC" />
+      <rect x="1235" y="230" width="95" height="190" fill="#C8C8DC" />
+      <rect x="1325" y="210" width="65" height="210" fill="#C8C8DC" />
+      <rect x="1385" y="240" width="55" height="180" fill="#C8C8DC" />
 
       {/* Foreground large base buildings */}
-      <rect x="0"   y="300" width="130" height="120" fill="#0D0D12" />
-      <rect x="125" y="320" width="100" height="100" fill="#0D0D12" />
-      <rect x="1220" y="310" width="110" height="110" fill="#0D0D12" />
-      <rect x="1325" y="295" width="115" height="125" fill="#0D0D12" />
+      <rect x="0"   y="300" width="130" height="120" fill="#C0C0D8" />
+      <rect x="125" y="320" width="100" height="100" fill="#C0C0D8" />
+      <rect x="1220" y="310" width="110" height="110" fill="#C0C0D8" />
+      <rect x="1325" y="295" width="115" height="125" fill="#C0C0D8" />
 
       {/* Ground base fill */}
-      <rect x="0" y="400" width="1440" height="20" fill="#0D0D12" />
+      <rect x="0" y="400" width="1440" height="20" fill="#C0C0D8" />
 
       {/* ── Windows — primary color glow ── */}
       {/* Left cluster windows */}
@@ -1022,8 +1023,8 @@ function CityscapeSVG() {
         ))
       )}
 
-      {/* ── Street-level glow — pink ground reflection ── */}
-      <rect x="0" y="390" width="1440" height="30" fill="var(--color-primary)" opacity="0.04" />
+      {/* ── Street-level glow — subtle pink ground reflection ── */}
+      <rect x="0" y="390" width="1440" height="30" fill="var(--color-primary)" opacity="0.03" />
 
       {/* ── Sky-to-transparent overlay so it blends into hero bg ── */}
       <rect x="0" y="0" width="1440" height="420" fill="url(#skyFade)" />
@@ -1346,22 +1347,22 @@ export default function GatewayLanding() {
             <div className="gw-hero-slash" />
             <div className="gw-pass-scene">
               <div className="gw-pass-aura" />
-              {/* ghost pass behind */}
+              {/* ghost pass behind — always dark */}
               <div className="gw-pass-ghost">
                 <div style={{
                   width: 260, borderRadius: 16, overflow: "hidden",
-                  boxShadow: "0 12px 40px rgba(123,92,240,0.3)",
-                  border: "1px solid rgba(123,92,240,0.3)"
+                  boxShadow: "0 12px 40px rgba(99,68,212,0.18)",
+                  border: "1px solid rgba(99,68,212,0.25)"
                 }}>
-                  <div style={{ height: 90, background: "linear-gradient(135deg, var(--color-accent) 0%, rgba(123,92,240,0.5) 100%)", position:"relative" }}>
+                  <div style={{ height: 90, background: "linear-gradient(135deg, #6344D4 0%, rgba(99,68,212,0.7) 100%)", position:"relative" }}>
                     <div style={{position:"absolute",inset:0,padding:"14px 16px",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
                       <div style={{fontFamily:"DM Sans",fontSize:"9px",letterSpacing:"0.07em",color:"rgba(255,255,255,0.6)",textTransform:"uppercase"}}>Wedding</div>
                       <div style={{fontFamily:"Space Grotesk",fontSize:"15px",fontWeight:800,color:"#fff"}}>Midnight Gala</div>
                     </div>
                   </div>
-                  <div style={{ background: "var(--color-surface-2)", padding: "12px 16px" }}>
+                  <div style={{ background: "#1E1E2C", padding: "12px 16px" }}>
                     <div style={{ fontFamily: "Space Grotesk", fontSize: "12px", fontWeight: 700, color: "rgba(255,255,255,0.7)" }}>Guest Name</div>
-                    <div style={{ fontFamily: "JetBrains Mono", fontSize: "9px", color: "var(--color-text-muted)", marginTop: 3 }}>EVT-BK3MZ9-0011</div>
+                    <div style={{ fontFamily: "JetBrains Mono", fontSize: "9px", color: "rgba(255,255,255,0.35)", marginTop: 3 }}>EVT-BK3MZ9-0011</div>
                   </div>
                 </div>
               </div>
