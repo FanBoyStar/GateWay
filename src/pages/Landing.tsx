@@ -65,7 +65,7 @@ export function Landing() {
             <div className="space-y-6 animate-fade-in">
               <h1
                 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight"
-                style={{ fontFamily: 'Syne, sans-serif' }}
+                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
               >
                 Beautiful Event Passes.
                 <br />
@@ -120,7 +120,7 @@ export function Landing() {
         <div className="max-w-7xl mx-auto px-4">
           <h2
             className="text-3xl md:text-4xl font-bold text-center mb-12"
-            style={{ fontFamily: 'Syne, sans-serif' }}
+            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
           >
             Everything you need for event passes
           </h2>
@@ -149,7 +149,7 @@ export function Landing() {
         <div className="max-w-7xl mx-auto px-4">
           <h2
             className="text-3xl md:text-4xl font-bold text-center mb-16"
-            style={{ fontFamily: 'Syne, sans-serif' }}
+            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
           >
             How It Works
           </h2>

@@ -112,7 +112,7 @@ export function Profile() {
           <div>
             <h1
               className="text-2xl font-bold mb-2"
-              style={{ fontFamily: 'Syne, sans-serif' }}
+              style={{ fontFamily: 'Space Grotesk, sans-serif' }}
             >
               Profile & Settings
             </h1>

@@ -95,7 +95,7 @@ export function CongratsModal({ open, eventId, eventName, onClose }: CongratsMod
 
               <h2
                 className="text-3xl font-bold text-white"
-                style={{ fontFamily: 'Syne, sans-serif' }}
+                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
               >
                 Congratulations!
               </h2>

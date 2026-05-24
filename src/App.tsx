@@ -80,7 +80,7 @@ function DemoPassPage() {
           <div className="flex justify-center mb-4">
             <Logo href="/" size="lg" />
           </div>
-          <h1 className="text-2xl font-bold" style={{ fontFamily: 'Syne, sans-serif' }}>
+          <h1 className="text-2xl font-bold" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
             Demo Pass Preview
           </h1>
           <p className="text-muted-foreground">This is what an event pass looks like</p>

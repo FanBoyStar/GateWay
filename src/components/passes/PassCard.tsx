@@ -105,7 +105,7 @@ export function PassCard({
               isThumbnail ? 'text-sm' : 'text-xl',
               textColorClass
             )}
-            style={{ fontFamily: 'Syne, sans-serif' }}
+            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
           >
             {event.name}
           </h2>
@@ -152,7 +152,7 @@ export function PassCard({
               isThumbnail ? 'text-base' : 'text-lg',
               templateStyle.textColor
             )}
-            style={{ fontFamily: 'Syne, sans-serif' }}
+            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
           >
             {attendee.name}
           </p>

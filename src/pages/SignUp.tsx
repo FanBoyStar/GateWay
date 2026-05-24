@@ -63,7 +63,7 @@ export function SignUp() {
 
         <div className="p-8 rounded-2xl bg-card border border-border shadow-lg">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Syne, sans-serif' }}>
+            <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
               Create your account
             </h1>
             <p className="text-muted-foreground">Join Gateway to start creating beautiful event passes</p>

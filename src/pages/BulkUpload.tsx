@@ -166,7 +166,7 @@ export function BulkUpload() {
           </Button>
 
           <div className="rounded-2xl border border-border bg-card p-6">
-            <h1 className="text-2xl font-bold mb-2" style={{ fontFamily: 'Syne, sans-serif' }}>
+            <h1 className="text-2xl font-bold mb-2" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
               Bulk Upload Attendees
             </h1>
             <p className="text-muted-foreground mb-6">

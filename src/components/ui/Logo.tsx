@@ -37,7 +37,7 @@ export function Logo({ size = 'md', href = '/', className = '' }: LogoProps) {
   const label = (
     <span
       className={`font-extrabold tracking-tight ${s.text}`}
-      style={{ fontFamily: 'Syne, sans-serif', letterSpacing: '-0.03em' }}
+      style={{ fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '-0.03em' }}
     >
       Gateway
     </span>

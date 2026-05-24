@@ -148,7 +148,7 @@ export function Onboarding() {
           {step === 1 && (
             <div className="animate-fade-in">
               <div className="mb-6">
-                <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: 'Syne, sans-serif' }}>
+                <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                   Welcome, {firstName}! 👋
                 </h1>
                 <p className="text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>
@@ -215,7 +215,7 @@ export function Onboarding() {
           {step === 2 && (
             <div className="animate-fade-in">
               <div className="mb-6">
-                <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: 'Syne, sans-serif' }}>
+                <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                   Pick your brand color
                 </h1>
                 <p className="text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>
@@ -336,7 +336,7 @@ export function Onboarding() {
               >
                 <Check className="w-10 h-10" style={{ color: brandColor }} />
               </div>
-              <h1 className="text-2xl font-bold mb-2" style={{ fontFamily: 'Syne, sans-serif' }}>
+              <h1 className="text-2xl font-bold mb-2" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                 You're all set!
               </h1>
               <p className="text-sm mb-8" style={{ color: 'rgba(255,255,255,0.55)' }}>

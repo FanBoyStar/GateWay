@@ -155,7 +155,7 @@ export function AddAttendee() {
 
           <div className="rounded-2xl border border-border bg-card p-6 space-y-6">
             <div className="space-y-2">
-              <h1 className="text-2xl font-bold" style={{ fontFamily: 'Syne, sans-serif' }}>
+              <h1 className="text-2xl font-bold" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                 Add Attendee
               </h1>
               <p className="text-muted-foreground">

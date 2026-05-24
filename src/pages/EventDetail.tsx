@@ -96,7 +96,7 @@ export function EventDetail() {
                   </div>
                   <h1
                     className="text-3xl lg:text-4xl font-bold"
-                    style={{ fontFamily: 'Syne, sans-serif' }}
+                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                   >
                     {event.name}
                   </h1>

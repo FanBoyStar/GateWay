@@ -9,7 +9,7 @@ import {
    GLOBAL STYLES — Neon Noir System
 ═══════════════════════════════════════════════ */
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono&display=swap');
 
 :root {
   --color-bg:             #0D0D12;
@@ -39,7 +39,7 @@ body {
 }
 
 /* ── Typography helpers ── */
-.font-syne  { font-family: "Syne", sans-serif; }
+.font-syne  { font-family: "Space Grotesk", sans-serif; }
 .font-mono  { font-family: "JetBrains Mono", monospace; }
 
 /* ══════════ BACKGROUND CANVAS ══════════ */
@@ -113,7 +113,7 @@ body {
 }
 .gw-logo {
   display: flex; align-items: center; gap: 10px;
-  font-family: "Syne", sans-serif; font-size: 20px; font-weight: 800;
+  font-family: "Space Grotesk", sans-serif; font-size: 20px; font-weight: 800;
   letter-spacing: -0.03em; color: var(--color-text-primary);
   text-decoration: none;
 }
@@ -215,7 +215,7 @@ body {
 }
 
 .gw-headline {
-  font-family: "Syne", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: clamp(40px, 5.5vw, 72px);
   font-weight: 800; line-height: 1.02;
   letter-spacing: -0.035em;
@@ -230,7 +230,7 @@ body {
 /* Guasco-style large decorative letter behind headline */
 .gw-bg-letter {
   position: absolute;
-  font-family: "Syne", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 320px; font-weight: 800;
   color: transparent;
   -webkit-text-stroke: 1px rgba(232,24,109,0.07);
@@ -364,7 +364,7 @@ body {
   width: fit-content;
 }
 .pc-event-name {
-  font-family: "Syne", sans-serif; font-size: 18px; font-weight: 800;
+  font-family: "Space Grotesk", sans-serif; font-size: 18px; font-weight: 800;
   letter-spacing: -0.02em; color: #fff;
   text-shadow: 0 2px 10px rgba(0,0,0,0.6);
 }
@@ -393,7 +393,7 @@ body {
   display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: end;
 }
 .pc-name {
-  font-family: "Syne", sans-serif; font-size: 15px; font-weight: 700;
+  font-family: "Space Grotesk", sans-serif; font-size: 15px; font-weight: 700;
   color: var(--color-text-primary);
 }
 .pc-vip {
@@ -444,7 +444,7 @@ body {
   margin-bottom: 14px;
 }
 .gw-section-title {
-  font-family: "Syne", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: clamp(28px, 4vw, 48px);
   font-weight: 800; line-height: 1.06;
   letter-spacing: -0.025em;
@@ -488,7 +488,7 @@ body {
   position: relative;
 }
 .gw-feat-title {
-  font-family: "Syne", sans-serif; font-size: 17px; font-weight: 700;
+  font-family: "Space Grotesk", sans-serif; font-size: 17px; font-weight: 700;
   margin-bottom: 9px; letter-spacing: -0.01em;
 }
 .gw-feat-body { font-size: 14px; color: var(--color-text-secondary); line-height: 1.65; }
@@ -530,7 +530,7 @@ body {
 }
 .gw-step-body { padding-top: 8px; }
 .gw-step-title {
-  font-family: "Syne", sans-serif; font-size: 16px; font-weight: 700;
+  font-family: "Space Grotesk", sans-serif; font-size: 16px; font-weight: 700;
   margin-bottom: 6px; transition: color 300ms;
 }
 .gw-step.active-step .gw-step-title { color: var(--color-primary); }
@@ -560,7 +560,7 @@ body {
   transform: translateY(-4px);
 }
 .gw-how-screen-title {
-  font-family: "Syne", sans-serif; font-size: 13px; font-weight: 700;
+  font-family: "Space Grotesk", sans-serif; font-size: 13px; font-weight: 700;
   color: var(--color-text-muted); text-transform: uppercase;
   letter-spacing: 0.07em; margin-bottom: 14px;
   display: flex; align-items: center; gap: 7px;
@@ -609,7 +609,7 @@ body {
   background: var(--color-surface-2); border-radius: 10px; padding: 10px;
   border: 1px solid var(--color-border);
 }
-.gw-mini-pass-name { font-size: 12px; font-weight: 600; font-family: "Syne", sans-serif; }
+.gw-mini-pass-name { font-size: 12px; font-weight: 600; font-family: "Space Grotesk", sans-serif; }
 .gw-mini-pass-id { font-family: "JetBrains Mono", monospace; font-size: 9px; color: var(--color-text-muted); margin-top: 2px; }
 .gw-mini-pass-status {
   display: inline-flex; align-items: center; gap: 3px;
@@ -637,7 +637,7 @@ body {
   background: rgba(34,197,94,0.2); color: var(--color-success);
   display: flex; align-items: center; justify-content: center;
 }
-.gw-verify-name { font-family: "Syne", sans-serif; font-size: 14px; font-weight: 700; }
+.gw-verify-name { font-family: "Space Grotesk", sans-serif; font-size: 14px; font-weight: 700; }
 .gw-verify-sub { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
 
 /* ══════════ STATS STRIP ══════════ */
@@ -664,7 +664,7 @@ body {
 }
 .gw-stat-item:hover::after { opacity: 1; }
 .gw-stat-num {
-  font-family: "Syne", sans-serif; font-size: 36px; font-weight: 800;
+  font-family: "Space Grotesk", sans-serif; font-size: 36px; font-weight: 800;
   letter-spacing: -0.03em; line-height: 1;
   background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-text-secondary) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -696,7 +696,7 @@ body {
 }
 .gw-tpl-top { height: 110px; position: relative; overflow: hidden; }
 .gw-tpl-bottom { padding: 16px 18px; display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
-.gw-tpl-name { font-family: "Syne", sans-serif; font-size: 14px; font-weight: 700; }
+.gw-tpl-name { font-family: "Space Grotesk", sans-serif; font-size: 14px; font-weight: 700; }
 .gw-tpl-id { font-family: "JetBrains Mono", monospace; font-size: 9px; margin-top: 2px; }
 .gw-tpl-qr { background: #fff; border-radius: 8px; padding: 6px; }
 .gw-tpl-label {
@@ -758,7 +758,7 @@ body {
 .gw-cta-slash-r { right: 15%; transform: skewX(8deg); }
 
 .gw-cta-title {
-  font-family: "Syne", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: clamp(32px, 5vw, 60px); font-weight: 800;
   line-height: 1.04; letter-spacing: -0.03em;
   max-width: 760px; margin: 0 auto; position: relative; z-index: 1;
@@ -796,7 +796,7 @@ body {
   flex-wrap: wrap; gap: 16px;
 }
 .gw-footer-logo {
-  font-family: "Syne", sans-serif; font-size: 16px; font-weight: 800;
+  font-family: "Space Grotesk", sans-serif; font-size: 16px; font-weight: 800;
   color: var(--color-text-secondary);
   display: flex; align-items: center; gap: 8px;
 }
@@ -1115,19 +1115,19 @@ function TemplatePassCard({ type }: { type: string }) {
         {isClassic && (
           <div style={{position:"absolute",inset:0,padding:"16px 20px 16px 24px",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
             <div style={{fontFamily:"DM Sans",fontSize:"9px",letterSpacing:"0.08em",color:"rgba(232,24,109,0.8)",textTransform:"uppercase",fontWeight:600}}>Conference · 21 Jun</div>
-            <div style={{fontFamily:"Syne",fontSize:"16px",fontWeight:800,color:"#fff",letterSpacing:"-0.02em"}}>{names[type]}</div>
+            <div style={{fontFamily:"Space Grotesk",fontSize:"16px",fontWeight:800,color:"#fff",letterSpacing:"-0.02em"}}>{names[type]}</div>
           </div>
         )}
         {isMinimal && (
           <div style={{position:"absolute",inset:0,padding:"16px 20px 16px 22px",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
             <div style={{fontFamily:"DM Sans",fontSize:"9px",letterSpacing:"0.08em",color:"rgba(13,13,18,0.4)",textTransform:"uppercase",fontWeight:600}}>Conference · 21 Jun</div>
-            <div style={{fontFamily:"Syne",fontSize:"16px",fontWeight:800,color:"#0D0D12",letterSpacing:"-0.02em"}}>{names[type]}</div>
+            <div style={{fontFamily:"Space Grotesk",fontSize:"16px",fontWeight:800,color:"#0D0D12",letterSpacing:"-0.02em"}}>{names[type]}</div>
           </div>
         )}
         {isVibrant && (
           <div style={{position:"absolute",inset:0,padding:"16px 20px 16px 22px",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
             <div style={{fontFamily:"DM Sans",fontSize:"9px",letterSpacing:"0.08em",color:"rgba(255,255,255,0.7)",textTransform:"uppercase",fontWeight:600}}>Conference · 21 Jun</div>
-            <div style={{fontFamily:"Syne",fontSize:"16px",fontWeight:800,color:"#fff",letterSpacing:"-0.02em"}}>{names[type]}</div>
+            <div style={{fontFamily:"Space Grotesk",fontSize:"16px",fontWeight:800,color:"#fff",letterSpacing:"-0.02em"}}>{names[type]}</div>
           </div>
         )}
       </div>
@@ -1356,11 +1356,11 @@ export default function GatewayLanding() {
                   <div style={{ height: 90, background: "linear-gradient(135deg, var(--color-accent) 0%, rgba(123,92,240,0.5) 100%)", position:"relative" }}>
                     <div style={{position:"absolute",inset:0,padding:"14px 16px",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
                       <div style={{fontFamily:"DM Sans",fontSize:"9px",letterSpacing:"0.07em",color:"rgba(255,255,255,0.6)",textTransform:"uppercase"}}>Wedding</div>
-                      <div style={{fontFamily:"Syne",fontSize:"15px",fontWeight:800,color:"#fff"}}>Midnight Gala</div>
+                      <div style={{fontFamily:"Space Grotesk",fontSize:"15px",fontWeight:800,color:"#fff"}}>Midnight Gala</div>
                     </div>
                   </div>
                   <div style={{ background: "var(--color-surface-2)", padding: "12px 16px" }}>
-                    <div style={{ fontFamily: "Syne", fontSize: "12px", fontWeight: 700, color: "rgba(255,255,255,0.7)" }}>Guest Name</div>
+                    <div style={{ fontFamily: "Space Grotesk", fontSize: "12px", fontWeight: 700, color: "rgba(255,255,255,0.7)" }}>Guest Name</div>
                     <div style={{ fontFamily: "JetBrains Mono", fontSize: "9px", color: "var(--color-text-muted)", marginTop: 3 }}>EVT-BK3MZ9-0011</div>
                   </div>
                 </div>

@@ -30,7 +30,7 @@ export function EventsList() {
             <div>
               <h1
                 className="text-2xl lg:text-3xl font-bold"
-                style={{ fontFamily: 'Syne, sans-serif' }}
+                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
               >
                 My Events
               </h1>

@@ -53,7 +53,7 @@ export function OnboardingModal({ open, onClose }: OnboardingModalProps) {
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-md rounded-2xl border border-border bg-card shadow-lg">
         <DialogHeader>
-          <DialogTitle style={{ fontFamily: 'Syne, sans-serif' }} className="text-2xl">
+          <DialogTitle style={{ fontFamily: 'Space Grotesk, sans-serif' }} className="text-2xl">
             Set up your organization
           </DialogTitle>
           <DialogDescription className="text-muted-foreground">

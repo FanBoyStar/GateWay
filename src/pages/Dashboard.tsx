@@ -82,7 +82,7 @@ export function Dashboard() {
             <div>
               <h1
                 className="text-2xl font-extrabold tracking-tight"
-                style={{ fontFamily: 'Syne, sans-serif' }}
+                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
               >
                 Hi, {firstName} 👋
               </h1>

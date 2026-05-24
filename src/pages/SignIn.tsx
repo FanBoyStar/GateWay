@@ -56,7 +56,7 @@ export function SignIn() {
 
         <div className="p-8 rounded-2xl bg-card border border-border shadow-lg">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Syne, sans-serif' }}>
+            <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
               Welcome back
             </h1>
             <p className="text-muted-foreground">Sign in to your Gateway account</p>

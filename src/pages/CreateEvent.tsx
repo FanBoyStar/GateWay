@@ -257,7 +257,7 @@ export function CreateEvent() {
             {/* Step 1: Event Details */}
             {currentStep === 1 && (
               <div className="space-y-6 animate-fade-in">
-                <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Syne, sans-serif' }}>
+                <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                   Event Details
                 </h2>
 
@@ -413,7 +413,7 @@ export function CreateEvent() {
             {/* Step 2: Branding */}
             {currentStep === 2 && (
               <div className="space-y-6 animate-fade-in">
-                <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Syne, sans-serif' }}>
+                <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                   Branding & Design
                 </h2>
 
@@ -491,7 +491,7 @@ export function CreateEvent() {
             {/* Step 3: Preview */}
             {currentStep === 3 && (
               <div className="space-y-6 animate-fade-in">
-                <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Syne, sans-serif' }}>
+                <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                   Preview & Confirm
                 </h2>
 
