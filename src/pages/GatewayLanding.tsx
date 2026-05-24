@@ -361,13 +361,16 @@ body {
 .gw-showcase-inner {
   position: relative;
   display: flex; align-items: center; justify-content: center;
-}
-/* ── Phone mockup ── */
-.gw-phone-wrap {
   perspective: 1400px;
   perspective-origin: 50% 40%;
 }
-.gw-phone {
+/* ── Pass card wrap ── */
+.gw-card-wrap {
+  filter: drop-shadow(0 32px 64px rgba(0,0,0,0.22)) drop-shadow(0 8px 20px rgba(232,24,109,0.10));
+  transform-style: preserve-3d;
+}
+/* ── (phone CSS removed) ── */
+.gw-phone-UNUSED {
   width: 276px; height: 564px;
   border-radius: 46px;
   background: #0e0e16;
@@ -445,11 +448,11 @@ body {
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
-/* Bubble positions — desktop */
-.gw-bubble-0 { left: calc(50% - 246px); top: calc(50% - 96px); }
-.gw-bubble-1 { left: calc(50% + 152px); top: calc(50% - 118px); }
-.gw-bubble-2 { left: calc(50% - 232px); top: calc(50% + 68px); }
-.gw-bubble-3 { left: calc(50% + 144px); top: calc(50% + 88px); }
+/* Bubble positions — desktop (320px wide card, ~380px tall) */
+.gw-bubble-0 { left: calc(50% - 320px); top: calc(50% - 115px); }
+.gw-bubble-1 { left: calc(50% + 162px); top: calc(50% - 135px); }
+.gw-bubble-2 { left: calc(50% - 305px); top: calc(50% + 75px); }
+.gw-bubble-3 { left: calc(50% + 152px); top: calc(50% + 95px); }
 /* ── Showcase tagline ── */
 .gw-showcase-tagline {
   position: relative; z-index: 1;
@@ -1211,25 +1214,15 @@ body {
   .gw-showcase-sticky { height: 100svh; }
   /* full-width inner so right:4px bubbles pin to viewport edge */
   .gw-showcase-inner { width: 100%; height: 100%; }
-  /* Phone: centered with room on sides for bubbles */
-  .gw-phone {
-    width: min(248px, 66vw);
-    height: min(506px, 72svh);
-    border-radius: 40px;
-    box-shadow: 0 0 0 6px #1a1a26, 0 0 0 8px rgba(255,255,255,0.04), 0 40px 80px rgba(0,0,0,0.7);
-  }
-  .gw-phone::after { border-radius: 40px; }
-  .gw-phone-notch { width: 68px; height: 20px; top: 11px; border-radius: 11px; }
-  .gw-phone-screen { padding: 50px 10px 18px; }
-  .pc { width: min(220px, 60vw); }
-  .pc-carousel { width: min(220px, 60vw); height: min(300px, 42svh); }
-  /* Bubbles: left ones pin to left edge, right ones pin to right edge */
+  /* Pass card — mobile: scale down slightly so bubbles have room */
+  .gw-card-wrap { zoom: 0.88; }
+  /* Bubbles pin to viewport edges */
   .gw-bubble { font-size: 11px; padding: 7px 11px 7px 8px; gap: 6px; white-space: nowrap; }
   .gw-bubble-icon { width: 22px; height: 22px; }
-  .gw-bubble-0 { left: 4px;  top: calc(50% - 236px); }
-  .gw-bubble-1 { left: auto; right: 4px; top: calc(50% - 254px); }
-  .gw-bubble-2 { left: 4px;  top: calc(50% + 192px); }
-  .gw-bubble-3 { left: auto; right: 4px; top: calc(50% + 172px); }
+  .gw-bubble-0 { left: 4px;  top: calc(50% - 205px); }
+  .gw-bubble-1 { left: auto; right: 4px; top: calc(50% - 222px); }
+  .gw-bubble-2 { left: 4px;  top: calc(50% + 168px); }
+  .gw-bubble-3 { left: auto; right: 4px; top: calc(50% + 152px); }
   .gw-showcase-tagline { padding: 48px 20px 80px; }
   .gw-showcase-tagline-sub { font-size: 15px; }
 
@@ -1976,17 +1969,9 @@ export default function GatewayLanding() {
             <div className="gw-showcase-track" ref={showcaseRef}>
               <div className="gw-showcase-sticky">
                 <div className="gw-showcase-inner">
-                  {/* Phone */}
-                  <div className="gw-phone-wrap">
-                    <div className="gw-phone" style={phoneStyle}>
-                      <div className="gw-phone-notch" />
-                      <div className="gw-phone-btn-r" />
-                      <div className="gw-phone-btn-l1" />
-                      <div className="gw-phone-btn-l2" />
-                      <div className="gw-phone-screen">
-                        <HeroPassCarousel />
-                      </div>
-                    </div>
+                  {/* Pass card */}
+                  <div className="gw-card-wrap" style={phoneStyle}>
+                    <HeroPassCarousel />
                   </div>
                   {/* Feature bubbles */}
                   {bubbles.map((b, i) => (
