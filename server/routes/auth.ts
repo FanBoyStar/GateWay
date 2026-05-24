@@ -159,6 +159,47 @@ router.get("/me", async (req, res) => {
   }
 });
 
+router.patch("/profile", async (req, res) => {
+  try {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
+      return res.status(401).json({ error: "Not authenticated" });
+    }
+
+    const { fullName, email } = req.body;
+    if (!fullName || !email) {
+      return res.status(400).json({ error: "Name and email are required" });
+    }
+
+    const emailLower = email.toLowerCase();
+    const existing = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, emailLower))
+      .limit(1);
+    if (existing.length > 0 && existing[0].id !== userId) {
+      return res.status(400).json({ error: "That email is already in use" });
+    }
+
+    const [user] = await db
+      .update(users)
+      .set({ fullName, email: emailLower, updatedAt: new Date() })
+      .where(eq(users.id, userId))
+      .returning();
+
+    return res.json({
+      id: user.id,
+      email: user.email,
+      full_name: user.fullName,
+      organization_id: user.organizationId,
+      onboarding_completed: user.onboardingCompleted,
+    });
+  } catch (err) {
+    console.error("Profile update error:", err);
+    return res.status(500).json({ error: "Failed to update profile" });
+  }
+});
+
 router.post("/complete-onboarding", async (req, res) => {
   try {
     const userId = await getUserIdFromRequest(req);

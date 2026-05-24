@@ -24,6 +24,7 @@ import { useThemeStore } from '@/store/useThemeStore';
 import { useEventStore, type PassTemplate } from '@/store/useEventStore';
 import { useAttendeeStore } from '@/store/useAttendeeStore';
 import { usePassStore } from '@/store/usePassStore';
+import { useAuth } from '@/contexts/AuthContext';
 import { profileFormSchema, type ProfileFormData } from '@/utils/validators';
 import { cn } from '@/lib/utils';
 import {
@@ -45,9 +46,15 @@ export function Profile() {
   const { events } = useEventStore();
   const { attendees } = useAttendeeStore();
   const { passes } = usePassStore();
+  const { user, updateProfile } = useAuth();
 
   const [defaultTemplate, setDefaultTemplate] = useState<PassTemplate>('classic');
   const [defaultColor, setDefaultColor] = useState('#E8186D');
+  const [saving, setSaving] = useState(false);
+
+  const savedExtra = (() => {
+    try { return JSON.parse(localStorage.getItem('profile_extra') || '{}'); } catch { return {}; }
+  })();
 
   const {
     register,
@@ -56,16 +63,26 @@ export function Profile() {
   } = useForm<ProfileFormData>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
-      name: 'Event Organizer',
-      email: 'organizer@example.com',
-      organizationName: '',
-      website: '',
+      name: user?.full_name || '',
+      email: user?.email || '',
+      organizationName: savedExtra.organizationName || '',
+      website: savedExtra.website || '',
     },
   });
 
-  const onProfileSubmit = (data: ProfileFormData) => {
-    localStorage.setItem('profile', JSON.stringify(data));
-    toast.success('Profile updated successfully');
+  const onProfileSubmit = async (data: ProfileFormData) => {
+    setSaving(true);
+    localStorage.setItem('profile_extra', JSON.stringify({
+      organizationName: data.organizationName,
+      website: data.website,
+    }));
+    const { error } = await updateProfile(data.name, data.email);
+    setSaving(false);
+    if (error) {
+      toast.error(error);
+    } else {
+      toast.success('Profile updated successfully');
+    }
   };
 
   const handleExportData = () => {
@@ -199,7 +216,9 @@ export function Profile() {
               </div>
 
               <div className="flex justify-end pt-4">
-                <Button type="submit">Save Changes</Button>
+                <Button type="submit" disabled={saving}>
+                  {saving ? 'Saving…' : 'Save Changes'}
+                </Button>
               </div>
             </form>
           </div>
