@@ -5,7 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import { useAuth } from '@/contexts/AuthContext';
-import { Ticket, ArrowRight } from 'lucide-react';
+import { Logo } from '@/components/ui/Logo';
+import { ArrowRight } from 'lucide-react';
 
 export function SignUp() {
   const navigate = useNavigate();
@@ -58,12 +59,7 @@ export function SignUp() {
 
       <div className="relative w-full max-w-md">
         <div className="flex items-center justify-center mb-8">
-          <div className="h-10 w-10 rounded-lg bg-[var(--neon-primary)] flex items-center justify-center">
-            <Ticket className="h-5 w-5 text-white" />
-          </div>
-          <span className="font-bold text-xl ml-2" style={{ fontFamily: 'Syne, sans-serif' }}>
-            PassGen
-          </span>
+          <Logo size="lg" href="/" />
         </div>
 
         <div className="p-8 rounded-2xl bg-card border border-border shadow-lg">
@@ -71,7 +67,7 @@ export function SignUp() {
             <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Syne, sans-serif' }}>
               Create your account
             </h1>
-            <p className="text-muted-foreground">Join PassGen to start creating beautiful event passes</p>
+            <p className="text-muted-foreground">Join Gateway to start creating beautiful event passes</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">

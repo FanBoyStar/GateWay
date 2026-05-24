@@ -350,10 +350,10 @@ export function Profile() {
 
           {/* About */}
           <div className="rounded-2xl border border-border bg-card p-6">
-            <h2 className="text-lg font-semibold mb-4">About PassGen</h2>
+            <h2 className="text-lg font-semibold mb-4">About Gateway</h2>
             <div className="space-y-2 text-sm text-foreground/60">
               <p>Version 1.0.0 (MVP)</p>
-              <p>Beautiful event passes, generated in minutes.</p>
+              <p>Beautiful branded event passes, generated in minutes.</p>
               <div className="flex gap-4 pt-2">
                 <a href="#" className="hover:text-foreground transition-colors">
                   Privacy Policy

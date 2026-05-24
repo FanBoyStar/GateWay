@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Hop as Home, CalendarDays, Ticket, ScanLine, User, Sun, Moon } from 'lucide-react';
 import { useThemeStore } from '@/store/useThemeStore';
+import { Logo } from '@/components/ui/Logo';
 
 const navItems = [
   { path: '/dashboard', label: 'Home', icon: Home },
@@ -17,19 +18,8 @@ export function Sidebar() {
 
   return (
     <aside className="hidden lg:flex flex-col fixed left-0 top-0 bottom-0 w-[240px] bg-sidebar border-r border-sidebar-border z-40">
-      <div className="flex items-center gap-3 p-6 border-b border-sidebar-border">
-        <div className="h-10 w-10 rounded-xl bg-[var(--neon-primary)] flex items-center justify-center">
-          <Ticket className="h-5 w-5 text-white" />
-        </div>
-        <div>
-          <h1
-            className="text-lg font-bold text-sidebar-foreground"
-            style={{ fontFamily: 'Syne, sans-serif' }}
-          >
-            PassGen
-          </h1>
-          <p className="text-xs text-muted-foreground">QR Event Passes</p>
-        </div>
+      <div className="flex items-center p-6 border-b border-sidebar-border">
+        <Logo href="/dashboard" size="md" />
       </div>
 
       <nav className="flex-1 p-4 space-y-1">

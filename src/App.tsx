@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { PassCard } from '@/components/passes/PassCard';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
+import { Logo } from '@/components/ui/Logo';
 
 // Pages
 import GatewayLanding from '@/pages/GatewayLanding';
@@ -75,6 +76,9 @@ function DemoPassPage() {
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <div className="text-center mb-6">
+          <div className="flex justify-center mb-4">
+            <Logo href="/" size="lg" />
+          </div>
           <h1 className="text-2xl font-bold" style={{ fontFamily: 'Syne, sans-serif' }}>
             Demo Pass Preview
           </h1>

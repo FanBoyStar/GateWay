@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Logo } from '@/components/ui/Logo';
 import {
   Ticket,
   Upload,
@@ -189,19 +190,9 @@ export function Landing() {
       <footer className="py-12 border-t border-border">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-[var(--neon-primary)] flex items-center justify-center">
-                <Ticket className="h-4 w-4 text-white" />
-              </div>
-              <span
-                className="font-bold text-lg"
-                style={{ fontFamily: 'Syne, sans-serif' }}
-              >
-                PassGen
-              </span>
-            </div>
+            <Logo href="/" size="sm" />
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} PassGen. All rights reserved.
+              © {new Date().getFullYear()} Gateway. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm text-muted-foreground">
               <Link to="/privacy" className="hover:text-foreground transition-colors">

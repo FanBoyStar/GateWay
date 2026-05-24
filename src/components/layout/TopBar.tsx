@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Sun, Moon, User, Menu, LogOut } from 'lucide-react';
 import { useThemeStore } from '@/store/useThemeStore';
 import { useAuth } from '@/contexts/AuthContext';
+import { Logo } from '@/components/ui/Logo';
 import { cn } from '@/lib/utils';
 import {
   DropdownMenu,
@@ -35,12 +36,7 @@ export function TopBar({ showMenu, onMenuClick }: TopBarProps) {
               <Menu className="h-5 w-5" />
             </button>
           )}
-          <Link to="/dashboard" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-[var(--neon-primary)] flex items-center justify-center">
-              <span className="text-white font-bold text-sm">P</span>
-            </div>
-            <span className="font-bold text-lg" style={{ fontFamily: 'Syne, sans-serif' }}>PassGen</span>
-          </Link>
+          <Logo href="/dashboard" size="md" />
         </div>
 
         <div className="flex items-center gap-2">
