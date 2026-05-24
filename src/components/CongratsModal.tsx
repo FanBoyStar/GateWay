@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogPortal } from '@/components/ui/dialog';
 import { Dialog as DialogPrimitive } from 'radix-ui';
+import { VisuallyHidden } from 'radix-ui';
 import { Button } from '@/components/ui/button';
 import { PartyPopper, Sparkles, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -44,7 +45,11 @@ export function CongratsModal({ open, eventId, eventName, onClose }: CongratsMod
     <Dialog open={open} onOpenChange={(v) => { if (!v) onClose(); }}>
       <DialogPortal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-        <DialogPrimitive.Content className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full max-w-md focus:outline-none">
+        <DialogPrimitive.Content className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full max-w-md px-4 focus:outline-none">
+          <VisuallyHidden.Root>
+            <DialogPrimitive.Title>Congratulations on your first event!</DialogPrimitive.Title>
+            <DialogPrimitive.Description>Your event has been created successfully.</DialogPrimitive.Description>
+          </VisuallyHidden.Root>
           <div
             className={cn(
               'relative overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d0d] p-8 text-center shadow-2xl transition-all duration-500',
