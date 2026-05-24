@@ -7,10 +7,6 @@ import { eq } from "drizzle-orm";
 const router = Router();
 const SALT_ROUNDS = 12;
 
-router.use((req, _res, next) => {
-  console.log(`[auth] ${req.method} ${req.path} | sessionID=${req.sessionID} | userId=${req.session.userId ?? 'NONE'}`);
-  next();
-});
 
 declare module "express-session" {
   interface SessionData {
