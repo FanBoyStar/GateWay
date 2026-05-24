@@ -1,18 +1,36 @@
 import express from "express";
-import { setupAuth, registerAuthRoutes } from "./replit_integrations/auth/index.js";
-import "./db.js";
+import session from "express-session";
+import connectPg from "connect-pg-simple";
+import authRouter from "./routes/auth.js";
 
 const app = express();
 app.use(express.json());
 
-async function main() {
-  await setupAuth(app);
-  registerAuthRoutes(app);
+const pgStore = connectPg(session);
+const sessionTtl = 7 * 24 * 60 * 60 * 1000;
 
-  const port = parseInt(process.env.PORT || "3001");
-  app.listen(port, "0.0.0.0", () => {
-    console.log(`Server running on port ${port}`);
-  });
-}
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "passgen-dev-secret-change-in-prod",
+    store: new pgStore({
+      conString: process.env.DATABASE_URL,
+      createTableIfMissing: false,
+      ttl: sessionTtl,
+      tableName: "sessions",
+    }),
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      maxAge: sessionTtl,
+    },
+  })
+);
 
-main().catch(console.error);
+app.use("/api/auth", authRouter);
+
+const port = parseInt(process.env.PORT || "3001");
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server running on port ${port}`);
+});

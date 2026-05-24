@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/sonner';
 import { Button } from '@/components/ui/button';
 import { PassCard } from '@/components/passes/PassCard';
@@ -8,6 +7,8 @@ import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 
 // Pages
 import GatewayLanding from '@/pages/GatewayLanding';
+import { SignIn } from '@/pages/SignIn';
+import { SignUp } from '@/pages/SignUp';
 import { Dashboard } from '@/pages/Dashboard';
 import { CreateEvent } from '@/pages/CreateEvent';
 import { EventDetail } from '@/pages/EventDetail';
@@ -19,9 +20,6 @@ import { BulkUpload } from '@/pages/BulkUpload';
 import { ScanVerify } from '@/pages/ScanVerify';
 import { Profile } from '@/pages/Profile';
 
-const queryClient = new QueryClient();
-
-// Demo Pass Page
 function DemoPassPage() {
   const demoEvent = {
     id: 'demo',
@@ -89,7 +87,7 @@ function DemoPassPage() {
         </div>
         <div className="text-center">
           <Button asChild>
-            <Link to="/dashboard">Get Started — It's Free</Link>
+            <Link to="/sign-up">Get Started — It's Free</Link>
           </Button>
         </div>
       </div>
@@ -99,107 +97,33 @@ function DemoPassPage() {
 
 export function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <AuthProvider>
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<GatewayLanding />} />
-            <Route path="/passes/demo" element={<DemoPassPage />} />
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<GatewayLanding />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/passes/demo" element={<DemoPassPage />} />
 
-            {/* Protected Routes */}
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/events"
-              element={
-                <ProtectedRoute>
-                  <EventsList />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/events/new"
-              element={
-                <ProtectedRoute>
-                  <CreateEvent />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/events/:id"
-              element={
-                <ProtectedRoute>
-                  <EventDetail />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/events/:eventId/add-attendee"
-              element={
-                <ProtectedRoute>
-                  <AddAttendee />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/events/:eventId/bulk"
-              element={
-                <ProtectedRoute>
-                  <BulkUpload />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/passes"
-              element={
-                <ProtectedRoute>
-                  <AllPasses />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/passes/:passId"
-              element={
-                <ProtectedRoute>
-                  <PassViewer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/scan"
-              element={
-                <ProtectedRoute>
-                  <ScanVerify />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              }
-            />
+          {/* Protected Routes */}
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/events" element={<ProtectedRoute><EventsList /></ProtectedRoute>} />
+          <Route path="/events/new" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>} />
+          <Route path="/events/:id" element={<ProtectedRoute><EventDetail /></ProtectedRoute>} />
+          <Route path="/events/:eventId/add-attendee" element={<ProtectedRoute><AddAttendee /></ProtectedRoute>} />
+          <Route path="/events/:eventId/bulk" element={<ProtectedRoute><BulkUpload /></ProtectedRoute>} />
+          <Route path="/passes" element={<ProtectedRoute><AllPasses /></ProtectedRoute>} />
+          <Route path="/passes/:passId" element={<ProtectedRoute><PassViewer /></ProtectedRoute>} />
+          <Route path="/scan" element={<ProtectedRoute><ScanVerify /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
-            {/* Redirect old auth routes */}
-            <Route path="/sign-in" element={<Navigate to="/api/login" replace />} />
-            <Route path="/sign-up" element={<Navigate to="/api/login" replace />} />
-
-            {/* Fallback */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-          <Toaster position="top-right" richColors closeButton />
-        </AuthProvider>
-      </BrowserRouter>
-    </QueryClientProvider>
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        <Toaster position="top-right" richColors closeButton />
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Sun, Moon, User, Menu, LogOut } from 'lucide-react';
 import { useThemeStore } from '@/store/useThemeStore';
+import { useAuth } from '@/contexts/AuthContext';
 import { cn } from '@/lib/utils';
 import {
   DropdownMenu,
@@ -17,9 +18,12 @@ interface TopBarProps {
 
 export function TopBar({ showMenu, onMenuClick }: TopBarProps) {
   const { theme, toggleTheme } = useThemeStore();
+  const { signOut } = useAuth();
+  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    window.location.href = '/api/logout';
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/');
   };
 
   return (
@@ -27,10 +31,7 @@ export function TopBar({ showMenu, onMenuClick }: TopBarProps) {
       <div className="flex items-center justify-between h-full px-4">
         <div className="flex items-center gap-3">
           {showMenu && (
-            <button
-              onClick={onMenuClick}
-              className="p-2 rounded-lg hover:bg-accent transition-colors"
-            >
+            <button onClick={onMenuClick} className="p-2 rounded-lg hover:bg-accent transition-colors">
               <Menu className="h-5 w-5" />
             </button>
           )}
@@ -38,33 +39,15 @@ export function TopBar({ showMenu, onMenuClick }: TopBarProps) {
             <div className="h-8 w-8 rounded-lg bg-[var(--neon-primary)] flex items-center justify-center">
               <span className="text-white font-bold text-sm">P</span>
             </div>
-            <span
-              className="font-bold text-lg"
-              style={{ fontFamily: 'Syne, sans-serif' }}
-            >
-              PassGen
-            </span>
+            <span className="font-bold text-lg" style={{ fontFamily: 'Syne, sans-serif' }}>PassGen</span>
           </Link>
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg hover:bg-accent transition-colors"
-          >
+          <button onClick={toggleTheme} className="p-2 rounded-lg hover:bg-accent transition-colors">
             <div className="relative w-5 h-5">
-              <Sun
-                className={cn(
-                  'absolute inset-0 h-5 w-5 transition-opacity duration-200',
-                  theme === 'light' ? 'opacity-100' : 'opacity-0'
-                )}
-              />
-              <Moon
-                className={cn(
-                  'absolute inset-0 h-5 w-5 transition-opacity duration-200',
-                  theme === 'dark' ? 'opacity-100' : 'opacity-0'
-                )}
-              />
+              <Sun className={cn('absolute inset-0 h-5 w-5 transition-opacity duration-200', theme === 'light' ? 'opacity-100' : 'opacity-0')} />
+              <Moon className={cn('absolute inset-0 h-5 w-5 transition-opacity duration-200', theme === 'dark' ? 'opacity-100' : 'opacity-0')} />
             </div>
           </button>
 
