@@ -6,6 +6,7 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 
 // Pages
+import GatewayLanding from '@/pages/GatewayLanding';
 import { Landing } from '@/pages/Landing';
 import { SignUp } from '@/pages/SignUp';
 import { SignIn } from '@/pages/SignIn';
@@ -110,7 +111,7 @@ export function App() {
       <AuthProvider>
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<Landing />} />
+          <Route path="/" element={<GatewayLanding />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
 

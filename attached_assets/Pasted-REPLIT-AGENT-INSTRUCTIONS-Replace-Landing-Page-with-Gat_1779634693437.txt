@@ -1,0 +1,71 @@
+REPLIT AGENT INSTRUCTIONS — Replace Landing Page with Gateway Neon Noir
+You are replacing the existing landing page of this project with a new one. Follow every instruction below exactly. Do not invent, assume, or add anything not explicitly described here.
+
+STEP 1 — READ BEFORE YOU TOUCH ANYTHING
+Before writing a single line of code, you must:
+
+Read PRD.md in full
+Read STYLE.md in full
+Identify the current landing page file (likely src/pages/index.jsx, src/pages/Landing.jsx, src/App.jsx, or the root route component — check the router to confirm)
+Identify where global CSS or a CSS-in-JS theme is defined
+Confirm which component is rendered at the / route
+
+Do not proceed until you have read both docs and located all four of the above.
+
+STEP 2 — INSTALL DEPENDENCIES (only if missing)
+Check package.json. If these are not already present, install them:
+
+lucide-react
+
+Do not install anything else. Do not install Framer Motion unless it is already in the project.
+
+STEP 3 — CREATE THE LANDING PAGE FILE
+Create a new file at the path that matches the project's existing page conventions (e.g. src/pages/Landing.jsx or src/pages/index.jsx).
+Copy the full contents of GatewayLanding_Cityscape.jsx into that file exactly as provided. Do not rewrite it, summarize it, paraphrase it, or "clean it up." Copy it verbatim.
+
+STEP 4 — WIRE IT TO THE ROUTER
+Find the router file (likely src/App.jsx, src/main.jsx, or src/router/index.jsx). Replace whatever component currently renders at the / route with the new landing page component. Do not remove other routes.
+
+STEP 5 — CHECK FOR CONFLICTS
+Check for the following potential conflicts and resolve each one:
+
+Global CSS resets — if the project has a global stylesheet that sets body background, font-family, or box-sizing that would override the landing page's inline styles, either scope those global rules away from the landing page or remove the conflicting declarations
+Google Fonts — the landing page already imports Syne, DM Sans, and JetBrains Mono via @import inside the injected <style> tag. Do not add a separate <link> tag for these fonts — it would create a duplicate. If the project already loads these fonts globally, remove the @import from the CSS string inside the component
+CSS custom property conflicts — the landing page defines its own :root variables. If the project already defines :root variables with the same names (--color-bg, --color-primary, etc.), the landing page's definitions will win because they are injected into a <style> tag at render time. Verify there is no conflict that breaks other pages
+TailwindCSS — if Tailwind is configured, make sure purge/content paths include the new landing page file so utility classes are not stripped
+
+
+STEP 6 — DO NOT DO ANY OF THE FOLLOWING
+
+Do not redesign, restyle, or rewrite any part of the component
+Do not change any color values — all colors must remain as CSS custom properties (var(--color-primary), etc.)
+Do not hardcode any hex values anywhere
+Do not swap out lucide-react icons for a different icon library
+Do not change font families
+Do not add new animation libraries
+Do not modify the CityscapeSVG component
+Do not modify the QRCode component
+Do not modify the PassCard component
+Do not "simplify" the CSS string — copy it exactly
+Do not split the single-file component into multiple files unless the project's build system absolutely requires it (and if you must, ask first)
+Do not remove the <style dangerouslySetInnerHTML={{ __html: CSS }} /> tag
+
+
+STEP 7 — VERIFY
+After wiring everything up:
+
+Run the dev server
+Navigate to /
+Confirm the page renders with a dark background (#0D0D12)
+Confirm the hero headline reads: "Beautiful Event Passes. Generated in Minutes."
+Confirm the cityscape SVG is visible at the bottom of the hero section
+Confirm no console errors related to missing modules or undefined components
+Confirm the nav, stats strip, features section, how-it-works section, templates section, CTA section, and footer all render
+
+If any of steps 1–7 fail, fix the specific error. Do not rewrite the component to fix it — find the integration issue.
+
+REFERENCE FILES IN THIS PROJECT:
+
+PRD.md — product requirements, user flow, copy
+STYLE.md — Neon Noir design system, color tokens, typography rules
+GatewayLanding_Cityscape.jsx — the complete landing page component to use
