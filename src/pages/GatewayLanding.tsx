@@ -1209,26 +1209,27 @@ body {
   /* Showcase — mobile */
   .gw-showcase-track { height: 300vh; }
   .gw-showcase-sticky { height: 100svh; }
-  .gw-showcase-inner { perspective: 800px; }
-  /* Phone: fill most of the screen */
+  /* full-width inner so right:4px bubbles pin to viewport edge */
+  .gw-showcase-inner { width: 100%; height: 100%; }
+  /* Phone: centered with room on sides for bubbles */
   .gw-phone {
-    width: min(300px, 84vw);
-    height: min(590px, 78svh);
-    border-radius: 42px;
+    width: min(248px, 66vw);
+    height: min(506px, 72svh);
+    border-radius: 40px;
     box-shadow: 0 0 0 6px #1a1a26, 0 0 0 8px rgba(255,255,255,0.04), 0 40px 80px rgba(0,0,0,0.7);
   }
-  .gw-phone::after { border-radius: 42px; }
-  .gw-phone-notch { width: 76px; height: 22px; top: 12px; border-radius: 12px; }
-  .gw-phone-screen { padding: 54px 12px 20px; }
-  .pc { width: min(268px, 78vw); }
-  .pc-carousel { width: min(268px, 78vw); height: min(340px, 46svh); }
-  /* Bubbles: straddle the phone corners */
-  .gw-bubble { font-size: 12px; padding: 8px 13px 8px 9px; gap: 7px; white-space: nowrap; }
-  .gw-bubble-icon { width: 24px; height: 24px; }
-  .gw-bubble-0 { left: 4px;              top: calc(50% - 268px); }
-  .gw-bubble-1 { left: calc(50% + 22px); top: calc(50% - 288px); }
-  .gw-bubble-2 { left: 4px;              top: calc(50% + 218px); }
-  .gw-bubble-3 { left: calc(50% + 22px); top: calc(50% + 198px); }
+  .gw-phone::after { border-radius: 40px; }
+  .gw-phone-notch { width: 68px; height: 20px; top: 11px; border-radius: 11px; }
+  .gw-phone-screen { padding: 50px 10px 18px; }
+  .pc { width: min(220px, 60vw); }
+  .pc-carousel { width: min(220px, 60vw); height: min(300px, 42svh); }
+  /* Bubbles: left ones pin to left edge, right ones pin to right edge */
+  .gw-bubble { font-size: 11px; padding: 7px 11px 7px 8px; gap: 6px; white-space: nowrap; }
+  .gw-bubble-icon { width: 22px; height: 22px; }
+  .gw-bubble-0 { left: 4px;  top: calc(50% - 236px); }
+  .gw-bubble-1 { left: auto; right: 4px; top: calc(50% - 254px); }
+  .gw-bubble-2 { left: 4px;  top: calc(50% + 192px); }
+  .gw-bubble-3 { left: auto; right: 4px; top: calc(50% + 172px); }
   .gw-showcase-tagline { padding: 48px 20px 80px; }
   .gw-showcase-tagline-sub { font-size: 15px; }
 
