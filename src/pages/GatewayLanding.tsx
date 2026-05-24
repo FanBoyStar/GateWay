@@ -1206,22 +1206,29 @@ body {
   .gw-hero-meta { gap: 12px; margin-top: 32px; }
   .gw-scroll-hint { left: 50%; transform: translateX(-50%); }
 
-  /* Showcase */
+  /* Showcase — mobile */
   .gw-showcase-track { height: 300vh; }
-  .gw-phone { width: 220px; height: 448px; border-radius: 36px;
-    box-shadow: 0 0 0 5px #1a1a26, 0 0 0 7px rgba(255,255,255,0.04), 0 40px 80px rgba(0,0,0,0.65); }
-  .gw-phone::after { border-radius: 36px; }
-  .gw-phone-notch { width: 66px; height: 18px; top: 10px; }
-  .gw-phone-screen { padding: 46px 10px 18px; }
-  .pc { width: min(190px, 76vw); }
-  .pc-carousel { width: min(190px, 76vw); height: 260px; }
-  .gw-bubble { font-size: 11px; padding: 7px 12px 7px 8px; gap: 6px; }
-  .gw-bubble-icon { width: 22px; height: 22px; }
-  /* reposition bubbles for narrow screens */
-  .gw-bubble-0 { left: calc(50% - 176px); top: calc(50% - 178px); }
-  .gw-bubble-1 { left: calc(50% + 28px);  top: calc(50% - 196px); }
-  .gw-bubble-2 { left: calc(50% - 168px); top: calc(50% + 152px); }
-  .gw-bubble-3 { left: calc(50% + 20px);  top: calc(50% + 168px); }
+  .gw-showcase-sticky { height: 100svh; }
+  .gw-showcase-inner { perspective: 800px; }
+  /* Phone: fill most of the screen */
+  .gw-phone {
+    width: min(300px, 84vw);
+    height: min(590px, 78svh);
+    border-radius: 42px;
+    box-shadow: 0 0 0 6px #1a1a26, 0 0 0 8px rgba(255,255,255,0.04), 0 40px 80px rgba(0,0,0,0.7);
+  }
+  .gw-phone::after { border-radius: 42px; }
+  .gw-phone-notch { width: 76px; height: 22px; top: 12px; border-radius: 12px; }
+  .gw-phone-screen { padding: 54px 12px 20px; }
+  .pc { width: min(268px, 78vw); }
+  .pc-carousel { width: min(268px, 78vw); height: min(340px, 46svh); }
+  /* Bubbles: straddle the phone corners */
+  .gw-bubble { font-size: 12px; padding: 8px 13px 8px 9px; gap: 7px; white-space: nowrap; }
+  .gw-bubble-icon { width: 24px; height: 24px; }
+  .gw-bubble-0 { left: 4px;              top: calc(50% - 268px); }
+  .gw-bubble-1 { left: calc(50% + 22px); top: calc(50% - 288px); }
+  .gw-bubble-2 { left: 4px;              top: calc(50% + 218px); }
+  .gw-bubble-3 { left: calc(50% + 22px); top: calc(50% + 198px); }
   .gw-showcase-tagline { padding: 48px 20px 80px; }
   .gw-showcase-tagline-sub { font-size: 15px; }
 
@@ -1762,6 +1769,7 @@ export default function GatewayLanding() {
   });
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.innerWidth <= 640);
   const showcaseRef = useRef<HTMLDivElement>(null);
   const revealRefs = useRef<Element[]>([]);
   const stepTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -1786,7 +1794,7 @@ export default function GatewayLanding() {
     return () => { if (stepTimerRef.current) clearInterval(stepTimerRef.current); };
   }, []);
 
-  // scroll progress for showcase
+  // scroll progress for showcase + isMobile resize
   useEffect(() => {
     const onScroll = () => {
       if (!showcaseRef.current) return;
@@ -1796,9 +1804,14 @@ export default function GatewayLanding() {
       const p = Math.min(1, Math.max(0, scrolled / (trackH || 1)));
       setScrollProgress(p);
     };
+    const onResize = () => setIsMobile(window.innerWidth <= 640);
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
 
   // intersection observer reveal
@@ -1941,12 +1954,12 @@ export default function GatewayLanding() {
           SCROLL SHOWCASE — Phone mockup
       ════════════════════════════════ */}
       {(() => {
-        // phone tilt: first 55% of scroll = tilt → flat
-        const tilt = Math.max(0, 1 - scrollProgress / 0.55);
-        const rotX  = 32 * tilt;
-        const rotZ  = -6 * tilt;
-        const sc    = 0.76 + 0.24 * (1 - tilt);
-        const ty    = -28 * tilt;
+        // phone tilt: first 55% of scroll = tilt → flat; less dramatic on mobile
+        const tilt  = Math.max(0, 1 - scrollProgress / 0.55);
+        const rotX  = (isMobile ? 16 : 32) * tilt;
+        const rotZ  = (isMobile ? -3 : -6) * tilt;
+        const sc    = (isMobile ? 0.88 : 0.76) + (isMobile ? 0.12 : 0.24) * (1 - tilt);
+        const ty    = (isMobile ? -14 : -28) * tilt;
         const phoneStyle: React.CSSProperties = {
           transform: `rotateX(${rotX}deg) rotateZ(${rotZ}deg) scale(${sc}) translateY(${ty}px)`,
           transition: "transform 60ms linear",
