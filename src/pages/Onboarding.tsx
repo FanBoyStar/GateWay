@@ -87,7 +87,7 @@ export function Onboarding() {
     navigate('/dashboard', { replace: true });
   };
 
-  const firstName = user?.full_name?.split(' ')[0] ?? user?.first_name ?? 'there';
+  const firstName = user?.full_name?.split(' ')[0] ?? 'there';
 
   return (
     <div className="min-h-screen text-white flex items-center justify-center p-4" style={{ background: '#0D0D12' }}>

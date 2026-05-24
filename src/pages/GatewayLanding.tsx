@@ -1297,7 +1297,7 @@ export default function GatewayLanding() {
           <li><a href="#how-it-works">How it works</a></li>
           <li><a href="#templates">Templates</a></li>
         </ul>
-        <a href="/api/login" className="gw-nav-cta">
+        <a href="/sign-up" className="gw-nav-cta">
           Get Started <ArrowUpRight size={14} />
         </a>
       </nav>
@@ -1324,7 +1324,7 @@ export default function GatewayLanding() {
               Create branded QR passes for any event — weddings, conferences, workshops, or private parties.
             </p>
             <div className="gw-hero-ctas">
-              <a href="/api/login" className="btn-primary">Get Started — Free <ArrowRight size={16} /></a>
+              <a href="/sign-up" className="btn-primary">Get Started — Free <ArrowRight size={16} /></a>
               <a href="/passes/demo" className="btn-ghost"><QrCode size={16} />See a Demo Pass</a>
             </div>
             <div className="gw-hero-meta">
@@ -1514,7 +1514,7 @@ export default function GatewayLanding() {
             Join hundreds of organizers creating beautiful, branded QR passes — no design skills needed.
           </p>
           <div className="gw-cta-actions">
-            <a href="/api/login" className="btn-primary">Get Started — Free <ArrowRight size={16} /></a>
+            <a href="/sign-up" className="btn-primary">Get Started — Free <ArrowRight size={16} /></a>
             <a href="/passes/demo" className="btn-ghost"><QrCode size={16} />See a Demo Pass</a>
           </div>
           <div className="gw-cta-checks">

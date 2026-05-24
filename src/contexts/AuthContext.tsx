@@ -1,12 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
+const TOKEN_KEY = 'gateway_auth_token';
+
 interface UserProfile {
   id: string;
-  email: string | null;
+  email: string;
   full_name: string;
-  first_name: string | null;
-  last_name: string | null;
-  profile_image_url: string | null;
   organization_id: string | null;
   onboarding_completed: boolean;
 }
@@ -14,33 +13,110 @@ interface UserProfile {
 interface AuthContextType {
   user: UserProfile | null;
   loading: boolean;
-  signOut: () => void;
+  signUp: (email: string, password: string, fullName: string) => Promise<{ error: string | null }>;
+  signIn: (email: string, password: string) => Promise<{ error: string | null }>;
+  signOut: () => Promise<void>;
   completeOnboarding: (organizationName: string, website?: string, brandColor?: string) => Promise<{ error: string | null }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+function getStoredToken(): string | null {
+  try {
+    return localStorage.getItem(TOKEN_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function setStoredToken(token: string): void {
+  try {
+    localStorage.setItem(TOKEN_KEY, token);
+  } catch {}
+}
+
+function clearStoredToken(): void {
+  try {
+    localStorage.removeItem(TOKEN_KEY);
+  } catch {}
+}
+
+function authHeaders(): Record<string, string> {
+  const token = getStoredToken();
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/auth/user', { credentials: 'include' })
+    fetch('/api/auth/me', {
+      credentials: 'include',
+      headers: authHeaders(),
+    })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => setUser(data))
       .catch(() => setUser(null))
       .finally(() => setLoading(false));
   }, []);
 
-  const signOut = () => {
-    window.location.href = '/api/logout';
+  const signUp = async (email: string, password: string, fullName: string): Promise<{ error: string | null }> => {
+    try {
+      const res = await fetch('/api/auth/sign-up', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email, password, fullName }),
+      });
+      const data = await res.json();
+      if (!res.ok) return { error: data.error || 'Sign up failed' };
+      if (data.token) setStoredToken(data.token);
+      const { token: _token, ...userProfile } = data;
+      setUser(userProfile);
+      return { error: null };
+    } catch {
+      return { error: 'Sign up failed' };
+    }
+  };
+
+  const signIn = async (email: string, password: string): Promise<{ error: string | null }> => {
+    try {
+      const res = await fetch('/api/auth/sign-in', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) return { error: data.error || 'Sign in failed' };
+      if (data.token) setStoredToken(data.token);
+      const { token: _token, ...userProfile } = data;
+      setUser(userProfile);
+      return { error: null };
+    } catch {
+      return { error: 'Sign in failed' };
+    }
+  };
+
+  const signOut = async () => {
+    await fetch('/api/auth/sign-out', {
+      method: 'POST',
+      credentials: 'include',
+      headers: authHeaders(),
+    }).catch(() => {});
+    clearStoredToken();
+    setUser(null);
   };
 
   const completeOnboarding = async (organizationName: string, website?: string, brandColor?: string): Promise<{ error: string | null }> => {
     try {
       const res = await fetch('/api/auth/complete-onboarding', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...authHeaders(),
+        },
         credentials: 'include',
         body: JSON.stringify({ organizationName, website, brandColor }),
       });
@@ -54,7 +130,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signOut, completeOnboarding }}>
+    <AuthContext.Provider value={{ user, loading, signUp, signIn, signOut, completeOnboarding }}>
       {children}
     </AuthContext.Provider>
   );
