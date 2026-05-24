@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CongratsModal } from '@/components/CongratsModal';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
@@ -51,8 +52,10 @@ const steps = [
 
 export function CreateEvent() {
   const navigate = useNavigate();
-  const { createEvent } = useEventStore();
+  const { createEvent, events } = useEventStore();
   const [currentStep, setCurrentStep] = useState(1);
+  const [congratsOpen, setCongratsOpen] = useState(false);
+  const [createdEvent, setCreatedEvent] = useState<{ id: string; name: string } | null>(null);
   const [bannerImage, setBannerImage] = useState<string>('');
   const [selectedTemplate, setSelectedTemplate] = useState<PassTemplate>('classic');
   const [darkBackground, setDarkBackground] = useState(true);
@@ -99,6 +102,8 @@ export function CreateEvent() {
   };
 
   const onSubmit = (data: EventFormData) => {
+    const isFirstEvent = events.length === 0;
+
     const event = createEvent({
       name: data.name,
       type: data.type as EventType,
@@ -118,8 +123,13 @@ export function CreateEvent() {
       expectedCount: data.expectedCount || 0,
     });
 
-    toast.success('Event created successfully!');
-    navigate(`/events/${event.id}`);
+    if (isFirstEvent) {
+      setCreatedEvent({ id: event.id, name: event.name });
+      setCongratsOpen(true);
+    } else {
+      toast.success('Event created successfully!');
+      navigate(`/events/${event.id}`);
+    }
   };
 
   const canProceed = () => {
@@ -190,6 +200,17 @@ export function CreateEvent() {
 
   return (
     <>
+      {createdEvent && (
+        <CongratsModal
+          open={congratsOpen}
+          eventId={createdEvent.id}
+          eventName={createdEvent.name}
+          onClose={() => {
+            setCongratsOpen(false);
+            navigate(`/events/${createdEvent.id}`);
+          }}
+        />
+      )}
       <TopBar />
       <Sidebar />
       <BottomNav />
