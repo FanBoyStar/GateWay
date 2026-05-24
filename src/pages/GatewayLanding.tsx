@@ -1047,104 +1047,6 @@ body {
   .pc { width: 280px; }
   .gw-pass-ghost { display: none; }
 }
-
-/* ══════════ HERO V2 — Centered Magazine Layout ══════════ */
-.gw-hero-v2 {
-  position: relative; z-index: 1;
-  height: 100vh; min-height: 620px;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: space-between;
-  padding: 100px 48px 40px;
-  text-align: center;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-.gw-v2-top {
-  display: flex; flex-direction: column; align-items: center;
-  animation: fadeUp 0.5s ease both;
-  flex-shrink: 0;
-}
-.gw-v2-i-wrap {
-  width: 28px; height: 28px; border-radius: 50%;
-  border: 1.5px solid var(--color-border-active);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-style: italic; font-family: Georgia, serif;
-  color: var(--color-text-muted); margin-bottom: 12px;
-}
-.gw-v2-title {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(36px, 7.5vw, 96px);
-  font-weight: 800; line-height: 1.0;
-  letter-spacing: -0.04em; color: var(--color-text-primary);
-  text-transform: uppercase;
-  animation: fadeUp 0.5s 0.06s ease both;
-}
-.gw-v2-sub {
-  font-size: 12px; letter-spacing: 0.13em;
-  color: var(--color-text-muted); margin-top: 10px;
-  text-transform: uppercase;
-  animation: fadeUp 0.5s 0.12s ease both;
-}
-.gw-v2-diagram {
-  flex: 1; min-height: 0;
-  width: 100%; max-width: 860px;
-  display: flex; align-items: center; justify-content: center;
-  animation: fadeUp 0.9s 0.22s ease both;
-  padding: 8px 0;
-}
-.gw-v2-diagram svg {
-  width: 100%; height: 100%;
-  max-height: 100%;
-}
-.gw-v2-bottom {
-  display: flex; flex-direction: column; align-items: center;
-  flex-shrink: 0;
-  animation: fadeUp 0.5s 0.38s ease both;
-}
-.gw-v2-tagline {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(9.5px, 1.1vw, 13.5px); font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.055em;
-  color: var(--color-text-primary); max-width: 660px;
-  margin: 0 auto; line-height: 1.8;
-}
-.gw-v2-cta-bar {
-  display: inline-flex; align-items: center;
-  border: 1px solid var(--color-border-active);
-  border-radius: 3px; overflow: hidden;
-  margin-top: 20px;
-}
-.gw-v2-page-num {
-  padding: 0 18px; font-size: 13px; letter-spacing: 0.04em;
-  color: var(--color-text-muted);
-  height: 44px; display: flex; align-items: center;
-  border-right: 1px solid var(--color-border-active);
-  font-family: "JetBrains Mono", monospace;
-}
-.gw-v2-sep {
-  width: 1px; height: 44px; background: var(--color-border-active);
-}
-.gw-v2-btn {
-  height: 44px; padding: 0 28px;
-  font-family: "DM Sans", sans-serif; font-size: 12px; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  cursor: pointer; border: none; text-decoration: none;
-  display: flex; align-items: center;
-  transition: background 150ms, color 150ms;
-}
-.gw-v2-btn-ghost {
-  background: transparent; color: var(--color-text-primary);
-}
-.gw-v2-btn-ghost:hover { background: var(--color-surface-2); }
-.gw-v2-btn-solid {
-  background: var(--color-text-primary); color: var(--color-bg);
-}
-.gw-v2-btn-solid:hover { opacity: 0.82; }
-@media (max-width: 768px) {
-  .gw-hero-v2 { padding: 90px 20px 32px; }
-  .gw-v2-tagline { font-size: 9px; max-width: 94%; }
-  .gw-v2-diagram { max-width: 100%; }
-}
 `;
 
 /* ══════════ CITYSCAPE SVG ══════════ */
@@ -1729,117 +1631,60 @@ export default function GatewayLanding() {
       </nav>
 
       {/* ════════════════════════════════
-          HERO V2 — Centered Magazine
+          HERO
       ════════════════════════════════ */}
-      <section className="gw-hero-v2">
-        {/* ── top block: icon + title + subtitle ── */}
-        <div className="gw-v2-top">
-          <div className="gw-v2-i-wrap">i</div>
-          <h1 className="gw-v2-title font-syne">Our Capabilities</h1>
-          <p className="gw-v2-sub">Beautiful event passes, generated instantly</p>
+      <section style={{ position: "relative", zIndex: 1 }}>
+        {/* cityscape background layer */}
+        <div className="gw-cityscape">
+          <CityscapeSVG dark={isDark} />
+        </div>
+        <div className="gw-hero">
+          {/* left */}
+          <div className="gw-hero-left">
+            <div className="gw-bg-letter font-syne">G</div>
+            <div className="gw-badge"><Zap size={10} />Free for all events</div>
+            <h1 className="gw-headline font-syne">
+              Beautiful Event<br />
+              Passes. <span className="grad">Generated</span><br />
+              in Minutes.
+            </h1>
+            <p className="gw-sub">
+              Create branded QR passes for any event — weddings, conferences, workshops, or private parties.
+            </p>
+            <div className="gw-hero-ctas">
+              <a href="/sign-up" className="btn-primary">Get Started — Free <ArrowRight size={16} /></a>
+              <a href="/passes/demo" className="btn-ghost"><QrCode size={16} />See a Demo Pass</a>
+            </div>
+            <div className="gw-hero-meta">
+              {[
+                [<CheckCircle size={13}/>, "No credit card"],
+                [<Shield size={13}/>, "Data stays local"],
+                [<Zap size={13}/>, "Works instantly"],
+              ].map(([icon, txt], i) => (
+                <div key={i} className="gw-hero-meta-item" style={{ color: "var(--color-success)" }}>
+                  {icon}
+                  <span style={{ color: "var(--color-text-muted)" }}>{txt as string}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* right — floating pass */}
+          <div className="gw-hero-right">
+            <div className="gw-hero-slash" />
+            <div className="gw-pass-scene">
+              <div className="gw-pass-aura" />
+              {/* main pass carousel */}
+              <div className="gw-pass-main" style={{ filter: "drop-shadow(0 32px 72px rgba(232,24,109,0.22))" }}>
+                <HeroPassCarousel />
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* ── Circle diagram ── */}
-        <div className="gw-v2-diagram">
-          <svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <filter id="nodeglow">
-                <feGaussianBlur stdDeviation="6" result="blur" />
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
-
-            {/* ── subtle axis construction lines ── */}
-            {/* vertical axis: top-intersection (450,105) → bottom-intersection (450,465) */}
-            <line x1="450" y1="105" x2="450" y2="465"
-              stroke="var(--color-primary)" strokeOpacity="0.15"
-              strokeWidth="1" strokeDasharray="4 8" />
-            {/* horizontal axis: left-node (70,285) → right-node (830,285) */}
-            <line x1="70" y1="285" x2="830" y2="285"
-              stroke="var(--color-primary)" strokeOpacity="0.1"
-              strokeWidth="1" strokeDasharray="4 8" />
-
-            {/* ── left circle (center 300,285, r 230) ── */}
-            <circle cx="300" cy="285" r="230"
-              fill="none"
-              stroke="var(--color-primary)" strokeOpacity="0.42"
-              strokeWidth="1.5" strokeDasharray="5 9" />
-
-            {/* ── right circle (center 600,285, r 230) ── */}
-            <circle cx="600" cy="285" r="230"
-              fill="none"
-              stroke="var(--color-primary)" strokeOpacity="0.42"
-              strokeWidth="1.5" strokeDasharray="5 9" />
-
-            {/* ── vesica / lens shape (the overlap) ── */}
-            {/*
-              Centers 300px apart, r=230.
-              half-d=150, h=sqrt(230²-150²)=sqrt(52900-22500)=sqrt(30400)≈174.4
-              top-intersection: (450, 285-174)=(450,111)
-              bottom-intersection: (450, 285+174)=(450,459)
-            */}
-            <path
-              d="M 450 111 A 230 230 0 0 1 450 459 A 230 230 0 0 1 450 111 Z"
-              fill="none"
-              stroke="var(--color-primary)" strokeOpacity="0.65"
-              strokeWidth="1.5" strokeDasharray="5 9" />
-
-            {/* ── TOP node — primary pink, at top intersection (450, 111) ── */}
-            <circle cx="450" cy="111" r="26"
-              fill="var(--color-primary)"
-              filter="url(#nodeglow)" />
-            <text x="450" y="120" textAnchor="middle"
-              fill="white" fontSize="24" fontWeight="bold"
-              fontFamily="DM Sans, sans-serif">+</text>
-
-            {/* ── LEFT node — at leftmost of left circle (70, 285) ── */}
-            <circle cx="70" cy="285" r="26"
-              fill="none"
-              stroke="var(--color-text-primary)" strokeOpacity="0.7"
-              strokeWidth="1.5" />
-            <text x="70" y="294" textAnchor="middle"
-              fill="var(--color-text-primary)" fontSize="22"
-              fontFamily="DM Sans, sans-serif">+</text>
-            {/* left label — text to the right of the node */}
-            <text x="112" y="278" textAnchor="start"
-              fill="var(--color-text-secondary)" fontSize="13"
-              fontFamily="DM Sans, sans-serif">We base everything</text>
-            <text x="112" y="297" textAnchor="start"
-              fill="var(--color-text-secondary)" fontSize="13"
-              fontFamily="DM Sans, sans-serif">on your brand</text>
-
-            {/* ── RIGHT node — at rightmost of right circle (830, 285) ── */}
-            <circle cx="830" cy="285" r="26"
-              fill="none"
-              stroke="var(--color-text-primary)" strokeOpacity="0.7"
-              strokeWidth="1.5" />
-            <text x="830" y="294" textAnchor="middle"
-              fill="var(--color-text-primary)" fontSize="22"
-              fontFamily="DM Sans, sans-serif">+</text>
-            {/* right label — text to the left of the node */}
-            <text x="788" y="278" textAnchor="end"
-              fill="var(--color-text-secondary)" fontSize="13"
-              fontFamily="DM Sans, sans-serif">Real-time QR</text>
-            <text x="788" y="297" textAnchor="end"
-              fill="var(--color-text-secondary)" fontSize="13"
-              fontFamily="DM Sans, sans-serif">verification</text>
-          </svg>
-        </div>
-
-        {/* tagline paragraph */}
-        <p className="gw-v2-tagline">
-          We have generated thousands of passes for events of all kinds — from intimate weddings
-          and private parties to large conferences and multi-day festivals.
-          We know what makes a branded event pass work.
-        </p>
-
-        {/* CTA bar matching reference bottom nav style */}
-        <div className="gw-v2-cta-bar">
-          <span className="gw-v2-page-num">4</span>
-          <span className="gw-v2-sep" />
-          <a href="#templates" className="gw-v2-btn gw-v2-btn-ghost">Templates</a>
-          <span className="gw-v2-sep" />
-          <a href="/sign-up" className="gw-v2-btn gw-v2-btn-solid">Get Started</a>
+        <div className="gw-scroll-hint">
+          <div className="gw-scroll-line" />
+          <span>Scroll to explore</span>
         </div>
       </section>
 
