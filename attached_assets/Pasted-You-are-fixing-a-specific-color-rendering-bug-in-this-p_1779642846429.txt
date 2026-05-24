@@ -1,0 +1,72 @@
+You are fixing a specific color rendering bug in this project. Do not touch any 
+other part of the codebase. Read and follow every instruction carefully before 
+making any changes.
+
+## THE BUG
+The primary pink color (#E8186D) renders correctly as pink on desktop browsers 
+but shifts to red on mobile browsers (iOS Safari and Chrome Android). This is 
+caused by the color sitting on the sRGB/P3 gamut boundary, which causes mobile 
+wide-gamut displays to misinterpret it.
+
+## THE FIX — Apply ALL three of these changes
+
+### CHANGE 1 — index.html
+Locate the <meta name="viewport"> tag in index.html and make sure it reads 
+exactly this — do not remove any existing attributes, only add viewport-fit=cover 
+if it is missing:
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+Also add this new meta tag directly below it if it does not already exist:
+
+<meta name="color-scheme" content="light dark">
+
+### CHANGE 2 — index.css
+Locate every instance of the color #E8186D in index.css (it will appear under 
+--color-primary in the :root block). Replace the entire --color-primary line 
+with these two lines — keep both, the first is the fallback, the second is the 
+explicit sRGB fix:
+
+--color-primary: #E5177A;
+--color-primary: color(srgb 0.898 0.090 0.478);
+
+Do the same inside the html.light block where --color-primary is set to #C8005A. 
+Replace that line with:
+
+--color-primary: #C4006B;
+--color-primary: color(srgb 0.769 0.000 0.420);
+
+### CHANGE 3 — index.css
+Add this block at the very bottom of index.css, after all existing rules. This 
+targets mobile viewports specifically as a safety net in case the color() function 
+is not supported:
+
+@media (max-width: 767px) {
+  :root {
+    --color-primary: #E5177A;
+    --color-primary-soft: rgba(229, 23, 122, 0.15);
+    --color-primary-glow: rgba(229, 23, 122, 0.35);
+  }
+
+  html.light {
+    --color-primary: #C4006B;
+    --color-primary-soft: rgba(196, 0, 107, 0.10);
+    --color-primary-glow: rgba(196, 0, 107, 0.20);
+  }
+}
+
+## RULES — Do not violate any of these
+- Only edit index.html and index.css. Touch no other file.
+- Do not change any hex values other than the ones listed above.
+- Do not remove any existing CSS rules or meta tags.
+- Do not rename or restructure any CSS variables.
+- Do not add any new dependencies or packages.
+- Do not change any component files.
+- After making the changes, confirm exactly which lines were changed in each file 
+  and show the before and after for each one. Do not summarize — show the actual 
+  lines.
+
+## HOW TO VERIFY THE FIX WORKED
+After applying the changes, tell me how to test it. The pink color should appear 
+as a cool magenta-pink (not red) on both desktop and mobile screens. The visual 
+difference between desktop and mobile should be imperceptible to the naked eye.

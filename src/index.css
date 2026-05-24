@@ -67,7 +67,8 @@
   --neon-border: rgba(255,255,255,0.08);
   --neon-border-active: rgba(255,255,255,0.18);
 
-  --neon-primary: #E8186D;
+  --neon-primary: #E5177A;
+  --neon-primary: color(srgb 0.898 0.090 0.478);
   --neon-primary-soft: rgba(232,24,109,0.15);
   --neon-primary-glow: rgba(232,24,109,0.35);
 
@@ -125,7 +126,8 @@
   --neon-border: rgba(255,255,255,0.08);
   --neon-border-active: rgba(255,255,255,0.18);
 
-  --neon-primary: #E8186D;
+  --neon-primary: #E5177A;
+  --neon-primary: color(srgb 0.898 0.090 0.478);
   --neon-primary-soft: rgba(232,24,109,0.15);
   --neon-primary-glow: rgba(232,24,109,0.35);
 
@@ -183,7 +185,8 @@
   --neon-border: rgba(0,0,0,0.08);
   --neon-border-active: rgba(0,0,0,0.18);
 
-  --neon-primary: #C8005A;
+  --neon-primary: #C4006B;
+  --neon-primary: color(srgb 0.769 0.000 0.420);
   --neon-primary-soft: rgba(200,0,90,0.10);
   --neon-primary-glow: rgba(200,0,90,0.20);
 
@@ -392,5 +395,19 @@
 @media print {
   .no-print {
     display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --neon-primary: #E5177A;
+    --neon-primary-soft: rgba(229, 23, 122, 0.15);
+    --neon-primary-glow: rgba(229, 23, 122, 0.35);
+  }
+
+  .light {
+    --neon-primary: #C4006B;
+    --neon-primary-soft: rgba(196, 0, 107, 0.10);
+    --neon-primary-glow: rgba(196, 0, 107, 0.20);
   }
 }
