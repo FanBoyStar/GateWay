@@ -2,9 +2,13 @@ import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { Toaster } from '@/components/ui/sonner';
 import { Button } from '@/components/ui/button';
 import { PassCard } from '@/components/passes/PassCard';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 
 // Pages
 import { Landing } from '@/pages/Landing';
+import { SignUp } from '@/pages/SignUp';
+import { SignIn } from '@/pages/SignIn';
 import { Dashboard } from '@/pages/Dashboard';
 import { CreateEvent } from '@/pages/CreateEvent';
 import { EventDetail } from '@/pages/EventDetail';
@@ -103,29 +107,103 @@ function DemoPassPage() {
 export function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Landing />} />
+      <AuthProvider>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Landing />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/sign-in" element={<SignIn />} />
 
-        {/* Protected Routes (for MVP, all routes are accessible) */}
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/events" element={<EventsList />} />
-        <Route path="/events/new" element={<CreateEvent />} />
-        <Route path="/events/:id" element={<EventDetail />} />
-        <Route path="/events/:eventId/add-attendee" element={<AddAttendee />} />
-        <Route path="/events/:eventId/bulk" element={<BulkUpload />} />
-        <Route path="/passes" element={<AllPasses />} />
-        <Route path="/passes/:passId" element={<PassViewer />} />
-        <Route path="/scan" element={<ScanVerify />} />
-        <Route path="/profile" element={<Profile />} />
+          {/* Protected Routes */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/events"
+            element={
+              <ProtectedRoute>
+                <EventsList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/events/new"
+            element={
+              <ProtectedRoute>
+                <CreateEvent />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/events/:id"
+            element={
+              <ProtectedRoute>
+                <EventDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/events/:eventId/add-attendee"
+            element={
+              <ProtectedRoute>
+                <AddAttendee />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/events/:eventId/bulk"
+            element={
+              <ProtectedRoute>
+                <BulkUpload />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/passes"
+            element={
+              <ProtectedRoute>
+                <AllPasses />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/passes/:passId"
+            element={
+              <ProtectedRoute>
+                <PassViewer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/scan"
+            element={
+              <ProtectedRoute>
+                <ScanVerify />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Demo pass route */}
-        <Route path="/passes/demo" element={<DemoPassPage />} />
+          {/* Demo pass route */}
+          <Route path="/passes/demo" element={<DemoPassPage />} />
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-      <Toaster position="top-right" richColors closeButton />
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        <Toaster position="top-right" richColors closeButton />
+      </AuthProvider>
     </BrowserRouter>
   );
 }

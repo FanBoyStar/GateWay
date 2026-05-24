@@ -80,7 +80,7 @@ export function Landing() {
                   size="lg"
                   className="rounded-full px-8 py-6 text-lg font-semibold bg-[var(--neon-primary)] hover:bg-[var(--neon-primary)]/90 neon-glow neon-glow-hover transition-all"
                 >
-                  <Link to="/dashboard">
+                  <Link to="/sign-up">
                     Get Started — Free
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
@@ -176,7 +176,7 @@ export function Landing() {
               size="lg"
               className="rounded-full px-10 py-7 text-lg font-semibold bg-[var(--neon-primary)] neon-glow neon-glow-hover"
             >
-              <Link to="/dashboard">
+              <Link to="/sign-up">
                 Start Creating Passes
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
