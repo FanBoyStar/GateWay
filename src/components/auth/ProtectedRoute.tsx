@@ -1,8 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { Spinner } from '@/components/ui/spinner';
 import { useAuth } from '@/contexts/AuthContext';
-import { OnboardingModal } from './OnboardingModal';
-import { useState, useEffect } from 'react';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -10,13 +8,6 @@ interface ProtectedRouteProps {
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, loading } = useAuth();
-  const [showOnboarding, setShowOnboarding] = useState(false);
-
-  useEffect(() => {
-    if (!loading && user && !user.onboarding_completed) {
-      setShowOnboarding(true);
-    }
-  }, [loading, user]);
 
   if (loading) {
     return (
@@ -30,10 +21,9 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
     return <Navigate to="/sign-in" replace />;
   }
 
-  return (
-    <>
-      {children}
-      <OnboardingModal open={showOnboarding} onClose={() => setShowOnboarding(false)} />
-    </>
-  );
+  if (!user.onboarding_completed) {
+    return <Navigate to="/onboarding" replace />;
+  }
+
+  return <>{children}</>;
 }

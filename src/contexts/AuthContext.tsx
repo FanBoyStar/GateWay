@@ -14,7 +14,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, fullName: string) => Promise<{ error: string | null }>;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
-  completeOnboarding: (organizationName: string, website?: string) => Promise<{ error: string | null }>;
+  completeOnboarding: (organizationName: string, website?: string, brandColor?: string) => Promise<{ error: string | null }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -70,13 +70,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
   };
 
-  const completeOnboarding = async (organizationName: string, website?: string): Promise<{ error: string | null }> => {
+  const completeOnboarding = async (organizationName: string, website?: string, brandColor?: string): Promise<{ error: string | null }> => {
     try {
       const res = await fetch('/api/auth/complete-onboarding', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ organizationName, website }),
+        body: JSON.stringify({ organizationName, website, brandColor }),
       });
       const data = await res.json();
       if (!res.ok) return { error: data.error || 'Onboarding failed' };

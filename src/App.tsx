@@ -10,6 +10,7 @@ import { Logo } from '@/components/ui/Logo';
 import GatewayLanding from '@/pages/GatewayLanding';
 import { SignIn } from '@/pages/SignIn';
 import { SignUp } from '@/pages/SignUp';
+import { Onboarding } from '@/pages/Onboarding';
 import { Dashboard } from '@/pages/Dashboard';
 import { CreateEvent } from '@/pages/CreateEvent';
 import { EventDetail } from '@/pages/EventDetail';
@@ -108,6 +109,7 @@ export function App() {
           <Route path="/" element={<GatewayLanding />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/passes/demo" element={<DemoPassPage />} />
 
           {/* Protected Routes */}

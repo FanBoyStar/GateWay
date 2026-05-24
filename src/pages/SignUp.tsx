@@ -48,7 +48,7 @@ export function SignUp() {
       setError(error);
       setLoading(false);
     } else {
-      navigate('/dashboard');
+      navigate('/onboarding');
     }
   };
 

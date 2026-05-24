@@ -115,13 +115,14 @@ router.post("/complete-onboarding", async (req, res) => {
     return res.status(401).json({ error: "Not authenticated" });
   }
   try {
-    const { organizationName, website } = req.body;
+    const { organizationName, website, brandColor } = req.body;
     let organizationId: string | null = null;
 
     if (organizationName) {
       const [org] = await db.insert(organizations).values({
         name: organizationName,
         website: website || null,
+        brandColor: brandColor || null,
         createdBy: userId,
       }).returning();
       organizationId = org.id;
