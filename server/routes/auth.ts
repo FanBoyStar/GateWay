@@ -1,17 +1,52 @@
 import { Router } from "express";
 import bcrypt from "bcrypt";
+import { randomBytes } from "crypto";
 import { db } from "../db.js";
-import { users, organizations } from "../models/auth.js";
-import { eq } from "drizzle-orm";
+import { users, organizations, userTokens } from "../models/auth.js";
+import { eq, and, gt } from "drizzle-orm";
 
 const router = Router();
 const SALT_ROUNDS = 12;
-
+const TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 declare module "express-session" {
   interface SessionData {
     userId: string;
   }
+}
+
+function generateToken(): string {
+  return randomBytes(32).toString("hex");
+}
+
+async function createUserToken(userId: string): Promise<string> {
+  const token = generateToken();
+  await db.insert(userTokens).values({
+    userId,
+    token,
+    expiresAt: new Date(Date.now() + TOKEN_TTL_MS),
+  });
+  return token;
+}
+
+export async function getUserIdFromRequest(req: any): Promise<string | null> {
+  const authHeader = req.headers["authorization"];
+  if (authHeader?.startsWith("Bearer ")) {
+    const token = authHeader.slice(7);
+    const [row] = await db
+      .select()
+      .from(userTokens)
+      .where(
+        and(
+          eq(userTokens.token, token),
+          gt(userTokens.expiresAt, new Date())
+        )
+      )
+      .limit(1);
+    if (row) return row.userId;
+  }
+  if (req.session?.userId) return req.session.userId;
+  return null;
 }
 
 router.post("/sign-up", async (req, res) => {
@@ -36,19 +71,18 @@ router.post("/sign-up", async (req, res) => {
       passwordHash,
     }).returning();
 
+    const token = await createUserToken(user.id);
+
     req.session.userId = user.id;
-    req.session.save((err) => {
-      if (err) {
-        console.error("Session save error:", err);
-        return res.status(500).json({ error: "Sign up failed" });
-      }
-      return res.json({
-        id: user.id,
-        email: user.email,
-        full_name: user.fullName,
-        organization_id: user.organizationId,
-        onboarding_completed: user.onboardingCompleted,
-      });
+    req.session.save(() => {});
+
+    return res.json({
+      id: user.id,
+      email: user.email,
+      full_name: user.fullName,
+      organization_id: user.organizationId,
+      onboarding_completed: user.onboardingCompleted,
+      token,
     });
   } catch (err) {
     console.error("Sign-up error:", err);
@@ -73,19 +107,18 @@ router.post("/sign-in", async (req, res) => {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 
+    const token = await createUserToken(user.id);
+
     req.session.userId = user.id;
-    req.session.save((err) => {
-      if (err) {
-        console.error("Session save error:", err);
-        return res.status(500).json({ error: "Sign in failed" });
-      }
-      return res.json({
-        id: user.id,
-        email: user.email,
-        full_name: user.fullName,
-        organization_id: user.organizationId,
-        onboarding_completed: user.onboardingCompleted,
-      });
+    req.session.save(() => {});
+
+    return res.json({
+      id: user.id,
+      email: user.email,
+      full_name: user.fullName,
+      organization_id: user.organizationId,
+      onboarding_completed: user.onboardingCompleted,
+      token,
     });
   } catch (err) {
     console.error("Sign-in error:", err);
@@ -93,18 +126,22 @@ router.post("/sign-in", async (req, res) => {
   }
 });
 
-router.post("/sign-out", (req, res) => {
-  req.session.destroy(() => {
-    res.json({ success: true });
-  });
+router.post("/sign-out", async (req, res) => {
+  const authHeader = req.headers["authorization"];
+  if (authHeader?.startsWith("Bearer ")) {
+    const token = authHeader.slice(7);
+    await db.delete(userTokens).where(eq(userTokens.token, token)).catch(() => {});
+  }
+  req.session.destroy(() => {});
+  res.json({ success: true });
 });
 
 router.get("/me", async (req, res) => {
-  const userId = req.session.userId;
-  if (!userId) {
-    return res.status(401).json({ error: "Not authenticated" });
-  }
   try {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
+      return res.status(401).json({ error: "Not authenticated" });
+    }
     const [user] = await db.select().from(users).where(eq(users.id, userId)).limit(1);
     if (!user) {
       return res.status(401).json({ error: "Not authenticated" });
@@ -123,11 +160,12 @@ router.get("/me", async (req, res) => {
 });
 
 router.post("/complete-onboarding", async (req, res) => {
-  const userId = req.session.userId;
-  if (!userId) {
-    return res.status(401).json({ error: "Not authenticated" });
-  }
   try {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
+      return res.status(401).json({ error: "Not authenticated" });
+    }
+
     const { organizationName, website, brandColor } = req.body;
     let organizationId: string | null = null;
 

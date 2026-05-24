@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
+const TOKEN_KEY = 'gateway_auth_token';
+
 interface UserProfile {
   id: string;
   email: string;
@@ -19,12 +21,40 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+function getStoredToken(): string | null {
+  try {
+    return localStorage.getItem(TOKEN_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function setStoredToken(token: string): void {
+  try {
+    localStorage.setItem(TOKEN_KEY, token);
+  } catch {}
+}
+
+function clearStoredToken(): void {
+  try {
+    localStorage.removeItem(TOKEN_KEY);
+  } catch {}
+}
+
+function authHeaders(): Record<string, string> {
+  const token = getStoredToken();
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/auth/me', { credentials: 'include' })
+    fetch('/api/auth/me', {
+      credentials: 'include',
+      headers: authHeaders(),
+    })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => setUser(data))
       .catch(() => setUser(null))
@@ -41,7 +71,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       const data = await res.json();
       if (!res.ok) return { error: data.error || 'Sign up failed' };
-      setUser(data);
+      if (data.token) setStoredToken(data.token);
+      const { token: _token, ...userProfile } = data;
+      setUser(userProfile);
       return { error: null };
     } catch {
       return { error: 'Sign up failed' };
@@ -58,7 +90,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       const data = await res.json();
       if (!res.ok) return { error: data.error || 'Sign in failed' };
-      setUser(data);
+      if (data.token) setStoredToken(data.token);
+      const { token: _token, ...userProfile } = data;
+      setUser(userProfile);
       return { error: null };
     } catch {
       return { error: 'Sign in failed' };
@@ -66,7 +100,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signOut = async () => {
-    await fetch('/api/auth/sign-out', { method: 'POST', credentials: 'include' });
+    await fetch('/api/auth/sign-out', {
+      method: 'POST',
+      credentials: 'include',
+      headers: authHeaders(),
+    }).catch(() => {});
+    clearStoredToken();
     setUser(null);
   };
 
@@ -74,7 +113,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const res = await fetch('/api/auth/complete-onboarding', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...authHeaders(),
+        },
         credentials: 'include',
         body: JSON.stringify({ organizationName, website, brandColor }),
       });
