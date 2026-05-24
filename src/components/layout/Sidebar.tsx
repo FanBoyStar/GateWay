@@ -1,11 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Hop as Home, CalendarDays, Ticket, ScanLine, User, Sun, Moon } from 'lucide-react';
+import { House, CalendarDays, Ticket, ScanLine, User, Sun, Moon } from 'lucide-react';
 import { useThemeStore } from '@/store/useThemeStore';
 import { Logo } from '@/components/ui/Logo';
 
 const navItems = [
-  { path: '/dashboard', label: 'Home', icon: Home },
+  { path: '/dashboard', label: 'Home', icon: House },
   { path: '/events', label: 'Events', icon: CalendarDays },
   { path: '/passes', label: 'Passes', icon: Ticket },
   { path: '/scan', label: 'Scan', icon: ScanLine },
