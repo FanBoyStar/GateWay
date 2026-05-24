@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import {
   Zap, QrCode, Users, CheckCircle, ArrowRight, Sparkles,
   Calendar, Shield, Download, Star, ChevronDown,
-  Clock, MapPin, Ticket, ScanLine, Mail, Globe, ArrowUpRight
+  Clock, MapPin, Ticket, ScanLine, Mail, Globe, ArrowUpRight,
+  Sun, Moon
 } from "lucide-react";
 
 /* ═══════════════════════════════════════════════
@@ -26,6 +27,30 @@ const CSS = `
   --color-text-primary:   #0D0D12;
   --color-text-secondary: rgba(13,13,18,0.55);
   --color-text-muted:     rgba(13,13,18,0.38);
+  --color-nav-bg:         rgba(248,248,252,0.82);
+  --color-stat-grad-start: #0D0D12;
+  --color-stat-grad-end:   rgba(13,13,18,0.6);
+}
+
+/* ══════════ DARK THEME OVERRIDES ══════════ */
+[data-gw-theme="dark"] {
+  --color-bg:             #0D0D12;
+  --color-surface:        #15151E;
+  --color-surface-2:      #1E1E2C;
+  --color-border:         rgba(255,255,255,0.08);
+  --color-border-active:  rgba(255,255,255,0.18);
+  --color-primary:        #E8186D;
+  --color-primary-soft:   rgba(232,24,109,0.15);
+  --color-primary-glow:   rgba(232,24,109,0.35);
+  --color-accent:         #7B5CF0;
+  --color-accent-soft:    rgba(123,92,240,0.15);
+  --color-success:        #22C55E;
+  --color-text-primary:   #FFFFFF;
+  --color-text-secondary: rgba(255,255,255,0.55);
+  --color-text-muted:     rgba(255,255,255,0.30);
+  --color-nav-bg:         rgba(13,13,18,0.75);
+  --color-stat-grad-start: #FFFFFF;
+  --color-stat-grad-end:   rgba(255,255,255,0.55);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -107,10 +132,10 @@ body {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 48px;
-  background: rgba(248,248,252,0.82);
+  background: var(--color-nav-bg);
   backdrop-filter: blur(20px) saturate(1.4);
   border-bottom: 1px solid var(--color-border);
-  transition: padding 250ms;
+  transition: padding 250ms, background 300ms;
 }
 .gw-logo {
   display: flex; align-items: center; gap: 10px;
@@ -141,6 +166,26 @@ body {
   transition: box-shadow 150ms, transform 100ms;
 }
 .gw-nav-cta:hover { box-shadow: 0 0 44px var(--color-primary-glow); transform: translateY(-1px); }
+
+/* ── Theme toggle ── */
+.gw-theme-toggle {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--color-surface-2); border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background 200ms, color 200ms, border-color 200ms, box-shadow 150ms;
+  flex-shrink: 0;
+}
+.gw-theme-toggle:hover {
+  background: var(--color-surface); color: var(--color-primary);
+  border-color: var(--color-primary-soft);
+  box-shadow: 0 0 14px var(--color-primary-soft);
+}
+
+/* ── Dark mode orb boost ── */
+[data-gw-theme="dark"] .gw-orb-1 { background: rgba(232,24,109,0.30); }
+[data-gw-theme="dark"] .gw-orb-2 { background: rgba(99,68,212,0.20); }
+[data-gw-theme="dark"] .gw-orb-3 { background: rgba(232,24,109,0.18); }
 
 /* ══════════ BUTTONS ══════════ */
 .btn-primary {
@@ -667,7 +712,7 @@ body {
 .gw-stat-num {
   font-family: "Space Grotesk", sans-serif; font-size: 36px; font-weight: 800;
   letter-spacing: -0.03em; line-height: 1;
-  background: linear-gradient(135deg, #0D0D12 0%, rgba(13,13,18,0.6) 100%);
+  background: linear-gradient(135deg, var(--color-stat-grad-start) 0%, var(--color-stat-grad-end) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
@@ -868,7 +913,13 @@ body {
 `;
 
 /* ══════════ CITYSCAPE SVG ══════════ */
-function CityscapeSVG() {
+function CityscapeSVG({ dark = false }: { dark?: boolean }) {
+  const bFar  = dark ? "#0a0a0f" : "#D8D8E8";
+  const bMid  = dark ? "#0D0D12" : "#C8C8DC";
+  const bTall = dark ? "#0D0D12" : "#B8B8D0";
+  const bSpire= dark ? "#0D0D12" : "#AEAEC8";
+  const bAnt  = dark ? "#0D0D12" : "#9898B8";
+  const bFore = dark ? "#0D0D12" : "#C0C0D8";
   return (
     <svg
       viewBox="0 0 1440 420"
@@ -878,9 +929,9 @@ function CityscapeSVG() {
       <defs>
         {/* fade-to-transparent gradient so cityscape blends into hero */}
         <linearGradient id="skyFade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#F8F8FC" stopOpacity="0" />
-          <stop offset="55%" stopColor="#F8F8FC" stopOpacity="0.55" />
-          <stop offset="100%" stopColor="#F8F8FC" stopOpacity="1" />
+          <stop offset="0%" stopColor={dark ? "#0D0D12" : "#F8F8FC"} stopOpacity="0" />
+          <stop offset="55%" stopColor={dark ? "#0D0D12" : "#F8F8FC"} stopOpacity="0.55" />
+          <stop offset="100%" stopColor={dark ? "#0D0D12" : "#F8F8FC"} stopOpacity="1" />
         </linearGradient>
         {/* primary-color window glow */}
         <filter id="winGlow" x="-50%" y="-50%" width="200%" height="200%">
@@ -893,70 +944,67 @@ function CityscapeSVG() {
         </filter>
       </defs>
 
-      {/* ── Building silhouettes — soft gray fills for light mode ── */}
+      {/* ── Building silhouettes ── */}
 
-      {/* Far background layer — lighter, more muted */}
-      {/* bg block left */}
-      <rect x="0"   y="280" width="90"  height="140" fill="#D8D8E8" />
-      <rect x="85"  y="300" width="60"  height="120" fill="#D8D8E8" />
-      <rect x="140" y="260" width="80"  height="160" fill="#D8D8E8" />
-      <rect x="215" y="295" width="50"  height="125" fill="#D8D8E8" />
-      <rect x="260" y="270" width="70"  height="150" fill="#D8D8E8" />
-      {/* bg block right */}
-      <rect x="1100" y="290" width="80"  height="130" fill="#D8D8E8" />
-      <rect x="1175" y="265" width="65"  height="155" fill="#D8D8E8" />
-      <rect x="1235" y="285" width="90"  height="135" fill="#D8D8E8" />
-      <rect x="1320" y="270" width="60"  height="150" fill="#D8D8E8" />
-      <rect x="1375" y="295" width="65"  height="125" fill="#D8D8E8" />
+      {/* Far background layer */}
+      <rect x="0"   y="280" width="90"  height="140" fill={bFar} />
+      <rect x="85"  y="300" width="60"  height="120" fill={bFar} />
+      <rect x="140" y="260" width="80"  height="160" fill={bFar} />
+      <rect x="215" y="295" width="50"  height="125" fill={bFar} />
+      <rect x="260" y="270" width="70"  height="150" fill={bFar} />
+      <rect x="1100" y="290" width="80"  height="130" fill={bFar} />
+      <rect x="1175" y="265" width="65"  height="155" fill={bFar} />
+      <rect x="1235" y="285" width="90"  height="135" fill={bFar} />
+      <rect x="1320" y="270" width="60"  height="150" fill={bFar} />
+      <rect x="1375" y="295" width="65"  height="125" fill={bFar} />
 
       {/* Mid layer — main body buildings */}
-      {/* Left cluster */}
-      <rect x="0"   y="220" width="100" height="200" fill="#C8C8DC" />
-      <rect x="95"  y="240" width="75"  height="180" fill="#C8C8DC" />
-      <rect x="165" y="200" width="55"  height="220" fill="#C8C8DC" />
-      <rect x="215" y="230" width="85"  height="190" fill="#C8C8DC" />
-      <rect x="295" y="210" width="65"  height="210" fill="#C8C8DC" />
-      <rect x="355" y="250" width="90"  height="170" fill="#C8C8DC" />
-      <rect x="440" y="230" width="55"  height="190" fill="#C8C8DC" />
-      <rect x="490" y="260" width="70"  height="160" fill="#C8C8DC" />
+      <rect x="0"   y="220" width="100" height="200" fill={bMid} />
+      <rect x="95"  y="240" width="75"  height="180" fill={bMid} />
+      <rect x="165" y="200" width="55"  height="220" fill={bMid} />
+      <rect x="215" y="230" width="85"  height="190" fill={bMid} />
+      <rect x="295" y="210" width="65"  height="210" fill={bMid} />
+      <rect x="355" y="250" width="90"  height="170" fill={bMid} />
+      <rect x="440" y="230" width="55"  height="190" fill={bMid} />
+      <rect x="490" y="260" width="70"  height="160" fill={bMid} />
 
       {/* Center cluster — tallest buildings */}
-      <rect x="555" y="150" width="80"  height="270" fill="#B8B8D0" />
-      <rect x="630" y="130" width="60"  height="290" fill="#B8B8D0" />
+      <rect x="555" y="150" width="80"  height="270" fill={bTall} />
+      <rect x="630" y="130" width="60"  height="290" fill={bTall} />
       {/* Central spire tower */}
-      <rect x="685" y="60"  width="30"  height="360" fill="#AEAEC8" />
-      <polygon points="700,30 685,80 715,80" fill="#AEAEC8" />
+      <rect x="685" y="60"  width="30"  height="360" fill={bSpire} />
+      <polygon points="700,30 685,80 715,80" fill={bSpire} />
       {/* Antenna */}
-      <rect x="698" y="10"  width="4"   height="50"  fill="#9898B8" />
+      <rect x="698" y="10"  width="4"   height="50"  fill={bAnt} />
       {/* Tower observation deck */}
-      <rect x="680" y="120" width="40"  height="18"  fill="#9898B8" />
-      <rect x="676" y="138" width="48"  height="8"   fill="#9898B8" />
+      <rect x="680" y="120" width="40"  height="18"  fill={bAnt} />
+      <rect x="676" y="138" width="48"  height="8"   fill={bAnt} />
 
-      <rect x="710" y="140" width="70"  height="280" fill="#B8B8D0" />
-      <rect x="775" y="160" width="55"  height="260" fill="#B8B8D0" />
-      <rect x="825" y="120" width="45"  height="300" fill="#B0B0CC" />
+      <rect x="710" y="140" width="70"  height="280" fill={bTall} />
+      <rect x="775" y="160" width="55"  height="260" fill={bTall} />
+      <rect x="825" y="120" width="45"  height="300" fill={bTall} />
       {/* Slender skyscraper */}
-      <rect x="865" y="80"  width="35"  height="340" fill="#AEAEC8" />
-      <polygon points="882,55 865,90 900,90" fill="#AEAEC8" />
-      <rect x="895" y="170" width="65"  height="250" fill="#B8B8D0" />
+      <rect x="865" y="80"  width="35"  height="340" fill={bSpire} />
+      <polygon points="882,55 865,90 900,90" fill={bSpire} />
+      <rect x="895" y="170" width="65"  height="250" fill={bTall} />
 
       {/* Right cluster */}
-      <rect x="955" y="200" width="90"  height="220" fill="#C8C8DC" />
-      <rect x="1040" y="220" width="70" height="200" fill="#C8C8DC" />
-      <rect x="1105" y="190" width="80" height="230" fill="#C8C8DC" />
-      <rect x="1180" y="215" width="60" height="205" fill="#C8C8DC" />
-      <rect x="1235" y="230" width="95" height="190" fill="#C8C8DC" />
-      <rect x="1325" y="210" width="65" height="210" fill="#C8C8DC" />
-      <rect x="1385" y="240" width="55" height="180" fill="#C8C8DC" />
+      <rect x="955" y="200" width="90"  height="220" fill={bMid} />
+      <rect x="1040" y="220" width="70" height="200" fill={bMid} />
+      <rect x="1105" y="190" width="80" height="230" fill={bMid} />
+      <rect x="1180" y="215" width="60" height="205" fill={bMid} />
+      <rect x="1235" y="230" width="95" height="190" fill={bMid} />
+      <rect x="1325" y="210" width="65" height="210" fill={bMid} />
+      <rect x="1385" y="240" width="55" height="180" fill={bMid} />
 
       {/* Foreground large base buildings */}
-      <rect x="0"   y="300" width="130" height="120" fill="#C0C0D8" />
-      <rect x="125" y="320" width="100" height="100" fill="#C0C0D8" />
-      <rect x="1220" y="310" width="110" height="110" fill="#C0C0D8" />
-      <rect x="1325" y="295" width="115" height="125" fill="#C0C0D8" />
+      <rect x="0"   y="300" width="130" height="120" fill={bFore} />
+      <rect x="125" y="320" width="100" height="100" fill={bFore} />
+      <rect x="1220" y="310" width="110" height="110" fill={bFore} />
+      <rect x="1325" y="295" width="115" height="125" fill={bFore} />
 
       {/* Ground base fill */}
-      <rect x="0" y="400" width="1440" height="20" fill="#C0C0D8" />
+      <rect x="0" y="400" width="1440" height="20" fill={bFore} />
 
       {/* ── Windows — primary color glow ── */}
       {/* Left cluster windows */}
@@ -1221,8 +1269,19 @@ function HowScreen({ step }: { step: number }) {
 /* ══════════ MAIN EXPORT ══════════ */
 export default function GatewayLanding() {
   const [activeStep, setActiveStep] = useState(0);
+  const [isDark, setIsDark] = useState(() => {
+    try { return localStorage.getItem("gw-theme") === "dark"; } catch { return false; }
+  });
   const revealRefs = useRef<Element[]>([]);
   const stepTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const toggleTheme = () => {
+    setIsDark(d => {
+      const next = !d;
+      try { localStorage.setItem("gw-theme", next ? "dark" : "light"); } catch {}
+      return next;
+    });
+  };
 
   // auto-advance steps
   useEffect(() => {
@@ -1266,7 +1325,7 @@ export default function GatewayLanding() {
   ];
 
   return (
-    <>
+    <div data-gw-theme={isDark ? "dark" : "light"} style={{ minHeight: "100vh", background: "var(--color-bg)", transition: "background 300ms" }}>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
 
       {/* ── Background ── */}
@@ -1298,9 +1357,14 @@ export default function GatewayLanding() {
           <li><a href="#how-it-works">How it works</a></li>
           <li><a href="#templates">Templates</a></li>
         </ul>
-        <a href="/sign-up" className="gw-nav-cta">
-          Get Started <ArrowUpRight size={14} />
-        </a>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <button className="gw-theme-toggle" onClick={toggleTheme} title={isDark ? "Switch to light mode" : "Switch to dark mode"}>
+            {isDark ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+          <a href="/sign-up" className="gw-nav-cta">
+            Get Started <ArrowUpRight size={14} />
+          </a>
+        </div>
       </nav>
 
       {/* ════════════════════════════════
@@ -1309,7 +1373,7 @@ export default function GatewayLanding() {
       <section style={{ position: "relative", zIndex: 1 }}>
         {/* cityscape background layer */}
         <div className="gw-cityscape">
-          <CityscapeSVG />
+          <CityscapeSVG dark={isDark} />
         </div>
         <div className="gw-hero">
           {/* left */}
@@ -1553,6 +1617,6 @@ export default function GatewayLanding() {
           © {new Date().getFullYear()} Gateway. All rights reserved.
         </div>
       </footer>
-    </>
+    </div>
   );
 }
