@@ -1,22 +1,19 @@
-import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Spinner } from '@/components/ui/spinner';
 import { useAuth } from '@/contexts/AuthContext';
-import { OnboardingModal } from './OnboardingModal';
-import { useState, useEffect } from 'react';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { session, user, loading } = useAuth();
-  const [showOnboarding, setShowOnboarding] = useState(false);
+  const { isAuthenticated, loading } = useAuth();
 
   useEffect(() => {
-    if (!loading && session && user && !user.onboarding_completed) {
-      setShowOnboarding(true);
+    if (!loading && !isAuthenticated) {
+      window.location.href = '/api/login';
     }
-  }, [loading, session, user]);
+  }, [loading, isAuthenticated]);
 
   if (loading) {
     return (
@@ -26,14 +23,13 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
     );
   }
 
-  if (!session) {
-    return <Navigate to="/sign-in" replace />;
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Spinner className="h-8 w-8 text-[var(--neon-primary)]" />
+      </div>
+    );
   }
 
-  return (
-    <>
-      {children}
-      <OnboardingModal open={showOnboarding} onClose={() => setShowOnboarding(false)} />
-    </>
-  );
+  return <>{children}</>;
 }

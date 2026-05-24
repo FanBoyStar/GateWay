@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/sonner';
 import { Button } from '@/components/ui/button';
 import { PassCard } from '@/components/passes/PassCard';
@@ -7,9 +8,6 @@ import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 
 // Pages
 import GatewayLanding from '@/pages/GatewayLanding';
-import { Landing } from '@/pages/Landing';
-import { SignUp } from '@/pages/SignUp';
-import { SignIn } from '@/pages/SignIn';
 import { Dashboard } from '@/pages/Dashboard';
 import { CreateEvent } from '@/pages/CreateEvent';
 import { EventDetail } from '@/pages/EventDetail';
@@ -21,9 +19,10 @@ import { BulkUpload } from '@/pages/BulkUpload';
 import { ScanVerify } from '@/pages/ScanVerify';
 import { Profile } from '@/pages/Profile';
 
+const queryClient = new QueryClient();
+
 // Demo Pass Page
 function DemoPassPage() {
-  // Demo event
   const demoEvent = {
     id: 'demo',
     name: 'Tech Summit 2026',
@@ -78,23 +77,16 @@ function DemoPassPage() {
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <div className="text-center mb-6">
-          <h1
-            className="text-2xl font-bold"
-            style={{ fontFamily: 'Syne, sans-serif' }}
-          >
+          <h1 className="text-2xl font-bold" style={{ fontFamily: 'Syne, sans-serif' }}>
             Demo Pass Preview
           </h1>
-          <p className="text-muted-foreground">
-            This is what an event pass looks like
-          </p>
+          <p className="text-muted-foreground">This is what an event pass looks like</p>
         </div>
-
         <div className="flex justify-center mb-6">
           <div id="demo-pass">
             <PassCard event={demoEvent} attendee={demoAttendee} pass={demoPass} size="full" />
           </div>
         </div>
-
         <div className="text-center">
           <Button asChild>
             <Link to="/dashboard">Get Started — It's Free</Link>
@@ -107,105 +99,107 @@ function DemoPassPage() {
 
 export function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<GatewayLanding />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/sign-in" element={<SignIn />} />
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <AuthProvider>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<GatewayLanding />} />
+            <Route path="/passes/demo" element={<DemoPassPage />} />
 
-          {/* Protected Routes */}
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/events"
-            element={
-              <ProtectedRoute>
-                <EventsList />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/events/new"
-            element={
-              <ProtectedRoute>
-                <CreateEvent />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/events/:id"
-            element={
-              <ProtectedRoute>
-                <EventDetail />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/events/:eventId/add-attendee"
-            element={
-              <ProtectedRoute>
-                <AddAttendee />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/events/:eventId/bulk"
-            element={
-              <ProtectedRoute>
-                <BulkUpload />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/passes"
-            element={
-              <ProtectedRoute>
-                <AllPasses />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/passes/:passId"
-            element={
-              <ProtectedRoute>
-                <PassViewer />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/scan"
-            element={
-              <ProtectedRoute>
-                <ScanVerify />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
+            {/* Protected Routes */}
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/events"
+              element={
+                <ProtectedRoute>
+                  <EventsList />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/events/new"
+              element={
+                <ProtectedRoute>
+                  <CreateEvent />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/events/:id"
+              element={
+                <ProtectedRoute>
+                  <EventDetail />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/events/:eventId/add-attendee"
+              element={
+                <ProtectedRoute>
+                  <AddAttendee />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/events/:eventId/bulk"
+              element={
+                <ProtectedRoute>
+                  <BulkUpload />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/passes"
+              element={
+                <ProtectedRoute>
+                  <AllPasses />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/passes/:passId"
+              element={
+                <ProtectedRoute>
+                  <PassViewer />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/scan"
+              element={
+                <ProtectedRoute>
+                  <ScanVerify />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
 
-          {/* Demo pass route */}
-          <Route path="/passes/demo" element={<DemoPassPage />} />
+            {/* Redirect old auth routes */}
+            <Route path="/sign-in" element={<Navigate to="/api/login" replace />} />
+            <Route path="/sign-up" element={<Navigate to="/api/login" replace />} />
 
-          {/* Fallback */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-        <Toaster position="top-right" richColors closeButton />
-      </AuthProvider>
-    </BrowserRouter>
+            {/* Fallback */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+          <Toaster position="top-right" richColors closeButton />
+        </AuthProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
