@@ -1,6 +1,6 @@
-import { Navigate } from 'react-router-dom';
 import { Spinner } from '@/components/ui/spinner';
 import { useAuth } from '@/contexts/AuthContext';
+import { Navigate } from 'react-router-dom';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -18,7 +18,8 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   }
 
   if (!user) {
-    return <Navigate to="/sign-in" replace />;
+    window.location.href = '/api/login';
+    return null;
   }
 
   if (!user.onboarding_completed) {

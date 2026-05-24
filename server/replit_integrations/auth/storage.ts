@@ -2,8 +2,6 @@ import { users, type User, type UpsertUser } from "../../models/auth.js";
 import { db } from "../../db.js";
 import { eq } from "drizzle-orm";
 
-// Interface for auth storage operations
-// (IMPORTANT) These user operations are mandatory for Replit Auth.
 export interface IAuthStorage {
   getUser(id: string): Promise<User | undefined>;
   upsertUser(user: UpsertUser): Promise<User>;

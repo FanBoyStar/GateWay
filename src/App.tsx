@@ -8,8 +8,6 @@ import { Logo } from '@/components/ui/Logo';
 
 // Pages
 import GatewayLanding from '@/pages/GatewayLanding';
-import { SignIn } from '@/pages/SignIn';
-import { SignUp } from '@/pages/SignUp';
 import { Onboarding } from '@/pages/Onboarding';
 import { Dashboard } from '@/pages/Dashboard';
 import { CreateEvent } from '@/pages/CreateEvent';
@@ -92,7 +90,7 @@ function DemoPassPage() {
         </div>
         <div className="text-center">
           <Button asChild>
-            <Link to="/sign-up">Get Started — It's Free</Link>
+            <Link to="/api/login">Get Started — It's Free</Link>
           </Button>
         </div>
       </div>
@@ -107,8 +105,6 @@ export function App() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<GatewayLanding />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/passes/demo" element={<DemoPassPage />} />
 

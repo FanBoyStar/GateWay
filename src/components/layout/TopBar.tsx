@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Sun, Moon, User, Menu, LogOut } from 'lucide-react';
 import { useThemeStore } from '@/store/useThemeStore';
 import { useAuth } from '@/contexts/AuthContext';
@@ -20,11 +20,9 @@ interface TopBarProps {
 export function TopBar({ showMenu, onMenuClick }: TopBarProps) {
   const { theme, toggleTheme } = useThemeStore();
   const { signOut } = useAuth();
-  const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    await signOut();
-    navigate('/');
+  const handleLogout = () => {
+    signOut();
   };
 
   return (

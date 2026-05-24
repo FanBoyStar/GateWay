@@ -36,7 +36,7 @@ export function Dashboard() {
 
   const recentEvents = [...events].reverse().slice(0, 5);
 
-  const firstName = user?.full_name?.split(' ')[0] ?? 'there';
+  const firstName = user?.full_name?.split(' ')[0] ?? user?.first_name ?? 'there';
   const today = format(new Date(), 'EEEE, d MMMM yyyy');
 
   const stats = [
