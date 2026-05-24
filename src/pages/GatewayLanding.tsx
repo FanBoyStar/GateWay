@@ -465,6 +465,143 @@ body {
   94% { opacity: 0.6; }
 }
 
+/* ══════════ HERO PASS CAROUSEL ══════════ */
+.pc-carousel {
+  position: relative; width: 320px; height: 316px;
+}
+.pc-slide {
+  position: absolute; inset: 0;
+  display: flex; align-items: flex-start; justify-content: center;
+  opacity: 0; pointer-events: none;
+}
+.pc-slide.pc-active {
+  opacity: 1; pointer-events: auto; z-index: 2;
+  animation: pcSlideIn 0.46s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.pc-slide.pc-exiting {
+  z-index: 1; pointer-events: none;
+  animation: pcSlideOut 0.34s cubic-bezier(0.4,0,1,1) forwards;
+}
+@keyframes pcSlideIn {
+  from { opacity: 0; transform: translateY(22px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes pcSlideOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(-16px) scale(0.97); }
+}
+
+/* slide indicator dots */
+.pc-dots {
+  display: flex; justify-content: center; gap: 7px;
+  margin-top: 16px;
+}
+.pc-dot {
+  height: 6px; width: 6px; border-radius: 3px;
+  background: var(--color-border-active); border: none; padding: 0;
+  cursor: pointer;
+  transition: background 280ms, width 280ms, box-shadow 280ms;
+}
+.pc-dot.pc-dot-active {
+  width: 22px; border-radius: 3px;
+  background: var(--color-primary);
+  box-shadow: 0 0 10px var(--color-primary-glow);
+}
+
+/* label pill above carousel */
+.pc-template-label {
+  text-align: center; margin-bottom: 10px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--color-text-muted);
+  transition: opacity 200ms;
+}
+
+/* ── Minimal pass variant ── */
+.pc-minimal {
+  border-radius: 20px; overflow: hidden; width: 320px;
+  background: #FFFFFF;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.07);
+}
+.pc-minimal-top {
+  height: 136px; position: relative;
+  background: linear-gradient(140deg, #F4F4FB 0%, #E8E8F8 100%);
+  padding: 20px 24px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  border-bottom: 1px solid rgba(0,0,0,0.055);
+}
+.pc-minimal-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: rgba(99,68,212,0.09); border: 1px solid rgba(99,68,212,0.18);
+  border-radius: 50px; padding: 3px 10px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+  color: #6344D4; text-transform: uppercase; width: fit-content;
+}
+.pc-minimal-event { font-family: "Space Grotesk", sans-serif; font-size: 18px; font-weight: 800; color: #0D0D12; letter-spacing: -0.02em; margin-top: 2px; }
+.pc-minimal-meta { font-size: 10px; color: rgba(13,13,18,0.40); margin-top: 2px; display: flex; gap: 10px; }
+.pc-minimal-perf {
+  border-top: 2px dashed rgba(0,0,0,0.08); margin: 0 -1px; position: relative;
+}
+.pc-minimal-perf::before, .pc-minimal-perf::after {
+  content: ''; position: absolute; top: -12px;
+  width: 24px; height: 24px; border-radius: 50%; background: #ffffff;
+}
+.pc-minimal-perf::before { left: -13px; }
+.pc-minimal-perf::after  { right: -13px; }
+.pc-minimal-bottom {
+  background: #FFFFFF; padding: 18px 20px 18px 24px;
+  display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: end;
+}
+.pc-minimal-name { font-family: "Space Grotesk", sans-serif; font-size: 15px; font-weight: 700; color: #0D0D12; }
+.pc-minimal-ticket {
+  display: inline-flex; background: rgba(99,68,212,0.08); color: #6344D4;
+  border-radius: 50px; padding: 2px 9px; font-size: 10px; font-weight: 600; margin-top: 3px;
+}
+.pc-minimal-info { font-size: 11px; color: rgba(13,13,18,0.33); margin-top: 10px; line-height: 1.7; }
+.pc-minimal-id { font-family: "JetBrains Mono", monospace; font-size: 10px; color: rgba(13,13,18,0.22); margin-top: 6px; }
+.pc-minimal-qr { background: #F4F4FB; border-radius: 10px; padding: 9px; border: 1px solid rgba(0,0,0,0.07); }
+
+/* ── Vibrant pass variant ── */
+.pc-vibrant {
+  border-radius: 20px; overflow: hidden; width: 320px;
+  box-shadow: 0 20px 60px rgba(123,92,240,0.28), 0 0 0 1px rgba(123,92,240,0.18);
+}
+.pc-vibrant-top {
+  height: 136px; position: relative;
+  background: linear-gradient(135deg, #7B5CF0 0%, #C026A6 60%, #E8186D 100%);
+  padding: 20px 24px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.pc-vibrant-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 50px; padding: 3px 10px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+  color: #fff; text-transform: uppercase; width: fit-content;
+}
+.pc-vibrant-event { font-family: "Space Grotesk", sans-serif; font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.02em; text-shadow: 0 2px 12px rgba(0,0,0,0.25); }
+.pc-vibrant-meta { font-size: 10px; color: rgba(255,255,255,0.60); margin-top: 2px; display: flex; gap: 10px; }
+.pc-vibrant-perf {
+  border-top: 2px dashed rgba(255,255,255,0.18); margin: 0 -1px; position: relative;
+}
+.pc-vibrant-perf::before, .pc-vibrant-perf::after {
+  content: ''; position: absolute; top: -12px;
+  width: 24px; height: 24px; border-radius: 50%; background: #150C2A;
+}
+.pc-vibrant-perf::before { left: -13px; }
+.pc-vibrant-perf::after  { right: -13px; }
+.pc-vibrant-bottom {
+  background: #150C2A; padding: 18px 20px 18px 24px;
+  display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: end;
+}
+.pc-vibrant-name { font-family: "Space Grotesk", sans-serif; font-size: 15px; font-weight: 700; color: #fff; }
+.pc-vibrant-ticket {
+  display: inline-flex; background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.88);
+  border-radius: 50px; padding: 2px 9px; font-size: 10px; font-weight: 600; margin-top: 3px;
+}
+.pc-vibrant-info { font-size: 11px; color: rgba(255,255,255,0.32); margin-top: 10px; line-height: 1.7; }
+.pc-vibrant-id { font-family: "JetBrains Mono", monospace; font-size: 10px; color: rgba(255,255,255,0.20); margin-top: 6px; }
+.pc-vibrant-qr { background: rgba(255,255,255,0.10); border-radius: 10px; padding: 9px; }
+
 /* ══════════ DIVIDER / SECTION TRANSITION ══════════ */
 .gw-slash-divider {
   position: relative; height: 120px; overflow: hidden;
@@ -1151,6 +1288,126 @@ function PassCard({ mini = false }) {
   );
 }
 
+/* ══════════ MINIMAL PASS CARD ══════════ */
+function MinimalPassCard() {
+  return (
+    <div className="pc-minimal">
+      <div className="pc-minimal-top">
+        <div className="pc-minimal-badge"><Sparkles size={8} />Workshop</div>
+        <div>
+          <div className="pc-minimal-event">Design Systems '26</div>
+          <div className="pc-minimal-meta">
+            <span><MapPin size={8} />Civic Centre, Nairobi</span>
+            <span><Clock size={8} />14 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div className="pc-minimal-perf" />
+      <div className="pc-minimal-bottom">
+        <div>
+          <div className="pc-minimal-name">Kofi Mensah-Bonsu</div>
+          <div className="pc-minimal-ticket">Speaker Pass</div>
+          <div className="pc-minimal-info">Stage B · Front Row<br />Doors open · 09:00</div>
+          <div className="pc-minimal-id">EVT-DS9WX1-0077</div>
+        </div>
+        <div className="pc-minimal-qr"><QRCode size={68} /></div>
+      </div>
+    </div>
+  );
+}
+
+/* ══════════ VIBRANT PASS CARD ══════════ */
+function VibrantPassCard() {
+  return (
+    <div className="pc-vibrant">
+      <div className="pc-vibrant-top">
+        <div className="pc-vibrant-badge"><Star size={8} />Music Festival</div>
+        <div>
+          <div className="pc-vibrant-event">Electric Horizon</div>
+          <div className="pc-vibrant-meta">
+            <span><MapPin size={8} />Lekki Beach, Lagos</span>
+            <span><Clock size={8} />31 Dec 2026</span>
+          </div>
+        </div>
+      </div>
+      <div className="pc-vibrant-perf" />
+      <div className="pc-vibrant-bottom">
+        <div>
+          <div className="pc-vibrant-name">Adaeze Okonkwo</div>
+          <div className="pc-vibrant-ticket">✦ VIP Backstage</div>
+          <div className="pc-vibrant-info">Zone A · Gate 1<br />Early access · 17:00</div>
+          <div className="pc-vibrant-id">EVT-EH7PK4-0003</div>
+        </div>
+        <div className="pc-vibrant-qr"><QRCode size={68} dark /></div>
+      </div>
+    </div>
+  );
+}
+
+/* ══════════ HERO PASS CAROUSEL ══════════ */
+const CAROUSEL_LABELS = ["Classic", "Minimal", "Vibrant"];
+
+function HeroPassCarousel() {
+  const [active, setActive] = useState(0);
+  const [exiting, setExiting] = useState<number | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const goTo = (next: number) => {
+    if (next === active) return;
+    setExiting(active);
+    setTimeout(() => setExiting(null), 400);
+    setActive(next);
+    if (timerRef.current) { clearInterval(timerRef.current); startTimer(next); }
+  };
+
+  const startTimer = (from: number) => {
+    let cur = from;
+    timerRef.current = setInterval(() => {
+      const next = (cur + 1) % 3;
+      setExiting(cur);
+      setTimeout(() => setExiting(null), 400);
+      setActive(next);
+      cur = next;
+    }, 3600);
+  };
+
+  useEffect(() => {
+    startTimer(0);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, []);
+
+  const slides = [<PassCard />, <MinimalPassCard />, <VibrantPassCard />];
+
+  return (
+    <div>
+      <div className="pc-template-label">{CAROUSEL_LABELS[active]} Template</div>
+      <div className="pc-carousel">
+        {slides.map((slide, i) => (
+          <div
+            key={i}
+            className={[
+              "pc-slide",
+              i === active ? "pc-active" : "",
+              i === exiting ? "pc-exiting" : "",
+            ].join(" ").trim()}
+          >
+            {slide}
+          </div>
+        ))}
+      </div>
+      <div className="pc-dots">
+        {[0, 1, 2].map(i => (
+          <button
+            key={i}
+            className={`pc-dot ${i === active ? "pc-dot-active" : ""}`}
+            onClick={() => goTo(i)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ══════════ TEMPLATE CARD ══════════ */
 function TemplatePassCard({ type }: { type: string }) {
   const isClassic = type === "classic";
@@ -1417,28 +1674,9 @@ export default function GatewayLanding() {
             <div className="gw-hero-slash" />
             <div className="gw-pass-scene">
               <div className="gw-pass-aura" />
-              {/* ghost pass behind — always dark */}
-              <div className="gw-pass-ghost">
-                <div style={{
-                  width: 260, borderRadius: 16, overflow: "hidden",
-                  boxShadow: "0 12px 40px rgba(99,68,212,0.18)",
-                  border: "1px solid rgba(99,68,212,0.25)"
-                }}>
-                  <div style={{ height: 90, background: "linear-gradient(135deg, #6344D4 0%, rgba(99,68,212,0.7) 100%)", position:"relative" }}>
-                    <div style={{position:"absolute",inset:0,padding:"14px 16px",display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
-                      <div style={{fontFamily:"DM Sans",fontSize:"9px",letterSpacing:"0.07em",color:"rgba(255,255,255,0.6)",textTransform:"uppercase"}}>Wedding</div>
-                      <div style={{fontFamily:"Space Grotesk",fontSize:"15px",fontWeight:800,color:"#fff"}}>Midnight Gala</div>
-                    </div>
-                  </div>
-                  <div style={{ background: "#1E1E2C", padding: "12px 16px" }}>
-                    <div style={{ fontFamily: "Space Grotesk", fontSize: "12px", fontWeight: 700, color: "rgba(255,255,255,0.7)" }}>Guest Name</div>
-                    <div style={{ fontFamily: "JetBrains Mono", fontSize: "9px", color: "rgba(255,255,255,0.35)", marginTop: 3 }}>EVT-BK3MZ9-0011</div>
-                  </div>
-                </div>
-              </div>
-              {/* main pass */}
-              <div className="gw-pass-main">
-                <PassCard />
+              {/* main pass carousel */}
+              <div className="gw-pass-main" style={{ filter: "drop-shadow(0 32px 72px rgba(232,24,109,0.22))" }}>
+                <HeroPassCarousel />
               </div>
             </div>
           </div>
