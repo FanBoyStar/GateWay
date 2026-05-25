@@ -333,20 +333,6 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* scroll hint */
-.gw-scroll-hint {
-  position: absolute; bottom: 32px; left: 48px;
-  display: flex; align-items: center; gap: 10px;
-  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--color-text-muted);
-  animation: fadeUp 0.5s 0.9s ease both;
-  z-index: 1;
-}
-.gw-scroll-line {
-  width: 40px; height: 1px;
-  background: linear-gradient(90deg, var(--color-primary), transparent);
-}
-
 /* ══════════ SCROLL SHOWCASE ══════════ */
 .gw-showcase-track {
   position: relative; z-index: 1;
@@ -1939,12 +1925,6 @@ export default function GatewayLanding() {
                       {b.label}
                     </div>
                   ))}
-                </div>
-                {/* scroll hint at bottom of sticky view */}
-                <div className="gw-scroll-hint" style={{ bottom: 24, left: "50%", transform: "translateX(-50%)", opacity: tilt > 0.3 ? 1 : 0, transition: "opacity 400ms" }}>
-                  <div className="gw-scroll-line" />
-                  <span>Scroll to explore</span>
-                  <div className="gw-scroll-line" style={{ transform: "scaleX(-1)" }} />
                 </div>
               </div>
             </div>
