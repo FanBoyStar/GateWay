@@ -1045,12 +1045,35 @@ body {
 .gw-cta-section {
   position: relative; z-index: 1;
   padding: 120px 72px; overflow: hidden;
+  background: #0a0812;
+}
+/* Cinematic dark background — blurred orbs */
+.gw-cta-bg-orb-1 {
+  position: absolute; width: 700px; height: 700px;
+  border-radius: 50%; pointer-events: none;
+  top: -180px; right: -100px;
+  background: rgba(123,92,240,0.18);
+  filter: blur(120px);
+}
+.gw-cta-bg-orb-2 {
+  position: absolute; width: 500px; height: 500px;
+  border-radius: 50%; pointer-events: none;
+  bottom: -120px; left: -80px;
+  background: rgba(232,24,109,0.12);
+  filter: blur(110px);
+}
+.gw-cta-bg-orb-3 {
+  position: absolute; width: 320px; height: 320px;
+  border-radius: 50%; pointer-events: none;
+  top: 40%; left: 30%;
+  background: rgba(99,68,212,0.10);
+  filter: blur(90px);
 }
 .gw-cta-radial {
   position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse 55% 60% at 70% 50%, rgba(232,24,109,0.04), transparent),
-    radial-gradient(ellipse 40% 40% at 25% 40%, rgba(99,68,212,0.03), transparent);
+    radial-gradient(ellipse 55% 60% at 70% 50%, rgba(123,92,240,0.07), transparent),
+    radial-gradient(ellipse 40% 40% at 25% 40%, rgba(232,24,109,0.05), transparent);
 }
 .gw-cta-inner {
   max-width: 1200px; margin: 0 auto;
@@ -1064,41 +1087,56 @@ body {
   font-size: clamp(36px, 4.2vw, 62px); font-weight: 800;
   line-height: 1.05; letter-spacing: -0.035em;
   margin-bottom: 20px;
+  color: #ffffff;
 }
 .gw-cta-grad {
-  background: linear-gradient(120deg, var(--color-primary) 0%, #c4176a 50%, var(--color-accent) 100%);
+  background: linear-gradient(120deg, #e8186d 0%, #c4176a 50%, #7b5cf0 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .gw-cta-sub {
-  font-size: 16px; color: var(--color-text-secondary);
+  font-size: 16px; color: rgba(255,255,255,0.55);
   line-height: 1.7; max-width: 440px; margin-bottom: 32px;
 }
+/* ── Event pills — SolCard dark glass style ── */
 .gw-event-pills {
   display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px;
 }
 .gw-event-pill {
   display: inline-flex; align-items: center; gap: 7px;
   padding: 9px 18px; border-radius: 50px;
-  border: 1px solid var(--color-border-active);
-  background: var(--color-surface);
-  font-size: 13px; font-weight: 500; color: var(--color-text-secondary);
+  border: 1px solid rgba(255,255,255,0.13);
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.60);
   cursor: pointer;
-  transition: all 220ms cubic-bezier(.16,1,.3,1);
+  transition: all 260ms cubic-bezier(.16,1,.3,1);
   user-select: none;
 }
 .gw-event-pill:hover {
-  border-color: var(--color-primary);
-  color: var(--color-text-primary);
+  border-color: rgba(255,255,255,0.30);
+  color: rgba(255,255,255,0.90);
+  background: rgba(255,255,255,0.12);
 }
 .gw-event-pill.active {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: #fff;
-  box-shadow: 0 4px 18px rgba(232,24,109,0.32);
+  background: rgba(255,255,255,0.92);
+  border-color: rgba(255,255,255,0.95);
+  color: #0a0812;
+  font-weight: 600;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.2), 0 4px 20px rgba(0,0,0,0.35);
 }
 .gw-cta-actions {
   display: flex; gap: 14px; flex-wrap: wrap;
+}
+/* Force ghost button to look good on the always-dark CTA background */
+.gw-cta-section .btn-ghost {
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.22);
+}
+.gw-cta-section .btn-ghost:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.45);
+  color: #fff;
 }
 .gw-cta-checks {
   display: flex; align-items: center; gap: 28px;
@@ -1106,25 +1144,42 @@ body {
 }
 .gw-cta-check {
   display: flex; align-items: center; gap: 6px;
-  font-size: 12px; color: var(--color-text-muted);
+  font-size: 12px; color: rgba(255,255,255,0.38);
 }
-/* Right — event card (single unified visual area) */
+/* Right — event card with SolCard-style glow border */
 .gw-cta-right {
   display: flex; align-items: center; justify-content: flex-end;
 }
+/* Outer glow wrapper */
+.gw-event-card-wrap {
+  position: relative; border-radius: 26px;
+  padding: 3px;
+  background: linear-gradient(135deg, rgba(123,92,240,0.80) 0%, rgba(232,24,109,0.55) 55%, rgba(123,92,240,0.40) 100%);
+  box-shadow:
+    0 0 40px rgba(123,92,240,0.40),
+    0 0 80px rgba(123,92,240,0.18),
+    0 24px 60px rgba(0,0,0,0.60);
+  transition: box-shadow 400ms ease;
+}
+.gw-event-card-wrap:hover {
+  box-shadow:
+    0 0 60px rgba(123,92,240,0.55),
+    0 0 110px rgba(123,92,240,0.25),
+    0 28px 70px rgba(0,0,0,0.65);
+}
 .gw-event-card {
-  width: 100%; border-radius: 22px;
+  width: 100%; border-radius: 24px;
   overflow: hidden;
-  transition: opacity 200ms ease, transform 200ms ease, box-shadow 300ms ease;
+  transition: opacity 220ms ease, transform 220ms ease;
 }
 .gw-event-card.switching {
   opacity: 0; transform: scale(0.97) translateY(8px);
 }
 /* Single full-height visual area */
 .gw-ec-area {
-  height: 340px; position: relative; overflow: hidden;
+  height: 360px; position: relative; overflow: hidden;
   display: flex; flex-direction: column; justify-content: space-between;
-  padding: 20px;
+  padding: 22px;
 }
 .gw-ec-header-glow {
   position: absolute; inset: 0; pointer-events: none;
@@ -1132,22 +1187,22 @@ body {
 .gw-ec-grid {
   position: absolute; inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.032) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 .gw-ec-blob {
   position: absolute; border-radius: 50%;
   filter: blur(60px); pointer-events: none;
   width: 220px; height: 220px;
-  top: 5%; right: -30px; opacity: 0.28;
+  top: 5%; right: -30px; opacity: 0.32;
   transition: background 300ms ease;
 }
 .gw-ec-blob-2 {
   position: absolute; border-radius: 50%;
   filter: blur(80px); pointer-events: none;
   width: 160px; height: 160px;
-  bottom: 10%; left: -20px; opacity: 0.18;
+  bottom: 10%; left: -20px; opacity: 0.20;
   transition: background 300ms ease;
 }
 .gw-ec-topbar {
@@ -1185,18 +1240,18 @@ body {
   display: flex; align-items: center; gap: 4px;
   font-size: 12px; color: rgba(255,255,255,0.45);
 }
-/* Bottom pill bar — like SolCard "Booking 148.59 USD" */
+/* Bottom pill bar — SolCard "Supermarket 89.32 USD" style */
 .gw-ec-bar {
   position: relative; z-index: 2;
   display: flex; align-items: center; justify-content: space-between;
-  background: rgba(0,0,0,0.38);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-radius: 50px; padding: 10px 10px 10px 18px;
-  border: 1px solid rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.09);
 }
 .gw-ec-bar-seat {
-  font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.75);
+  font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.80);
   display: flex; align-items: center; gap: 7px;
 }
 .gw-ec-bar-badge {
@@ -1848,6 +1903,8 @@ export default function GatewayLanding() {
   const [activeStep, setActiveStep] = useState(0);
   const [activeEvent, setActiveEvent] = useState(0);
   const [eventSwitching, setEventSwitching] = useState(false);
+  const pillsHoveredRef = useRef(false);
+  const eventAutoRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const { theme, toggleTheme } = useThemeStore();
   const isDark = theme === "dark";
   const [menuOpen, setMenuOpen] = useState(false);
@@ -1861,6 +1918,21 @@ export default function GatewayLanding() {
   useEffect(() => {
     stepTimerRef.current = setInterval(() => setActiveStep(s => (s + 1) % 4), 2200);
     return () => { if (stepTimerRef.current) clearInterval(stepTimerRef.current); };
+  }, []);
+
+  // auto-rotate event pills (pause on hover)
+  useEffect(() => {
+    const NUM_EVENTS = 6;
+    eventAutoRef.current = setInterval(() => {
+      if (pillsHoveredRef.current) return;
+      setActiveEvent(prev => {
+        const next = (prev + 1) % NUM_EVENTS;
+        setEventSwitching(true);
+        setTimeout(() => setEventSwitching(false), 220);
+        return next;
+      });
+    }, 2800);
+    return () => { if (eventAutoRef.current) clearInterval(eventAutoRef.current); };
   }, []);
 
   // scroll progress for showcase + isMobile resize
@@ -2212,7 +2284,10 @@ export default function GatewayLanding() {
           setTimeout(() => { setActiveEvent(idx); setEventSwitching(false); }, 200);
         };
         return (
-          <div className="gw-cta-section" style={{ background: "var(--color-bg)" }}>
+          <div className="gw-cta-section">
+            <div className="gw-cta-bg-orb-1" />
+            <div className="gw-cta-bg-orb-2" />
+            <div className="gw-cta-bg-orb-3" />
             <div className="gw-cta-radial" />
             <div className="gw-cta-inner gw-reveal" ref={ref}>
               {/* Left */}
@@ -2224,7 +2299,11 @@ export default function GatewayLanding() {
                 <p className="gw-cta-sub">
                   Whether it's a global conference or a backyard party — generate beautiful, scan-ready QR passes in minutes. No design skills needed.
                 </p>
-                <div className="gw-event-pills">
+                <div
+                  className="gw-event-pills"
+                  onMouseEnter={() => { pillsHoveredRef.current = true; }}
+                  onMouseLeave={() => { pillsHoveredRef.current = false; }}
+                >
                   {eventTypes.map((et, i) => (
                     <button
                       key={i}
@@ -2247,19 +2326,23 @@ export default function GatewayLanding() {
                     [<Zap size={12}/>, "Ready in under 5 minutes"],
                   ] as [React.ReactNode, string][]).map(([icon, txt], i) => (
                     <div key={i} className="gw-cta-check">
-                      <span style={{ color: "var(--color-success)" }}>{icon}</span>
+                      <span style={{ color: "#22C55E" }}>{icon}</span>
                       {txt}
                     </div>
                   ))}
                 </div>
               </div>
-              {/* Right — animated event card (single unified visual) */}
+              {/* Right — animated event card with SolCard glow border */}
               <div className="gw-cta-right">
                 <div
-                  className={`gw-event-card${eventSwitching ? " switching" : ""}`}
+                  className="gw-event-card-wrap"
                   style={{
-                    boxShadow: `0 0 0 1px ${ev.color}30, 0 48px 100px rgba(0,0,0,0.45), 0 0 60px ${ev.color}12`,
+                    background: `linear-gradient(135deg, ${ev.color}99 0%, ${ev.accent}77 55%, ${ev.color}55 100%)`,
+                    boxShadow: `0 0 40px ${ev.color}55, 0 0 80px ${ev.color}22, 0 24px 60px rgba(0,0,0,0.65)`,
                   }}
+                >
+                <div
+                  className={`gw-event-card${eventSwitching ? " switching" : ""}`}
                 >
                   <div className="gw-ec-area" style={{ background: ev.bg }}>
                     {/* Depth blobs */}
@@ -2301,6 +2384,7 @@ export default function GatewayLanding() {
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
