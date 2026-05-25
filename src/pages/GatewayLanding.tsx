@@ -1154,6 +1154,7 @@ body {
 .gw-event-card-wrap {
   position: relative; border-radius: 26px;
   padding: 3px;
+  width: 100%; max-width: 520px;
   background: linear-gradient(135deg, rgba(123,92,240,0.80) 0%, rgba(232,24,109,0.55) 55%, rgba(123,92,240,0.40) 100%);
   box-shadow:
     0 0 40px rgba(123,92,240,0.40),
@@ -1175,9 +1176,9 @@ body {
 .gw-event-card.switching {
   opacity: 0; transform: scale(0.97) translateY(8px);
 }
-/* Single full-height visual area */
+/* Single full-height visual area — fixed size so cards never shift */
 .gw-ec-area {
-  height: 360px; position: relative; overflow: hidden;
+  height: 380px; position: relative; overflow: hidden;
   display: flex; flex-direction: column; justify-content: space-between;
   padding: 22px;
 }
@@ -1232,6 +1233,7 @@ body {
   font-family: "Space Grotesk", sans-serif;
   font-size: 24px; font-weight: 800; letter-spacing: -0.02em;
   color: #fff; margin-bottom: 8px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .gw-ec-meta {
   display: flex; gap: 18px; flex-wrap: wrap;
