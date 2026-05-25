@@ -273,13 +273,31 @@ body {
 /* ══════════ HERO V2 — CENTERED ══════════ */
 .gw-hero {
   position: relative; z-index: 1;
-  padding: 160px 24px 24px;
+  min-height: 100vh;
+  padding: 200px 24px 280px;
   display: flex; flex-direction: column; align-items: center;
   text-align: center;
+}
+/* dark night-sky gradient at bottom so cityscape always pops */
+.gw-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(8, 6, 20, 0.55) 45%,
+    rgba(8, 6, 20, 0.88) 80%,
+    rgba(6, 4, 16, 0.95) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
 }
 .gw-hero-text {
   max-width: 860px; width: 100%;
   display: flex; flex-direction: column; align-items: center;
+  position: relative; z-index: 3;
 }
 .gw-hero-left, .gw-hero-right, .gw-hero-slash, .gw-bg-letter { display: none; }
 
@@ -1096,10 +1114,10 @@ body {
 .gw-cityscape {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  z-index: 0;
+  z-index: 2;
   pointer-events: none;
   overflow: hidden;
-  height: 52%;
+  height: 58%;
 }
 .gw-cityscape svg {
   width: 100%; height: 100%;
@@ -1844,6 +1862,7 @@ export default function GatewayLanding() {
       ════════════════════════════════ */}
       <section style={{ position: "relative", zIndex: 1 }}>
         <div className="gw-hero">
+          <div className="gw-cityscape"><CityscapeSVG dark={true} /></div>
           <div className="gw-hero-text">
             <div className="gw-badge"><Zap size={10} />Free for all events</div>
             <h1 className="gw-headline font-syne">
