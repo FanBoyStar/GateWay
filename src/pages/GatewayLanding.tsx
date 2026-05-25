@@ -136,12 +136,7 @@ body {
   background: var(--color-nav-bg);
   backdrop-filter: blur(20px) saturate(1.4);
   border-bottom: 1px solid var(--color-border);
-  transition: padding 250ms, background 400ms ease, backdrop-filter 400ms ease, border-color 400ms ease;
-}
-.gw-nav.gw-nav-scrolled {
-  background: transparent;
-  backdrop-filter: none;
-  border-bottom-color: transparent;
+  transition: padding 250ms, background 300ms;
 }
 .gw-logo {
   display: flex; align-items: center; gap: 10px;
@@ -1737,7 +1732,6 @@ export default function GatewayLanding() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.innerWidth <= 640);
-  const [navScrolled, setNavScrolled] = useState(false);
   const showcaseRef = useRef<HTMLDivElement>(null);
   const revealRefs = useRef<Element[]>([]);
   const stepTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -1748,10 +1742,9 @@ export default function GatewayLanding() {
     return () => { if (stepTimerRef.current) clearInterval(stepTimerRef.current); };
   }, []);
 
-  // scroll progress for showcase + isMobile resize + nav transparency
+  // scroll progress for showcase + isMobile resize
   useEffect(() => {
     const onScroll = () => {
-      setNavScrolled(window.scrollY > 0);
       if (!showcaseRef.current) return;
       const rect = showcaseRef.current.getBoundingClientRect();
       const trackH = showcaseRef.current.offsetHeight - window.innerHeight;
@@ -1835,7 +1828,7 @@ export default function GatewayLanding() {
         </div>
       </div>
 
-      <nav className={`gw-nav${navScrolled ? " gw-nav-scrolled" : ""}`}>
+      <nav className="gw-nav">
         <a className="gw-logo" href="#">
           <div className="gw-logo-mark">
             <QrCode size={16} color="#fff" />
