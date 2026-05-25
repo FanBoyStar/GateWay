@@ -274,7 +274,7 @@ body {
 .gw-hero {
   position: relative; z-index: 1;
   min-height: 100vh;
-  padding: 200px 24px 280px;
+  padding: 200px 24px 80px;
   display: flex; flex-direction: column; align-items: center;
   text-align: center;
 }
@@ -283,7 +283,7 @@ body {
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 220px;
+  height: 120px;
   background: linear-gradient(to bottom, transparent 0%, var(--color-bg) 100%);
   z-index: 3;
   pointer-events: none;
@@ -1111,7 +1111,7 @@ body {
   z-index: 2;
   pointer-events: none;
   overflow: hidden;
-  height: 58%;
+  height: 62%;
 }
 .gw-cityscape svg {
   width: 100%; height: 100%;
@@ -1247,7 +1247,7 @@ function CityscapeSVG({ dark = false }: { dark?: boolean }) {
         {/* fade-to-transparent gradient so cityscape blends into hero */}
         <linearGradient id="skyFade" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={dark ? "#0D0D12" : "#F8F8FC"} stopOpacity="0" />
-          <stop offset="55%" stopColor={dark ? "#0D0D12" : "#F8F8FC"} stopOpacity="0.55" />
+          <stop offset="70%" stopColor={dark ? "#0D0D12" : "#F8F8FC"} stopOpacity="0.25" />
           <stop offset="100%" stopColor={dark ? "#0D0D12" : "#F8F8FC"} stopOpacity="1" />
         </linearGradient>
         {/* primary-color window glow */}
