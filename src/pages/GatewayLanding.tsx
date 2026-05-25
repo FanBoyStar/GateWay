@@ -1481,10 +1481,12 @@ body {
   .gw-event-card { width: 100%; min-width: 0; }
   /* Card internals — fix text overflow */
   .gw-ec-area { height: 300px; }
-  .gw-ec-name { white-space: normal; font-size: 20px; line-height: 1.2; }
-  .gw-ec-bar { flex-wrap: wrap; gap: 8px; border-radius: 18px; padding: 10px 14px; }
-  .gw-ec-bar-badge { font-size: 11px; padding: 7px 12px; white-space: normal; flex-shrink: 1; }
-  .gw-ec-bar-seat { font-size: 12px; }
+  .gw-ec-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 20px; }
+  /* Bar stays as a single row — seat clips, badge never wraps */
+  .gw-ec-bar { flex-wrap: nowrap; gap: 8px; border-radius: 18px; padding: 10px 14px; overflow: hidden; }
+  .gw-ec-bar-seat { font-size: 12px; flex: 1; min-width: 0; overflow: hidden;
+    white-space: nowrap; text-overflow: ellipsis; }
+  .gw-ec-bar-badge { font-size: 11px; padding: 7px 12px; white-space: nowrap; flex-shrink: 0; }
 
   /* Footer */
   .gw-footer { padding: 28px 20px; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
