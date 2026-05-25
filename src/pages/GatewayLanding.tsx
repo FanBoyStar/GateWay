@@ -4,7 +4,7 @@ import {
   Zap, QrCode, Users, CheckCircle, ArrowRight, Sparkles,
   Calendar, Shield, Download, Star, ChevronDown,
   Clock, MapPin, Ticket, ScanLine, Mail, Globe, ArrowUpRight,
-  Sun, Moon
+  Sun, Moon, Mic, Heart, Music2, Wrench, Briefcase
 } from "lucide-react";
 
 /* ═══════════════════════════════════════════════
@@ -1041,31 +1041,29 @@ body {
 .tpl-vibrant .gw-tpl-name { color: #0D0D12; }
 .tpl-vibrant .gw-tpl-id { color: rgba(13,13,18,0.35); }
 
-/* ══════════ CTA SECTION ══════════ */
+/* ══════════ CTA SECTION — EVENT SHOWCASE ══════════ */
 .gw-cta-section {
   position: relative; z-index: 1;
-  padding: 200px 72px; text-align: center; overflow: hidden;
+  padding: 140px 72px; overflow: hidden;
 }
 .gw-cta-radial {
   position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 60% at 50% 60%, rgba(232,24,109,0.03), transparent),
-    radial-gradient(ellipse 40% 40% at 20% 40%, rgba(99,68,212,0.02), transparent);
+    radial-gradient(ellipse 55% 60% at 70% 50%, rgba(232,24,109,0.04), transparent),
+    radial-gradient(ellipse 40% 40% at 25% 40%, rgba(99,68,212,0.03), transparent);
 }
-/* editorial slash lines in CTA */
-.gw-cta-slash-l, .gw-cta-slash-r {
-  position: absolute; top: 0; bottom: 0; width: 1px;
-  background: linear-gradient(180deg, transparent, rgba(232,24,109,0.06), transparent);
-  opacity: 0.6;
+.gw-cta-inner {
+  max-width: 1160px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+  position: relative; z-index: 1;
 }
-.gw-cta-slash-l { left: 15%; transform: skewX(-8deg); }
-.gw-cta-slash-r { right: 15%; transform: skewX(8deg); }
-
+.gw-cta-left {}
 .gw-cta-title {
   font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(42px, 6.5vw, 80px); font-weight: 800;
-  line-height: 1.02; letter-spacing: -0.035em;
-  max-width: 900px; margin: 0 auto; position: relative; z-index: 1;
+  font-size: clamp(34px, 4vw, 58px); font-weight: 800;
+  line-height: 1.05; letter-spacing: -0.035em;
+  margin-bottom: 20px;
 }
 .gw-cta-grad {
   background: linear-gradient(120deg, var(--color-primary) 0%, #c4176a 50%, var(--color-accent) 100%);
@@ -1073,21 +1071,124 @@ body {
   background-clip: text;
 }
 .gw-cta-sub {
-  font-size: 19px; color: var(--color-text-secondary);
-  max-width: 520px; margin: 28px auto 0; line-height: 1.65;
-  position: relative; z-index: 1;
+  font-size: 17px; color: var(--color-text-secondary);
+  line-height: 1.65; max-width: 460px; margin-bottom: 36px;
+}
+.gw-event-pills {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 44px;
+}
+.gw-event-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 18px; border-radius: 50px;
+  border: 1px solid var(--color-border-active);
+  background: var(--color-surface);
+  font-size: 13px; font-weight: 500; color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 220ms cubic-bezier(.16,1,.3,1);
+  user-select: none;
+}
+.gw-event-pill:hover {
+  border-color: var(--color-primary);
+  color: var(--color-text-primary);
+}
+.gw-event-pill.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(232,24,109,0.32);
 }
 .gw-cta-actions {
-  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
-  margin-top: 56px; position: relative; z-index: 1;
+  display: flex; gap: 14px; flex-wrap: wrap;
 }
 .gw-cta-checks {
-  display: flex; align-items: center; justify-content: center; gap: 32px;
-  margin-top: 36px; flex-wrap: wrap; position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 28px;
+  margin-top: 24px; flex-wrap: wrap;
 }
 .gw-cta-check {
   display: flex; align-items: center; gap: 6px;
-  font-size: 13px; color: var(--color-text-muted);
+  font-size: 12px; color: var(--color-text-muted);
+}
+/* Right — event card preview */
+.gw-cta-right {
+  display: flex; align-items: center; justify-content: center;
+}
+.gw-event-card {
+  width: 360px; border-radius: 22px;
+  background: #15151E;
+  border: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.32), 0 8px 24px rgba(0,0,0,0.2);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.gw-event-card.switching {
+  opacity: 0; transform: scale(0.96) translateY(10px);
+}
+.gw-ec-header {
+  height: 168px; position: relative; overflow: hidden;
+}
+.gw-ec-header-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  transition: background 300ms ease;
+}
+.gw-ec-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.gw-ec-topbar {
+  position: absolute; top: 18px; left: 20px; right: 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  z-index: 2;
+}
+.gw-ec-logo-row {
+  display: flex; align-items: center; gap: 8px;
+  font-family: "Space Grotesk", sans-serif; font-weight: 800;
+  font-size: 14px; color: #fff;
+}
+.gw-ec-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  border-radius: 50px; padding: 4px 12px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 300ms ease;
+  border-width: 1px; border-style: solid;
+}
+.gw-ec-accent-bar {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px; transition: background 300ms ease;
+}
+.gw-ec-body { background: #0D0D12; padding: 22px 22px 18px; }
+.gw-ec-name {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 21px; font-weight: 800; letter-spacing: -0.02em;
+  color: #fff; margin-bottom: 10px;
+}
+.gw-ec-meta {
+  display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 18px;
+}
+.gw-ec-meta span {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 12px; color: rgba(255,255,255,0.45);
+}
+.gw-ec-divider {
+  border: none; border-top: 1px dashed rgba(255,255,255,0.1);
+  margin-bottom: 16px;
+}
+.gw-ec-footer {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.gw-ec-seat {
+  display: flex; flex-direction: column; gap: 3px;
+}
+.gw-ec-entry-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  border-radius: 50px; padding: 7px 14px;
+  font-size: 12px; font-weight: 600;
+  border-width: 1px; border-style: solid;
+  transition: all 300ms ease;
+  white-space: nowrap;
 }
 
 /* ══════════ FOOTER ══════════ */
@@ -1163,6 +1264,8 @@ body {
 
   .gw-section { padding: 100px 40px; }
   .gw-cta-section { padding: 100px 40px; }
+  .gw-cta-inner { grid-template-columns: 1fr; gap: 56px; }
+  .gw-event-card { width: 100%; max-width: 420px; }
   .gw-footer { padding: 40px 40px; }
 }
 
@@ -1227,9 +1330,10 @@ body {
 
   /* CTA */
   .gw-cta-section { padding: 72px 20px; }
-  .gw-cta-sub { font-size: 16px; max-width: 100%; }
+  .gw-cta-sub { font-size: 15px; max-width: 100%; }
   .gw-cta-checks { gap: 16px; }
-  .gw-cta-check { font-size: 12px; }
+  .gw-event-card { width: 100%; max-width: 100%; }
+  .gw-cta-right { justify-content: flex-start; }
 
   /* Footer */
   .gw-footer { padding: 28px 20px; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
@@ -1727,6 +1831,8 @@ function HowScreen({ step }: { step: number }) {
 /* ══════════ MAIN EXPORT ══════════ */
 export default function GatewayLanding() {
   const [activeStep, setActiveStep] = useState(0);
+  const [activeEvent, setActiveEvent] = useState(0);
+  const [eventSwitching, setEventSwitching] = useState(false);
   const { theme, toggleTheme } = useThemeStore();
   const isDark = theme === "dark";
   const [menuOpen, setMenuOpen] = useState(false);
@@ -2049,38 +2155,152 @@ export default function GatewayLanding() {
       </section>
 
       {/* ════════════════════════════════
-          CTA
+          CTA — EVENT SHOWCASE
       ════════════════════════════════ */}
-      <div className="gw-cta-section" style={{ background: "var(--color-bg)" }}>
-        <div className="gw-cta-radial" />
-        <div className="gw-cta-slash-l" />
-        <div className="gw-cta-slash-r" />
-        <div className="gw-reveal" ref={ref}>
-          <h2 className="gw-cta-title font-syne">
-            Your next event deserves<br />
-            <span className="gw-cta-grad">passes that impress.</span>
-          </h2>
-          <p className="gw-cta-sub">
-            Join hundreds of organizers creating beautiful, branded QR passes — no design skills needed.
-          </p>
-          <div className="gw-cta-actions">
-            <a href="/sign-up" className="btn-primary">Get Started — Free <ArrowRight size={16} /></a>
-            <a href="/passes/demo" className="btn-ghost"><QrCode size={16} />See a Demo Pass</a>
-          </div>
-          <div className="gw-cta-checks">
-            {[
-              [<CheckCircle size={13}/>, "No credit card required"],
-              [<Shield size={13}/>, "Your data stays private"],
-              [<Zap size={13}/>, "Ready in under 5 minutes"],
-            ].map(([icon, txt], i) => (
-              <div key={i} className="gw-cta-check">
-                <span style={{ color: "var(--color-success)" }}>{icon}</span>
-                {txt as string}
+      {(() => {
+        const eventTypes = [
+          { icon: <Mic size={13}/>, label: "Conference", color: "#E8186D", accent: "#7B5CF0",
+            bg: "linear-gradient(135deg, #1a0a12 0%, #2d0d20 60%, #160a1f 100%)",
+            tag: "CONFERENCE", eventName: "Tech Summit '26",
+            location: "Convention Centre", date: "14 Mar 2026",
+            seat: "Hall B · Row 3", entry: "09:00 · General Entry" },
+          { icon: <Heart size={13}/>, label: "Wedding", color: "#F59E0B", accent: "#EC4899",
+            bg: "linear-gradient(135deg, #1a1205 0%, #2a1a06 60%, #1a0a14 100%)",
+            tag: "WEDDING", eventName: "Smith & Davies",
+            location: "Grand Pavilion", date: "21 Jun 2026",
+            seat: "Table 7 · Seat 2", entry: "16:00 · Ceremony" },
+          { icon: <Music2 size={13}/>, label: "Festival", color: "#8B5CF6", accent: "#3B82F6",
+            bg: "linear-gradient(135deg, #0d0a1f 0%, #150d2e 60%, #0a0f1f 100%)",
+            tag: "FESTIVAL", eventName: "Neon Beats '26",
+            location: "Lakeside Arena", date: "5 Aug 2026",
+            seat: "GA · Zone A", entry: "12:00 · All Day" },
+          { icon: <Wrench size={13}/>, label: "Workshop", color: "#10B981", accent: "#6366F1",
+            bg: "linear-gradient(135deg, #051a12 0%, #0a2a1a 60%, #080f1a 100%)",
+            tag: "WORKSHOP", eventName: "Design Sprint",
+            location: "Studio Hub · 4F", date: "3 Apr 2026",
+            seat: "Seat 12", entry: "10:00 · Full Day" },
+          { icon: <Briefcase size={13}/>, label: "Corporate", color: "#3B82F6", accent: "#6366F1",
+            bg: "linear-gradient(135deg, #050d1a 0%, #0a152e 60%, #08091f 100%)",
+            tag: "CORPORATE", eventName: "Annual Summit",
+            location: "HQ Tower · 22F", date: "18 Nov 2026",
+            seat: "Boardroom A", entry: "08:30 · Staff Only" },
+          { icon: <Sparkles size={13}/>, label: "Party", color: "#F43F5E", accent: "#FB923C",
+            bg: "linear-gradient(135deg, #1a050c 0%, #2a0a10 60%, #1a0a05 100%)",
+            tag: "PARTY", eventName: "Year-End Bash",
+            location: "Rooftop Lounge", date: "31 Dec 2026",
+            seat: "Open · VIP", entry: "20:00 · Open Bar" },
+        ];
+        const ev = eventTypes[activeEvent];
+        const switchEvent = (idx: number) => {
+          if (idx === activeEvent) return;
+          setEventSwitching(true);
+          setTimeout(() => { setActiveEvent(idx); setEventSwitching(false); }, 200);
+        };
+        return (
+          <div className="gw-cta-section" style={{ background: "var(--color-bg)" }}>
+            <div className="gw-cta-radial" />
+            <div className="gw-cta-inner gw-reveal" ref={ref}>
+              {/* Left */}
+              <div className="gw-cta-left">
+                <h2 className="gw-cta-title font-syne">
+                  Gateway: for<br />
+                  <span className="gw-cta-grad">every event.</span>
+                </h2>
+                <p className="gw-cta-sub">
+                  Whether it's a global conference or a backyard party — generate beautiful, scan-ready QR passes in minutes. No design skills needed.
+                </p>
+                <div className="gw-event-pills">
+                  {eventTypes.map((et, i) => (
+                    <button
+                      key={i}
+                      className={`gw-event-pill${activeEvent === i ? " active" : ""}`}
+                      onClick={() => switchEvent(i)}
+                    >
+                      {et.icon}
+                      {et.label}
+                    </button>
+                  ))}
+                </div>
+                <div className="gw-cta-actions">
+                  <a href="/sign-up" className="btn-primary">Get Started — Free <ArrowRight size={16} /></a>
+                  <a href="/passes/demo" className="btn-ghost"><QrCode size={16} />See a Demo Pass</a>
+                </div>
+                <div className="gw-cta-checks">
+                  {([
+                    [<CheckCircle size={12}/>, "No credit card required"],
+                    [<Shield size={12}/>, "Your data stays private"],
+                    [<Zap size={12}/>, "Ready in under 5 minutes"],
+                  ] as [React.ReactNode, string][]).map(([icon, txt], i) => (
+                    <div key={i} className="gw-cta-check">
+                      <span style={{ color: "var(--color-success)" }}>{icon}</span>
+                      {txt}
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+              {/* Right — animated event pass card */}
+              <div className="gw-cta-right">
+                <div className={`gw-event-card${eventSwitching ? " switching" : ""}`}>
+                  {/* Header */}
+                  <div className="gw-ec-header" style={{ background: ev.bg }}>
+                    <div
+                      className="gw-ec-header-glow"
+                      style={{ background: `radial-gradient(ellipse 80% 80% at 20% 50%, ${ev.color}28, transparent 70%)` }}
+                    />
+                    <div className="gw-ec-grid" />
+                    <div className="gw-ec-topbar">
+                      <div className="gw-ec-logo-row">
+                        <div className="gw-logo-mark" style={{ width: 26, height: 26, borderRadius: 8 }}>
+                          <QrCode size={13} color="#fff" />
+                        </div>
+                        Gateway
+                      </div>
+                      <div
+                        className="gw-ec-tag"
+                        style={{
+                          color: ev.color,
+                          borderColor: `${ev.color}40`,
+                          background: `${ev.color}18`,
+                        }}
+                      >
+                        {ev.icon}
+                        {ev.tag}
+                      </div>
+                    </div>
+                    <div className="gw-ec-accent-bar" style={{ background: `linear-gradient(90deg, ${ev.color}, ${ev.accent})` }} />
+                  </div>
+                  {/* Body */}
+                  <div className="gw-ec-body">
+                    <h3 className="gw-ec-name font-syne">{ev.eventName}</h3>
+                    <div className="gw-ec-meta">
+                      <span><MapPin size={11} />{ev.location}</span>
+                      <span><Calendar size={11} />{ev.date}</span>
+                    </div>
+                    <hr className="gw-ec-divider" />
+                    <div className="gw-ec-footer">
+                      <div className="gw-ec-seat">
+                        <span className="font-mono" style={{ fontSize: 10, color: "rgba(255,255,255,0.28)", letterSpacing: "0.05em" }}>EVT-AX9KD2-0042</span>
+                        <span style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", marginTop: 2 }}>{ev.seat}</span>
+                      </div>
+                      <div
+                        className="gw-ec-entry-badge"
+                        style={{
+                          color: ev.color,
+                          borderColor: `${ev.color}35`,
+                          background: `${ev.color}18`,
+                        }}
+                      >
+                        <Clock size={11} />
+                        {ev.entry}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        );
+      })()}
 
       {/* ════════════════════════════════
           FOOTER
