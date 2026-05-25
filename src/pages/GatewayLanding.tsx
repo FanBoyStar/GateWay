@@ -355,7 +355,7 @@ body {
 .gw-showcase-sticky {
   position: sticky; top: 0;
   height: 100vh;
-  display: flex; align-items: flex-start; padding-top: 10vh; justify-content: center;
+  display: flex; align-items: center; padding-top: 0; justify-content: center;
   overflow: hidden;
 }
 .gw-showcase-inner {
@@ -448,7 +448,7 @@ body {
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
-/* Bubble positions — desktop (320px wide card, ~380px tall) */
+/* Bubble positions — base (320px wide card) */
 .gw-bubble-0 { left: calc(50% - 320px); top: calc(50% - 115px); }
 .gw-bubble-1 { left: calc(50% + 162px); top: calc(50% - 135px); }
 .gw-bubble-2 { left: calc(50% - 305px); top: calc(50% + 75px); }
@@ -527,6 +527,17 @@ body {
 .pc-top {
   height: 136px; position: relative; overflow: hidden;
   background: #0D0D12;
+}
+
+/* ── Desktop: larger pass showcase ── */
+@media (min-width: 641px) {
+  .pc { width: 390px; }
+  .pc-top { height: 162px; }
+  .gw-showcase-track { height: 300vh; }
+  .gw-bubble-0 { left: calc(50% - 390px); top: calc(50% - 128px); }
+  .gw-bubble-1 { left: calc(50% + 198px); top: calc(50% - 148px); }
+  .gw-bubble-2 { left: calc(50% - 372px); top: calc(50% + 86px); }
+  .gw-bubble-3 { left: calc(50% + 188px); top: calc(50% + 108px); }
 }
 .pc-top-stripe {
   position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
