@@ -1182,11 +1182,33 @@ body {
   display: flex; flex-direction: column; justify-content: space-between;
   padding: 22px;
 }
+/* Cross-fade photo layers */
+.gw-ec-photo {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  opacity: 0;
+  transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+.gw-ec-photo.active {
+  opacity: 1;
+}
+/* Dark gradient overlay so text stays readable over any photo */
+.gw-ec-photo-overlay {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.52) 0%,
+    rgba(0,0,0,0.18) 40%,
+    rgba(0,0,0,0.62) 100%
+  );
+}
 .gw-ec-header-glow {
-  position: absolute; inset: 0; pointer-events: none;
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
 }
 .gw-ec-grid {
-  position: absolute; inset: 0;
+  position: absolute; inset: 0; z-index: 3;
   background-image:
     linear-gradient(rgba(255,255,255,0.032) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.032) 1px, transparent 1px);
@@ -1196,18 +1218,20 @@ body {
   position: absolute; border-radius: 50%;
   filter: blur(60px); pointer-events: none;
   width: 220px; height: 220px;
-  top: 5%; right: -30px; opacity: 0.32;
+  top: 5%; right: -30px; opacity: 0.22;
+  z-index: 3;
   transition: background 300ms ease;
 }
 .gw-ec-blob-2 {
   position: absolute; border-radius: 50%;
   filter: blur(80px); pointer-events: none;
   width: 160px; height: 160px;
-  bottom: 10%; left: -20px; opacity: 0.20;
+  bottom: 10%; left: -20px; opacity: 0.14;
+  z-index: 3;
   transition: background 300ms ease;
 }
 .gw-ec-topbar {
-  position: relative; z-index: 2;
+  position: relative; z-index: 4;
   display: flex; align-items: center; justify-content: space-between;
 }
 .gw-ec-logo-row {
@@ -1225,7 +1249,7 @@ body {
 }
 /* Middle content */
 .gw-ec-content {
-  position: relative; z-index: 2; flex: 1;
+  position: relative; z-index: 4; flex: 1;
   display: flex; flex-direction: column; justify-content: flex-end;
   padding-bottom: 18px;
 }
@@ -2252,31 +2276,37 @@ export default function GatewayLanding() {
         const eventTypes = [
           { icon: <Mic size={13}/>, label: "Conference", color: "#E8186D", accent: "#7B5CF0",
             bg: "linear-gradient(135deg, #1a0a12 0%, #2d0d20 60%, #160a1f 100%)",
+            photo: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=75",
             tag: "CONFERENCE", eventName: "Tech Summit '26",
             location: "Convention Centre", date: "14 Mar 2026",
             seat: "Hall B · Row 3", entry: "09:00 · General Entry" },
           { icon: <Heart size={13}/>, label: "Wedding", color: "#F59E0B", accent: "#EC4899",
             bg: "linear-gradient(135deg, #1a1205 0%, #2a1a06 60%, #1a0a14 100%)",
+            photo: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=75",
             tag: "WEDDING", eventName: "Smith & Davies",
             location: "Grand Pavilion", date: "21 Jun 2026",
             seat: "Table 7 · Seat 2", entry: "16:00 · Ceremony" },
           { icon: <Music2 size={13}/>, label: "Festival", color: "#8B5CF6", accent: "#3B82F6",
             bg: "linear-gradient(135deg, #0d0a1f 0%, #150d2e 60%, #0a0f1f 100%)",
+            photo: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=800&q=75",
             tag: "FESTIVAL", eventName: "Neon Beats '26",
             location: "Lakeside Arena", date: "5 Aug 2026",
             seat: "GA · Zone A", entry: "12:00 · All Day" },
           { icon: <Wrench size={13}/>, label: "Workshop", color: "#10B981", accent: "#6366F1",
             bg: "linear-gradient(135deg, #051a12 0%, #0a2a1a 60%, #080f1a 100%)",
+            photo: "https://images.unsplash.com/photo-1542626991-cbc4e32524cc?auto=format&fit=crop&w=800&q=75",
             tag: "WORKSHOP", eventName: "Design Sprint",
             location: "Studio Hub · 4F", date: "3 Apr 2026",
             seat: "Seat 12", entry: "10:00 · Full Day" },
           { icon: <Briefcase size={13}/>, label: "Corporate", color: "#3B82F6", accent: "#6366F1",
             bg: "linear-gradient(135deg, #050d1a 0%, #0a152e 60%, #08091f 100%)",
+            photo: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=75",
             tag: "CORPORATE", eventName: "Annual Summit",
             location: "HQ Tower · 22F", date: "18 Nov 2026",
             seat: "Boardroom A", entry: "08:30 · Staff Only" },
           { icon: <Sparkles size={13}/>, label: "Party", color: "#F43F5E", accent: "#FB923C",
             bg: "linear-gradient(135deg, #1a050c 0%, #2a0a10 60%, #1a0a05 100%)",
+            photo: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=75",
             tag: "PARTY", eventName: "Year-End Bash",
             location: "Rooftop Lounge", date: "31 Dec 2026",
             seat: "Open · VIP", entry: "20:00 · Open Bar" },
@@ -2349,6 +2379,17 @@ export default function GatewayLanding() {
                   className={`gw-event-card${eventSwitching ? " switching" : ""}`}
                 >
                   <div className="gw-ec-area" style={{ background: ev.bg }}>
+                    {/* All photos stacked — cross-fade by toggling .active */}
+                    {eventTypes.map((et, i) => (
+                      <img
+                        key={i}
+                        src={et.photo}
+                        alt=""
+                        className={`gw-ec-photo${activeEvent === i ? " active" : ""}`}
+                      />
+                    ))}
+                    {/* Readability overlay */}
+                    <div className="gw-ec-photo-overlay" />
                     {/* Depth blobs */}
                     <div className="gw-ec-blob" style={{ background: ev.color }} />
                     <div className="gw-ec-blob-2" style={{ background: ev.accent }} />
