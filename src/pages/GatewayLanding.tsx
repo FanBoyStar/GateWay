@@ -1486,7 +1486,8 @@ body {
   .gw-ec-bar { flex-wrap: nowrap; gap: 6px; border-radius: 16px; padding: 8px 10px 8px 14px; overflow: hidden; }
   .gw-ec-bar-seat { font-size: 11px; flex: 1; min-width: 0; overflow: hidden;
     white-space: nowrap; text-overflow: ellipsis; gap: 7px; }
-  .gw-ec-bar-badge { font-size: 10px; padding: 6px 9px; gap: 4px; white-space: nowrap; flex-shrink: 0; }
+  .gw-ec-bar-badge { font-size: 10px; padding: 6px 9px; gap: 4px; white-space: nowrap;
+    flex: 0 0 auto; max-width: 52%; overflow: hidden; text-overflow: ellipsis; }
 
   /* Footer */
   .gw-footer { padding: 28px 20px; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
