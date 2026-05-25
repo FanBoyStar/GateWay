@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useThemeStore } from "@/store/useThemeStore";
 import {
   Zap, QrCode, Users, CheckCircle, ArrowRight, Sparkles,
-  Calendar, Shield, Download, Star, ChevronDown,
-  Clock, MapPin, Ticket, ScanLine, Mail, Globe, ArrowUpRight,
+  Calendar, Shield, Download, Star,
+  Clock, MapPin, Ticket, ScanLine, ArrowUpRight,
   Sun, Moon, Mic, Heart, Music2, Wrench, Briefcase
 } from "lucide-react";
 
