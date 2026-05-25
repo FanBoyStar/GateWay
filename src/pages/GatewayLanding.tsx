@@ -1102,6 +1102,10 @@ body {
 .gw-event-pills {
   display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px;
 }
+/* Wrapper so the ring can sit outside the button */
+.gw-pill-wrap {
+  position: relative; display: inline-flex;
+}
 .gw-event-pill {
   display: inline-flex; align-items: center; gap: 7px;
   padding: 9px 18px; border-radius: 50px;
@@ -1112,7 +1116,7 @@ body {
   cursor: pointer;
   transition: all 260ms cubic-bezier(.16,1,.3,1);
   user-select: none;
-  position: relative; overflow: hidden;
+  position: relative;
 }
 .gw-event-pill:hover {
   border-color: rgba(255,255,255,0.30);
@@ -1121,24 +1125,40 @@ body {
 }
 .gw-event-pill.active {
   background: rgba(255,255,255,0.92);
-  border-color: rgba(255,255,255,0.95);
+  border-color: transparent;
   color: #0a0812;
   font-weight: 600;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.2), 0 4px 20px rgba(0,0,0,0.35);
 }
-/* Progress drain bar inside the active pill */
-.gw-pill-progress {
+/* ── Border-ring progress — conic-gradient drain ── */
+@property --gw-ring-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 360deg;
+}
+@keyframes pillRingDrain {
+  from { --gw-ring-angle: 360deg; }
+  to   { --gw-ring-angle: 0deg; }
+}
+.gw-pill-ring {
   position: absolute;
-  bottom: 0; left: 0;
-  height: 3px; width: 100%;
-  background: rgba(10,8,18,0.30);
-  border-radius: 0 0 50px 50px;
-  transform-origin: left center;
-  animation: pillDrain 2.8s linear forwards;
-}
-@keyframes pillDrain {
-  from { transform: scaleX(1); }
-  to   { transform: scaleX(0); }
+  inset: -2px;
+  border-radius: 54px;
+  background: conic-gradient(
+    from -90deg,
+    #9b72f5 0deg,
+    #e8186d calc(var(--gw-ring-angle) * 0.45),
+    #9b72f5 var(--gw-ring-angle),
+    rgba(255,255,255,0.08) var(--gw-ring-angle)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 2px;
+  pointer-events: none;
+  z-index: 1;
+  animation: pillRingDrain 2.8s linear forwards;
 }
 .gw-cta-actions {
   display: flex; gap: 14px; flex-wrap: wrap;
@@ -2354,17 +2374,18 @@ export default function GatewayLanding() {
                   onMouseLeave={() => { pillsHoveredRef.current = false; }}
                 >
                   {eventTypes.map((et, i) => (
-                    <button
-                      key={i}
-                      className={`gw-event-pill${activeEvent === i ? " active" : ""}`}
-                      onClick={() => switchEvent(i)}
-                    >
-                      {et.icon}
-                      {et.label}
+                    <div key={i} className="gw-pill-wrap">
+                      <button
+                        className={`gw-event-pill${activeEvent === i ? " active" : ""}`}
+                        onClick={() => switchEvent(i)}
+                      >
+                        {et.icon}
+                        {et.label}
+                      </button>
                       {activeEvent === i && (
-                        <span key={activeEvent} className="gw-pill-progress" />
+                        <span key={activeEvent} className="gw-pill-ring" />
                       )}
-                    </button>
+                    </div>
                   ))}
                 </div>
                 <div className="gw-cta-actions">
