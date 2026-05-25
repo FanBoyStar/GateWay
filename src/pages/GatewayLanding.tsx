@@ -2353,18 +2353,6 @@ export default function GatewayLanding() {
                   <a href="/sign-up" className="btn-primary">Get Started — Free <ArrowRight size={16} /></a>
                   <a href="/passes/demo" className="btn-ghost"><QrCode size={16} />See a Demo Pass</a>
                 </div>
-                <div className="gw-cta-checks">
-                  {([
-                    [<CheckCircle size={12}/>, "No credit card required"],
-                    [<Shield size={12}/>, "Your data stays private"],
-                    [<Zap size={12}/>, "Ready in under 5 minutes"],
-                  ] as [React.ReactNode, string][]).map(([icon, txt], i) => (
-                    <div key={i} className="gw-cta-check">
-                      <span style={{ color: "#22C55E" }}>{icon}</span>
-                      {txt}
-                    </div>
-                  ))}
-                </div>
               </div>
               {/* Right — animated event card with SolCard glow border */}
               <div className="gw-cta-right">
