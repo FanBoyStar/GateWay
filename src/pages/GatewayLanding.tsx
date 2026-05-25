@@ -278,22 +278,6 @@ body {
   display: flex; flex-direction: column; align-items: center;
   text-align: center;
 }
-/* dark night-sky gradient at bottom so cityscape always pops */
-.gw-hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 60%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(8, 6, 20, 0.55) 45%,
-    rgba(8, 6, 20, 0.88) 80%,
-    rgba(6, 4, 16, 0.95) 100%
-  );
-  z-index: 1;
-  pointer-events: none;
-}
 .gw-hero-text {
   max-width: 860px; width: 100%;
   display: flex; flex-direction: column; align-items: center;
@@ -1237,12 +1221,12 @@ body {
 
 /* ══════════ CITYSCAPE SVG ══════════ */
 function CityscapeSVG({ dark = false }: { dark?: boolean }) {
-  const bFar  = dark ? "#0a0a0f" : "#D8D8E8";
-  const bMid  = dark ? "#0D0D12" : "#C8C8DC";
-  const bTall = dark ? "#0D0D12" : "#B8B8D0";
-  const bSpire= dark ? "#0D0D12" : "#AEAEC8";
-  const bAnt  = dark ? "#0D0D12" : "#9898B8";
-  const bFore = dark ? "#0D0D12" : "#C0C0D8";
+  const bFar  = dark ? "#0a0a0f" : "#E6E5F2";
+  const bMid  = dark ? "#0D0D12" : "#DDDCEC";
+  const bTall = dark ? "#0D0D12" : "#D4D2E6";
+  const bSpire= dark ? "#0D0D12" : "#CCCADF";
+  const bAnt  = dark ? "#0D0D12" : "#C4C2D8";
+  const bFore = dark ? "#0D0D12" : "#DDDBE8";
   return (
     <svg
       viewBox="0 0 1440 420"
@@ -1862,7 +1846,7 @@ export default function GatewayLanding() {
       ════════════════════════════════ */}
       <section style={{ position: "relative", zIndex: 1 }}>
         <div className="gw-hero">
-          <div className="gw-cityscape"><CityscapeSVG dark={true} /></div>
+          <div className="gw-cityscape"><CityscapeSVG dark={false} /></div>
           <div className="gw-hero-text">
             <div className="gw-badge"><Zap size={10} />Free for all events</div>
             <h1 className="gw-headline font-syne">
