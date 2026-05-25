@@ -964,37 +964,88 @@ body {
 .gw-verify-name { font-family: "Space Grotesk", sans-serif; font-size: 14px; font-weight: 700; }
 .gw-verify-sub { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
 
-/* ══════════ STATS STRIP ══════════ */
-.gw-stats {
+/* ══════════ SOCIAL PROOF ══════════ */
+.gw-social-proof {
   position: relative; z-index: 1;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-  background: var(--color-surface);
-  padding: 0 72px;
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: var(--color-bg);
+  padding: 120px 72px;
   overflow: hidden;
 }
-.gw-stat-item {
-  padding: 60px 32px;
-  border-right: 1px solid var(--color-border);
-  display: flex; flex-direction: column; gap: 4px;
+.gw-sp-inner { max-width: 1200px; margin: 0 auto; }
+.gw-sp-heading {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(36px, 5vw, 68px);
+  font-weight: 800; line-height: 1.04;
+  letter-spacing: -0.04em;
+  text-align: center; margin-bottom: 80px;
+  color: var(--color-text-primary);
+}
+.gw-sp-heading .sp-accent {
+  color: var(--color-primary);
+}
+.gw-sp-stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--color-border);
+  border-radius: 24px; overflow: hidden;
+  margin-bottom: 72px;
+  background: var(--color-surface);
+}
+.gw-sp-stat {
+  padding: 64px 56px;
   position: relative;
+  transition: background 200ms;
+  cursor: default;
 }
-.gw-stat-item:last-child { border-right: none; }
-.gw-stat-item::after {
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-  width: 2px; background: var(--color-primary); opacity: 0;
-  transition: opacity 200ms;
-}
-.gw-stat-item:hover::after { opacity: 1; }
-.gw-stat-num {
-  font-family: "Space Grotesk", sans-serif; font-size: 52px; font-weight: 800;
+.gw-sp-stat:hover { background: var(--color-surface-2); }
+/* right border on left-column cells */
+.gw-sp-stat:nth-child(odd)  { border-right: 1px solid var(--color-border); }
+/* bottom border on top-row cells */
+.gw-sp-stat:nth-child(1),
+.gw-sp-stat:nth-child(2) { border-bottom: 1px solid var(--color-border); }
+.gw-sp-stat-num {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(52px, 7vw, 80px); font-weight: 800;
   letter-spacing: -0.04em; line-height: 1;
-  background: linear-gradient(135deg, var(--color-stat-grad-start) 0%, var(--color-stat-grad-end) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-text-primary);
 }
-.gw-stat-label { font-size: 14px; color: var(--color-text-muted); margin-top: 6px; }
+.gw-sp-stat-label {
+  font-size: 15px; color: var(--color-text-muted);
+  margin-top: 10px; font-weight: 400;
+}
+/* testimonials */
+.gw-testimonials {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.gw-testimonial {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px; padding: 28px 26px;
+  display: flex; flex-direction: column; gap: 18px;
+  transition: border-color 200ms, transform 200ms, box-shadow 200ms;
+  cursor: default;
+}
+.gw-testimonial:hover {
+  border-color: var(--color-border-active);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+.gw-testimonial-user { display: flex; align-items: center; gap: 12px; }
+.gw-testimonial-avatar {
+  width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Space Grotesk", sans-serif; font-size: 14px; font-weight: 700;
+}
+.gw-testimonial-name {
+  font-family: "Space Grotesk", sans-serif; font-size: 15px; font-weight: 700;
+  color: var(--color-text-primary);
+}
+.gw-testimonial-role { font-size: 12px; color: var(--color-text-muted); margin-top: 2px; }
+.gw-testimonial-text {
+  font-size: 14px; color: var(--color-text-secondary);
+  line-height: 1.72; flex: 1;
+}
+.gw-testimonial-text strong { color: var(--color-text-primary); font-weight: 600; }
 
 /* ══════════ TEMPLATES ══════════ */
 .gw-templates-header {
@@ -1180,7 +1231,10 @@ body {
   .gw-how-layout { grid-template-columns: 1fr; gap: 48px; }
   .gw-how-visual { position: static; }
 
-  .gw-stats { grid-template-columns: repeat(2, 1fr); padding: 0 24px; }
+  .gw-sp-stats { border-radius: 16px; }
+  .gw-sp-stat { padding: 48px 36px; }
+  .gw-testimonials { grid-template-columns: 1fr 1fr; }
+  .gw-social-proof { padding: 80px 40px; }
   .gw-template-grid { grid-template-columns: 1fr 1fr; }
 
   .gw-section { padding: 100px 40px; }
@@ -1226,14 +1280,14 @@ body {
   .gw-showcase-tagline { padding: 48px 20px 80px; }
   .gw-showcase-tagline-sub { font-size: 15px; }
 
-  /* Stats — 2-col, compact */
-  .gw-stats { grid-template-columns: 1fr 1fr; padding: 0; }
-  .gw-stat-item { padding: 28px 16px; }
-  .gw-stat-item:nth-child(2) { border-right: none; }
-  .gw-stat-item:nth-child(3) { border-top: 1px solid var(--color-border); }
-  .gw-stat-item:nth-child(4) { border-top: 1px solid var(--color-border); border-right: none; }
-  .gw-stat-num { font-size: 32px; }
-  .gw-stat-label { font-size: 12px; margin-top: 4px; }
+  /* Social proof — mobile */
+  .gw-social-proof { padding: 64px 20px; }
+  .gw-sp-heading { margin-bottom: 48px; }
+  .gw-sp-stats { border-radius: 14px; margin-bottom: 40px; }
+  .gw-sp-stat { padding: 36px 24px; }
+  .gw-sp-stat-num { font-size: clamp(40px, 10vw, 56px); }
+  .gw-sp-stat-label { font-size: 13px; margin-top: 6px; }
+  .gw-testimonials { grid-template-columns: 1fr; gap: 14px; }
 
   /* Sections */
   .gw-section { padding: 64px 20px; }
@@ -1843,6 +1897,33 @@ export default function GatewayLanding() {
     { num: "3",       label: "Premium templates" },
   ];
 
+  const testimonials = [
+    {
+      initials: "AO",
+      name: "Amara Osei-Bonsu",
+      role: "Conference Organizer · Accra",
+      bg: "rgba(232,24,109,0.15)",
+      color: "#E8186D",
+      quote: "Gateway made our annual tech summit feel <strong>premium from the start</strong>. Guests actually commented on how professional the passes looked — and setup took me under 10 minutes.",
+    },
+    {
+      initials: "JK",
+      name: "James Kofi",
+      role: "Wedding Planner · Lagos",
+      bg: "rgba(123,92,240,0.15)",
+      color: "#7B5CF0",
+      quote: "I've tried three other tools. Gateway is the only one where the <strong>QR codes actually work reliably</strong> at the door. No more awkward moments with guests who can't get in.",
+    },
+    {
+      initials: "FN",
+      name: "Fatima Ndiaye",
+      role: "Event Director · Dakar",
+      bg: "rgba(34,197,94,0.15)",
+      color: "#22C55E",
+      quote: "Bulk CSV upload is a game-changer. I uploaded <strong>400 attendees in one go</strong> and had every pass ready within a minute. Nothing else on the market comes close.",
+    },
+  ];
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
@@ -2011,18 +2092,6 @@ export default function GatewayLanding() {
       })()}
 
       {/* ════════════════════════════════
-          STATS STRIP
-      ════════════════════════════════ */}
-      <div className="gw-stats">
-        {stats.map((s, i) => (
-          <div key={i} className="gw-stat-item gw-reveal" ref={ref} style={{ transitionDelay: `${i * 0.07}s` }}>
-            <div className="gw-stat-num font-syne">{s.num}</div>
-            <div className="gw-stat-label">{s.label}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* ════════════════════════════════
           FEATURES
       ════════════════════════════════ */}
       <section className="gw-section gw-features-bg" id="features">
@@ -2123,6 +2192,45 @@ export default function GatewayLanding() {
               <div key={t.type} className={`gw-tpl-wrap gw-reveal gw-reveal-d${i + 1}`} ref={ref}>
                 <TemplatePassCard type={t.type} />
                 <div className="gw-tpl-label">{t.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════
+          SOCIAL PROOF
+      ════════════════════════════════ */}
+      <section className="gw-social-proof">
+        <div className="gw-sp-inner">
+          <h2 className="gw-sp-heading gw-reveal font-syne" ref={ref}>
+            Trusted by <span className="sp-accent">12,000+</span> organizers
+          </h2>
+
+          {/* 2×2 stats grid */}
+          <div className="gw-sp-stats">
+            {stats.map((s, i) => (
+              <div key={i} className="gw-sp-stat gw-reveal" ref={ref} style={{ transitionDelay: `${i * 0.07}s` }}>
+                <div className="gw-sp-stat-num font-syne">{s.num}</div>
+                <div className="gw-sp-stat-label">{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* testimonial cards */}
+          <div className="gw-testimonials">
+            {testimonials.map((t, i) => (
+              <div key={i} className={`gw-testimonial gw-reveal gw-reveal-d${i + 1}`} ref={ref}>
+                <div className="gw-testimonial-user">
+                  <div className="gw-testimonial-avatar" style={{ background: t.bg, color: t.color }}>
+                    {t.initials}
+                  </div>
+                  <div>
+                    <div className="gw-testimonial-name">{t.name}</div>
+                    <div className="gw-testimonial-role">{t.role}</div>
+                  </div>
+                </div>
+                <p className="gw-testimonial-text" dangerouslySetInnerHTML={{ __html: t.quote }} />
               </div>
             ))}
           </div>
