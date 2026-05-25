@@ -131,7 +131,7 @@ body {
 /* ══════════ NAV ══════════ */
 .gw-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   padding: 28px 72px;
   background: var(--color-nav-bg);
   backdrop-filter: blur(20px) saturate(1.4);
@@ -2117,7 +2117,7 @@ export default function GatewayLanding() {
           <li><a href="#how-it-works">How it works</a></li>
           <li><a href="#templates">Templates</a></li>
         </ul>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, justifySelf: "end" }}>
           <button className="gw-theme-toggle" onClick={toggleTheme} title={isDark ? "Switch to light mode" : "Switch to dark mode"}>
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
