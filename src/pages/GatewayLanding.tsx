@@ -2139,7 +2139,7 @@ export default function GatewayLanding() {
       ════════════════════════════════ */}
       <section style={{ position: "relative", zIndex: 1 }}>
         <div className="gw-hero">
-          <div className="gw-cityscape"><CityscapeSVG dark={isDark} /></div>
+          {isDark && <div className="gw-cityscape"><CityscapeSVG dark={true} /></div>}
           <div className="gw-hero-text">
             <div className="gw-badge"><Zap size={10} />Free for all events</div>
             <h1 className="gw-headline font-syne">
