@@ -1112,6 +1112,7 @@ body {
   cursor: pointer;
   transition: all 260ms cubic-bezier(.16,1,.3,1);
   user-select: none;
+  position: relative; overflow: hidden;
 }
 .gw-event-pill:hover {
   border-color: rgba(255,255,255,0.30);
@@ -1124,6 +1125,20 @@ body {
   color: #0a0812;
   font-weight: 600;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.2), 0 4px 20px rgba(0,0,0,0.35);
+}
+/* Progress drain bar inside the active pill */
+.gw-pill-progress {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 3px; width: 100%;
+  background: rgba(10,8,18,0.30);
+  border-radius: 0 0 50px 50px;
+  transform-origin: left center;
+  animation: pillDrain 2.8s linear forwards;
+}
+@keyframes pillDrain {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
 }
 .gw-cta-actions {
   display: flex; gap: 14px; flex-wrap: wrap;
@@ -2346,6 +2361,9 @@ export default function GatewayLanding() {
                     >
                       {et.icon}
                       {et.label}
+                      {activeEvent === i && (
+                        <span key={activeEvent} className="gw-pill-progress" />
+                      )}
                     </button>
                   ))}
                 </div>
