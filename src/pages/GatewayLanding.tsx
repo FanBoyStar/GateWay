@@ -319,14 +319,6 @@ body {
   margin-top: 48px;
   animation: fadeUp 0.5s 0.24s ease both;
 }
-.gw-hero-meta {
-  display: flex; gap: 24px; margin-top: 52px; flex-wrap: wrap;
-  animation: fadeUp 0.5s 0.32s ease both;
-}
-.gw-hero-meta-item {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 13px; color: var(--color-text-muted);
-}
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(28px); }
@@ -1160,7 +1152,6 @@ body {
   .gw-hero-ctas { flex-direction: column; width: 100%; margin-top: 32px; gap: 10px; }
   .btn-primary { width: 100%; justify-content: center; padding: 14px 24px; font-size: 14px; }
   .btn-ghost { width: 100%; justify-content: center; padding: 13px 24px; font-size: 14px; }
-  .gw-hero-meta { gap: 12px; margin-top: 32px; }
   .gw-scroll-hint { left: 50%; transform: translateX(-50%); }
 
   /* Showcase — mobile */
@@ -1866,18 +1857,6 @@ export default function GatewayLanding() {
             <div className="gw-hero-ctas">
               <a href="/sign-up" className="btn-primary">Get Started — Free <ArrowRight size={16} /></a>
               <a href="/passes/demo" className="btn-ghost"><QrCode size={16} />See a Demo Pass</a>
-            </div>
-            <div className="gw-hero-meta">
-              {([
-                [<CheckCircle size={13}/>, "No credit card"],
-                [<Shield size={13}/>, "Data stays local"],
-                [<Zap size={13}/>, "Works instantly"],
-              ] as [React.ReactNode, string][]).map(([icon, txt], i) => (
-                <div key={i} className="gw-hero-meta-item" style={{ color: "var(--color-success)" }}>
-                  {icon}
-                  <span style={{ color: "var(--color-text-muted)" }}>{txt}</span>
-                </div>
-              ))}
             </div>
           </div>
         </div>
