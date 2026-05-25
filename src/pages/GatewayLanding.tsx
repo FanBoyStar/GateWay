@@ -81,16 +81,16 @@ body {
 }
 .gw-orb-1 {
   width: 600px; height: 600px; top: -200px; right: -120px;
-  background: rgba(232,24,109,0.10); --dur: 22s;
+  background: rgba(232,24,109,0.04); --dur: 22s;
 }
 .gw-orb-2 {
   width: 450px; height: 450px; bottom: 20%; left: -140px;
-  background: rgba(99,68,212,0.08); --dur: 28s;
+  background: rgba(99,68,212,0.03); --dur: 28s;
   animation-delay: -10s;
 }
 .gw-orb-3 {
   width: 350px; height: 350px; bottom: -80px; right: 15%;
-  background: rgba(232,24,109,0.07); --dur: 24s;
+  background: rgba(232,24,109,0.03); --dur: 24s;
   animation-delay: -5s;
 }
 @keyframes orbFloat {
@@ -116,7 +116,7 @@ body {
 /* kinetic sweep streaks — very subtle in light mode */
 .gw-streak {
   position: absolute; height: 1px; pointer-events: none;
-  background: linear-gradient(90deg, transparent, rgba(232,24,109,0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgba(232,24,109,0.05), transparent);
   animation: streak var(--spd, 7s) linear infinite;
   animation-delay: var(--del, 0s);
 }
@@ -460,8 +460,8 @@ body {
   position: absolute;
   inset: -60px;
   background: radial-gradient(ellipse at 50% 50%,
-    rgba(232,24,109,0.12) 0%,
-    rgba(99,68,212,0.06) 45%,
+    rgba(232,24,109,0.05) 0%,
+    rgba(99,68,212,0.03) 45%,
     transparent 70%
   );
   border-radius: 50%;
@@ -515,7 +515,7 @@ body {
 }
 .pc-top-glow {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(232,24,109,0.18), transparent);
+  background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(232,24,109,0.08), transparent);
 }
 .pc-top-inner {
   position: absolute; inset: 0; padding: 18px 20px 18px 26px;
@@ -1018,13 +1018,13 @@ body {
 .gw-cta-radial {
   position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 60% at 50% 60%, rgba(232,24,109,0.06), transparent),
-    radial-gradient(ellipse 40% 40% at 20% 40%, rgba(99,68,212,0.05), transparent);
+    radial-gradient(ellipse 70% 60% at 50% 60%, rgba(232,24,109,0.03), transparent),
+    radial-gradient(ellipse 40% 40% at 20% 40%, rgba(99,68,212,0.02), transparent);
 }
 /* editorial slash lines in CTA */
 .gw-cta-slash-l, .gw-cta-slash-r {
   position: absolute; top: 0; bottom: 0; width: 1px;
-  background: linear-gradient(180deg, transparent, rgba(232,24,109,0.12), transparent);
+  background: linear-gradient(180deg, transparent, rgba(232,24,109,0.06), transparent);
   opacity: 0.6;
 }
 .gw-cta-slash-l { left: 15%; transform: skewX(-8deg); }

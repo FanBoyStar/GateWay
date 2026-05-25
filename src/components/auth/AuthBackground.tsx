@@ -176,20 +176,20 @@ export function AuthBackground() {
         .auth-orb-1 {
           width: 600px; height: 600px;
           top: -200px; right: -120px;
-          background: var(--neon-primary-glow);
+          background: rgba(232,24,109,0.08);
           animation-duration: 22s;
         }
         .auth-orb-2 {
           width: 480px; height: 480px;
           bottom: 10%; left: -150px;
-          background: rgba(123,92,240,0.18);
+          background: rgba(123,92,240,0.07);
           animation-duration: 28s;
           animation-delay: -10s;
         }
         .auth-orb-3 {
           width: 340px; height: 340px;
           bottom: -80px; right: 20%;
-          background: rgba(232,24,109,0.10);
+          background: rgba(232,24,109,0.05);
           animation-duration: 24s;
           animation-delay: -5s;
         }
@@ -205,15 +205,15 @@ export function AuthBackground() {
             -32deg,
             transparent,
             transparent 140px,
-            rgba(232,24,109,0.025) 140px,
-            rgba(232,24,109,0.025) 141px
+            rgba(232,24,109,0.010) 140px,
+            rgba(232,24,109,0.010) 141px
           );
         }
         .auth-streak {
           position: absolute;
           height: 1px;
           pointer-events: none;
-          background: linear-gradient(90deg, transparent, rgba(232,24,109,0.15), transparent);
+          background: linear-gradient(90deg, transparent, rgba(232,24,109,0.06), transparent);
           animation: authStreak var(--spd, 9s) linear infinite;
           animation-delay: var(--del, 0s);
         }
