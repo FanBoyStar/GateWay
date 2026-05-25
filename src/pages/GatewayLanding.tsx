@@ -1153,7 +1153,7 @@ body {
   .gw-nav { padding: 12px 16px; gap: 0; }
   .gw-nav-cta { display: none; }
   .gw-logo { font-size: 17px; flex: 1; }
-  .gw-theme-toggle { display: none; }
+  .gw-nav .gw-theme-toggle { display: none; }
   .gw-hamburger { display: flex; }
   .gw-mobile-menu { display: flex; }
 
