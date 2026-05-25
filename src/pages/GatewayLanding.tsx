@@ -1147,7 +1147,6 @@ body {
 /* ══════════ RESPONSIVE — TABLET ══════════ */
 @media (max-width: 1023px) {
   .gw-nav { padding: 14px 20px; }
-  .gw-nav-links { display: none; }
   .gw-nav-cta { padding: 10px 18px; font-size: 13px; }
 
   .gw-hero { grid-template-columns: 1fr; padding: 120px 24px 20px; text-align: center; }
@@ -1171,6 +1170,7 @@ body {
 @media (max-width: 640px) {
   /* Nav — hamburger layout */
   .gw-nav { padding: 12px 16px; gap: 0; }
+  .gw-nav-links { display: none; }
   .gw-nav-cta { display: none; }
   .gw-logo { font-size: 17px; flex: 1; }
   .gw-nav .gw-theme-toggle { display: none; }
