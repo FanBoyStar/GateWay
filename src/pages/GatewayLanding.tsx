@@ -1044,7 +1044,7 @@ body {
 /* ══════════ CTA SECTION — EVENT SHOWCASE ══════════ */
 .gw-cta-section {
   position: relative; z-index: 1;
-  padding: 140px 72px; overflow: hidden;
+  padding: 120px 72px; overflow: hidden;
 }
 .gw-cta-radial {
   position: absolute; inset: 0; pointer-events: none;
@@ -1053,15 +1053,15 @@ body {
     radial-gradient(ellipse 40% 40% at 25% 40%, rgba(99,68,212,0.03), transparent);
 }
 .gw-cta-inner {
-  max-width: 1160px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 80px; align-items: center;
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 5fr 6fr;
+  gap: 64px; align-items: center;
   position: relative; z-index: 1;
 }
 .gw-cta-left {}
 .gw-cta-title {
   font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(34px, 4vw, 58px); font-weight: 800;
+  font-size: clamp(36px, 4.2vw, 62px); font-weight: 800;
   line-height: 1.05; letter-spacing: -0.035em;
   margin-bottom: 20px;
 }
@@ -1071,11 +1071,11 @@ body {
   background-clip: text;
 }
 .gw-cta-sub {
-  font-size: 17px; color: var(--color-text-secondary);
-  line-height: 1.65; max-width: 460px; margin-bottom: 36px;
+  font-size: 16px; color: var(--color-text-secondary);
+  line-height: 1.7; max-width: 440px; margin-bottom: 32px;
 }
 .gw-event-pills {
-  display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 44px;
+  display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px;
 }
 .gw-event-pill {
   display: inline-flex; align-items: center; gap: 7px;
@@ -1108,86 +1108,103 @@ body {
   display: flex; align-items: center; gap: 6px;
   font-size: 12px; color: var(--color-text-muted);
 }
-/* Right — event card preview */
+/* Right — event card (single unified visual area) */
 .gw-cta-right {
-  display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: center; justify-content: flex-end;
 }
 .gw-event-card {
-  width: 360px; border-radius: 22px;
-  background: #15151E;
-  border: 1px solid rgba(255,255,255,0.08);
+  width: 100%; border-radius: 22px;
   overflow: hidden;
-  box-shadow: 0 40px 100px rgba(0,0,0,0.32), 0 8px 24px rgba(0,0,0,0.2);
-  transition: opacity 200ms ease, transform 200ms ease;
+  transition: opacity 200ms ease, transform 200ms ease, box-shadow 300ms ease;
 }
 .gw-event-card.switching {
-  opacity: 0; transform: scale(0.96) translateY(10px);
+  opacity: 0; transform: scale(0.97) translateY(8px);
 }
-.gw-ec-header {
-  height: 168px; position: relative; overflow: hidden;
+/* Single full-height visual area */
+.gw-ec-area {
+  height: 340px; position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 20px;
 }
 .gw-ec-header-glow {
   position: absolute; inset: 0; pointer-events: none;
-  transition: background 300ms ease;
 }
 .gw-ec-grid {
   position: absolute; inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
   background-size: 28px 28px;
 }
+.gw-ec-blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(60px); pointer-events: none;
+  width: 220px; height: 220px;
+  top: 5%; right: -30px; opacity: 0.28;
+  transition: background 300ms ease;
+}
+.gw-ec-blob-2 {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); pointer-events: none;
+  width: 160px; height: 160px;
+  bottom: 10%; left: -20px; opacity: 0.18;
+  transition: background 300ms ease;
+}
 .gw-ec-topbar {
-  position: absolute; top: 18px; left: 20px; right: 20px;
+  position: relative; z-index: 2;
   display: flex; align-items: center; justify-content: space-between;
-  z-index: 2;
 }
 .gw-ec-logo-row {
   display: flex; align-items: center; gap: 8px;
   font-family: "Space Grotesk", sans-serif; font-weight: 800;
-  font-size: 14px; color: #fff;
+  font-size: 15px; color: #fff;
 }
 .gw-ec-tag {
   display: inline-flex; align-items: center; gap: 5px;
-  border-radius: 50px; padding: 4px 12px;
+  border-radius: 50px; padding: 5px 13px;
   font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
   text-transform: uppercase;
-  transition: all 300ms ease;
   border-width: 1px; border-style: solid;
+  transition: color 300ms ease, border-color 300ms ease, background 300ms ease;
 }
-.gw-ec-accent-bar {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  height: 3px; transition: background 300ms ease;
+/* Middle content */
+.gw-ec-content {
+  position: relative; z-index: 2; flex: 1;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding-bottom: 18px;
 }
-.gw-ec-body { background: #0D0D12; padding: 22px 22px 18px; }
 .gw-ec-name {
   font-family: "Space Grotesk", sans-serif;
-  font-size: 21px; font-weight: 800; letter-spacing: -0.02em;
-  color: #fff; margin-bottom: 10px;
+  font-size: 24px; font-weight: 800; letter-spacing: -0.02em;
+  color: #fff; margin-bottom: 8px;
 }
 .gw-ec-meta {
-  display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 18px;
+  display: flex; gap: 18px; flex-wrap: wrap;
 }
 .gw-ec-meta span {
   display: flex; align-items: center; gap: 4px;
   font-size: 12px; color: rgba(255,255,255,0.45);
 }
-.gw-ec-divider {
-  border: none; border-top: 1px dashed rgba(255,255,255,0.1);
-  margin-bottom: 16px;
-}
-.gw-ec-footer {
+/* Bottom pill bar — like SolCard "Booking 148.59 USD" */
+.gw-ec-bar {
+  position: relative; z-index: 2;
   display: flex; align-items: center; justify-content: space-between;
+  background: rgba(0,0,0,0.38);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 50px; padding: 10px 10px 10px 18px;
+  border: 1px solid rgba(255,255,255,0.07);
 }
-.gw-ec-seat {
-  display: flex; flex-direction: column; gap: 3px;
+.gw-ec-bar-seat {
+  font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.75);
+  display: flex; align-items: center; gap: 7px;
 }
-.gw-ec-entry-badge {
+.gw-ec-bar-badge {
   display: inline-flex; align-items: center; gap: 6px;
-  border-radius: 50px; padding: 7px 14px;
+  border-radius: 50px; padding: 7px 15px;
   font-size: 12px; font-weight: 600;
   border-width: 1px; border-style: solid;
-  transition: all 300ms ease;
+  transition: color 300ms ease, border-color 300ms ease, background 300ms ease;
   white-space: nowrap;
 }
 
@@ -1264,8 +1281,6 @@ body {
 
   .gw-section { padding: 100px 40px; }
   .gw-cta-section { padding: 100px 40px; }
-  .gw-cta-inner { grid-template-columns: 1fr; gap: 56px; }
-  .gw-event-card { width: 100%; max-width: 420px; }
   .gw-footer { padding: 40px 40px; }
 }
 
@@ -2238,60 +2253,51 @@ export default function GatewayLanding() {
                   ))}
                 </div>
               </div>
-              {/* Right — animated event pass card */}
+              {/* Right — animated event card (single unified visual) */}
               <div className="gw-cta-right">
-                <div className={`gw-event-card${eventSwitching ? " switching" : ""}`}>
-                  {/* Header */}
-                  <div className="gw-ec-header" style={{ background: ev.bg }}>
-                    <div
-                      className="gw-ec-header-glow"
-                      style={{ background: `radial-gradient(ellipse 80% 80% at 20% 50%, ${ev.color}28, transparent 70%)` }}
+                <div
+                  className={`gw-event-card${eventSwitching ? " switching" : ""}`}
+                  style={{
+                    boxShadow: `0 0 0 1px ${ev.color}30, 0 48px 100px rgba(0,0,0,0.45), 0 0 60px ${ev.color}12`,
+                  }}
+                >
+                  <div className="gw-ec-area" style={{ background: ev.bg }}>
+                    {/* Depth blobs */}
+                    <div className="gw-ec-blob" style={{ background: ev.color }} />
+                    <div className="gw-ec-blob-2" style={{ background: ev.accent }} />
+                    {/* Grid overlay */}
+                    <div className="gw-ec-header-glow"
+                      style={{ background: `radial-gradient(ellipse 90% 70% at 15% 60%, ${ev.color}22, transparent 65%)` }}
                     />
                     <div className="gw-ec-grid" />
+                    {/* Top bar — logo + tag */}
                     <div className="gw-ec-topbar">
                       <div className="gw-ec-logo-row">
-                        <div className="gw-logo-mark" style={{ width: 26, height: 26, borderRadius: 8 }}>
-                          <QrCode size={13} color="#fff" />
+                        <div className="gw-logo-mark" style={{ width: 28, height: 28, borderRadius: 9 }}>
+                          <QrCode size={14} color="#fff" />
                         </div>
                         Gateway
                       </div>
-                      <div
-                        className="gw-ec-tag"
-                        style={{
-                          color: ev.color,
-                          borderColor: `${ev.color}40`,
-                          background: `${ev.color}18`,
-                        }}
-                      >
-                        {ev.icon}
-                        {ev.tag}
+                      <div className="gw-ec-tag" style={{ color: ev.color, borderColor: `${ev.color}45`, background: `${ev.color}1a` }}>
+                        {ev.icon}{ev.tag}
                       </div>
                     </div>
-                    <div className="gw-ec-accent-bar" style={{ background: `linear-gradient(90deg, ${ev.color}, ${ev.accent})` }} />
-                  </div>
-                  {/* Body */}
-                  <div className="gw-ec-body">
-                    <h3 className="gw-ec-name font-syne">{ev.eventName}</h3>
-                    <div className="gw-ec-meta">
-                      <span><MapPin size={11} />{ev.location}</span>
-                      <span><Calendar size={11} />{ev.date}</span>
-                    </div>
-                    <hr className="gw-ec-divider" />
-                    <div className="gw-ec-footer">
-                      <div className="gw-ec-seat">
-                        <span className="font-mono" style={{ fontSize: 10, color: "rgba(255,255,255,0.28)", letterSpacing: "0.05em" }}>EVT-AX9KD2-0042</span>
-                        <span style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", marginTop: 2 }}>{ev.seat}</span>
+                    {/* Middle — event info */}
+                    <div className="gw-ec-content">
+                      <h3 className="gw-ec-name font-syne">{ev.eventName}</h3>
+                      <div className="gw-ec-meta">
+                        <span><MapPin size={11} />{ev.location}</span>
+                        <span><Calendar size={11} />{ev.date}</span>
                       </div>
-                      <div
-                        className="gw-ec-entry-badge"
-                        style={{
-                          color: ev.color,
-                          borderColor: `${ev.color}35`,
-                          background: `${ev.color}18`,
-                        }}
-                      >
-                        <Clock size={11} />
-                        {ev.entry}
+                    </div>
+                    {/* Bottom bar — like "Booking 148.59 USD" */}
+                    <div className="gw-ec-bar">
+                      <div className="gw-ec-bar-seat">
+                        <QrCode size={14} color="rgba(255,255,255,0.45)" />
+                        {ev.seat}
+                      </div>
+                      <div className="gw-ec-bar-badge" style={{ color: ev.color, borderColor: `${ev.color}40`, background: `${ev.color}1a` }}>
+                        <Clock size={11} />{ev.entry}
                       </div>
                     </div>
                   </div>
