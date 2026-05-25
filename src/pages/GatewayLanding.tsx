@@ -1247,20 +1247,22 @@ body {
   background: rgba(0,0,0,0.45);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-radius: 50px; padding: 10px 10px 10px 18px;
+  border-radius: 50px; padding: 12px 12px 12px 22px;
   border: 1px solid rgba(255,255,255,0.09);
+  gap: 16px;
 }
 .gw-ec-bar-seat {
-  font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.80);
-  display: flex; align-items: center; gap: 7px;
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.80);
+  display: flex; align-items: center; gap: 10px;
+  flex: 1; min-width: 0;
 }
 .gw-ec-bar-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  border-radius: 50px; padding: 7px 15px;
-  font-size: 12px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 7px;
+  border-radius: 50px; padding: 9px 20px;
+  font-size: 13px; font-weight: 600;
   border-width: 1px; border-style: solid;
   transition: color 300ms ease, border-color 300ms ease, background 300ms ease;
-  white-space: nowrap;
+  white-space: nowrap; flex-shrink: 0;
 }
 
 /* ══════════ FOOTER ══════════ */
