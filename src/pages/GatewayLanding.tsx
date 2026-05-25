@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useThemeStore } from "@/store/useThemeStore";
 import {
   Zap, QrCode, Users, CheckCircle, ArrowRight, Sparkles,
   Calendar, Shield, Download, Star, ChevronDown,
@@ -33,7 +34,7 @@ const CSS = `
 }
 
 /* ══════════ DARK THEME OVERRIDES ══════════ */
-[data-gw-theme="dark"] {
+.dark {
   --color-bg:             #0D0D12;
   --color-surface:        #15151E;
   --color-surface-2:      #1E1E2C;
@@ -243,9 +244,9 @@ body {
 }
 
 /* ── Dark mode orb boost ── */
-[data-gw-theme="dark"] .gw-orb-1 { background: rgba(232,24,109,0.30); }
-[data-gw-theme="dark"] .gw-orb-2 { background: rgba(99,68,212,0.20); }
-[data-gw-theme="dark"] .gw-orb-3 { background: rgba(232,24,109,0.18); }
+.dark .gw-orb-1 { background: rgba(232,24,109,0.30); }
+.dark .gw-orb-2 { background: rgba(99,68,212,0.20); }
+.dark .gw-orb-3 { background: rgba(232,24,109,0.18); }
 
 /* ══════════ BUTTONS ══════════ */
 .btn-primary {
@@ -1706,29 +1707,14 @@ function HowScreen({ step }: { step: number }) {
 /* ══════════ MAIN EXPORT ══════════ */
 export default function GatewayLanding() {
   const [activeStep, setActiveStep] = useState(0);
-  const [isDark, setIsDark] = useState(() => {
-    try { return localStorage.getItem("gw-theme") === "dark"; } catch { return false; }
-  });
+  const { theme, toggleTheme } = useThemeStore();
+  const isDark = theme === "dark";
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.innerWidth <= 640);
   const showcaseRef = useRef<HTMLDivElement>(null);
   const revealRefs = useRef<Element[]>([]);
   const stepTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const toggleTheme = () => {
-    setIsDark(d => {
-      const next = !d;
-      try { localStorage.setItem("gw-theme", next ? "dark" : "light"); } catch {}
-      return next;
-    });
-  };
-
-  // Apply theme attribute to <html> so CSS vars cascade from :root correctly
-  useEffect(() => {
-    document.documentElement.setAttribute("data-gw-theme", isDark ? "dark" : "light");
-    return () => { document.documentElement.removeAttribute("data-gw-theme"); };
-  }, [isDark]);
 
   // auto-advance steps
   useEffect(() => {
