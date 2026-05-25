@@ -1461,12 +1461,21 @@ body {
   .gw-pass-ghost { display: none; }
   .gw-pass-scene { display: flex; justify-content: center; }
 
-  /* CTA */
-  .gw-cta-section { padding: 72px 20px; }
-  .gw-cta-sub { font-size: 15px; max-width: 100%; }
+  /* CTA — stack to single column on mobile */
+  .gw-cta-section { padding: 64px 20px 72px; }
+  .gw-cta-inner { grid-template-columns: 1fr; gap: 40px; }
+  .gw-cta-title { font-size: clamp(32px, 8vw, 48px); }
+  .gw-cta-sub { font-size: 15px; max-width: 100%; margin-bottom: 24px; }
+  /* pills: 2-column grid like SolCard reference */
+  .gw-event-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 28px; }
+  .gw-event-pill { justify-content: flex-start; font-size: 12px; padding: 9px 14px; }
+  .gw-cta-actions { flex-direction: column; width: 100%; }
+  .gw-cta-section .btn-primary,
+  .gw-cta-section .btn-ghost { width: 100%; justify-content: center; }
   .gw-cta-checks { gap: 16px; }
+  .gw-cta-right { justify-content: center; }
+  .gw-event-card-wrap { max-width: 100%; }
   .gw-event-card { width: 100%; max-width: 100%; }
-  .gw-cta-right { justify-content: flex-start; }
 
   /* Footer */
   .gw-footer { padding: 28px 20px; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
@@ -2118,7 +2127,7 @@ export default function GatewayLanding() {
       ════════════════════════════════ */}
       <section style={{ position: "relative", zIndex: 1 }}>
         <div className="gw-hero">
-          {isDark && <div className="gw-cityscape"><CityscapeSVG dark={isDark} /></div>}
+          <div className="gw-cityscape"><CityscapeSVG dark={isDark} /></div>
           <div className="gw-hero-text">
             <div className="gw-badge"><Zap size={10} />Free for all events</div>
             <h1 className="gw-headline font-syne">
