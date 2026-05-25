@@ -343,6 +343,15 @@ body {
   position: relative; z-index: 1;
   height: 270vh;
 }
+.gw-showcase-track::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, var(--color-bg) 0%, transparent 100%);
+  z-index: 10;
+  pointer-events: none;
+}
 .gw-showcase-sticky {
   position: sticky; top: 0;
   height: 100vh;
