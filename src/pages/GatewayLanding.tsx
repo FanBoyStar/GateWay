@@ -1462,20 +1462,29 @@ body {
   .gw-pass-scene { display: flex; justify-content: center; }
 
   /* CTA — stack to single column on mobile */
-  .gw-cta-section { padding: 64px 20px 72px; }
-  .gw-cta-inner { grid-template-columns: 1fr; gap: 40px; }
-  .gw-cta-title { font-size: clamp(32px, 8vw, 48px); }
+  .gw-cta-section { padding: 64px 20px 72px; overflow: hidden; }
+  /* Grid items MUST have min-width:0 or they'll exceed 1fr column */
+  .gw-cta-inner { grid-template-columns: 1fr; gap: 36px; }
+  .gw-cta-inner > * { min-width: 0; }
+  .gw-cta-title { font-size: clamp(30px, 8vw, 46px); }
   .gw-cta-sub { font-size: 15px; max-width: 100%; margin-bottom: 24px; }
   /* pills: 2-column grid like SolCard reference */
   .gw-event-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 28px; }
-  .gw-event-pill { justify-content: flex-start; font-size: 12px; padding: 9px 14px; }
+  .gw-event-pill { justify-content: flex-start; font-size: 12px; padding: 9px 14px; width: 100%; box-sizing: border-box; }
   .gw-cta-actions { flex-direction: column; width: 100%; }
   .gw-cta-section .btn-primary,
   .gw-cta-section .btn-ghost { width: 100%; justify-content: center; }
   .gw-cta-checks { gap: 16px; }
-  .gw-cta-right { justify-content: center; }
-  .gw-event-card-wrap { max-width: 100%; }
-  .gw-event-card { width: 100%; max-width: 100%; }
+  /* Right column — card must stay inside viewport */
+  .gw-cta-right { min-width: 0; width: 100%; justify-content: center; }
+  .gw-event-card-wrap { width: 100%; max-width: 100%; box-sizing: border-box; }
+  .gw-event-card { width: 100%; min-width: 0; }
+  /* Card internals — fix text overflow */
+  .gw-ec-area { height: 300px; }
+  .gw-ec-name { white-space: normal; font-size: 20px; line-height: 1.2; }
+  .gw-ec-bar { flex-wrap: wrap; gap: 8px; border-radius: 18px; padding: 10px 14px; }
+  .gw-ec-bar-badge { font-size: 11px; padding: 7px 12px; white-space: normal; flex-shrink: 1; }
+  .gw-ec-bar-seat { font-size: 12px; }
 
   /* Footer */
   .gw-footer { padding: 28px 20px; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
