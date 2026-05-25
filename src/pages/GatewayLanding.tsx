@@ -273,7 +273,7 @@ body {
 /* ══════════ HERO V2 — CENTERED ══════════ */
 .gw-hero {
   position: relative; z-index: 1;
-  padding: 160px 24px 80px;
+  padding: 160px 24px 24px;
   display: flex; flex-direction: column; align-items: center;
   text-align: center;
 }
@@ -1139,7 +1139,7 @@ body {
   .gw-nav-links { display: none; }
   .gw-nav-cta { padding: 10px 18px; font-size: 13px; }
 
-  .gw-hero { grid-template-columns: 1fr; padding: 120px 24px 80px; text-align: center; }
+  .gw-hero { grid-template-columns: 1fr; padding: 120px 24px 20px; text-align: center; }
   .gw-hero-left { align-items: center; }
   .gw-hero-right { margin-top: 48px; }
   .gw-hero-slash { display: none; }
@@ -1167,7 +1167,7 @@ body {
   .gw-mobile-menu { display: flex; }
 
   /* Hero */
-  .gw-hero { padding: 90px 20px 40px; }
+  .gw-hero { padding: 90px 20px 16px; }
   .gw-badge { margin-bottom: 20px; font-size: 10px; }
   .gw-headline { font-size: clamp(34px, 9vw, 52px); }
   .gw-sub { font-size: 16px; max-width: 100%; margin-top: 18px; }
