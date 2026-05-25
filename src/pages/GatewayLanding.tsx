@@ -1158,7 +1158,7 @@ body {
   .gw-mobile-menu { display: flex; }
 
   /* Hero */
-  .gw-hero { padding: 90px 20px 16px; }
+  .gw-hero { padding: 90px 20px 16px; min-height: auto; }
   .gw-badge { margin-bottom: 20px; font-size: 10px; }
   .gw-headline { font-size: clamp(34px, 9vw, 52px); }
   .gw-sub { font-size: 16px; max-width: 100%; margin-top: 18px; }
