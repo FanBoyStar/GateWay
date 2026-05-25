@@ -1405,7 +1405,7 @@ body {
 /* ══════════ RESPONSIVE — MOBILE ══════════ */
 @media (max-width: 640px) {
   /* Nav — hamburger layout */
-  .gw-nav { padding: 12px 16px; gap: 0; }
+  .gw-nav { padding: 12px 16px; gap: 0; display: flex; justify-content: space-between; }
   .gw-nav-links { display: none; }
   .gw-nav-cta { display: none; }
   .gw-logo { font-size: 17px; flex: 1; }
