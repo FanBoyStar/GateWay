@@ -216,42 +216,44 @@ export function CreateEvent() {
       <BottomNav />
       <PageWrapper>
         <div className="max-w-4xl mx-auto">
-          {/* Stepper */}
-          <div className="flex items-center justify-center mb-8">
-            {steps.map((step, index) => {
-              const Icon = step.icon;
-              const isActive = currentStep === step.id;
-              const isComplete = currentStep > step.id;
+         {/* Stepper */}
+<div className="flex items-center justify-center mb-8 w-full overflow-hidden">
+  {steps.map((step, index) => {
+    const Icon = step.icon;
+    const isActive = currentStep === step.id;
+    const isComplete = currentStep > step.id;
 
-              return (
-                <div key={step.id} className="flex items-center">
-                  <div
-                    className={cn(
-                      'flex items-center gap-2 px-4 py-2 rounded-full transition-all',
-                      isActive && 'bg-[var(--neon-primary)] text-white',
-                      isComplete && 'bg-[var(--neon-primary-soft)] text-[var(--neon-primary)]',
-                      !isActive && !isComplete && 'bg-muted text-muted-foreground'
-                    )}
-                  >
-                    {isComplete ? (
-                      <Check className="h-4 w-4" />
-                    ) : (
-                      <Icon className="h-4 w-4" />
-                    )}
-                    <span className="text-sm font-medium">{step.name}</span>
-                  </div>
-                  {index < steps.length - 1 && (
-                    <div
-                      className={cn(
-                        'w-8 h-0.5 mx-2',
-                        currentStep > step.id ? 'bg-[var(--neon-primary)]' : 'bg-border'
-                      )}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </div>
+    return (
+      <div key={step.id} className="flex items-center shrink-0">
+        <div
+          className={cn(
+            'flex items-center gap-1.5 px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-full transition-all',
+            isActive && 'bg-[var(--neon-primary)] text-white',
+            isComplete && 'bg-[var(--neon-primary-soft)] text-[var(--neon-primary)]',
+            !isActive && !isComplete && 'bg-muted text-muted-foreground'
+          )}
+        >
+          {isComplete ? (
+            <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+          ) : (
+            <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+          )}
+          <span className="text-xs sm:text-sm font-medium whitespace-nowrap">
+            {step.name}
+          </span>
+        </div>
+        {index < steps.length - 1 && (
+          <div
+            className={cn(
+              'h-0.5 mx-1 sm:mx-2 w-4 sm:w-8 shrink-0',
+              currentStep > step.id ? 'bg-[var(--neon-primary)]' : 'bg-border'
+            )}
+          />
+        )}
+      </div>
+    );
+  })}
+</div>
 
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Step 1: Event Details */}
