@@ -341,7 +341,7 @@ body {
 .gw-showcase-sticky {
   position: sticky; top: 0;
   height: 100vh;
-  display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: flex-start; padding-top: 10vh; justify-content: center;
   overflow: hidden;
 }
 .gw-showcase-inner {
@@ -1165,7 +1165,7 @@ body {
 
   /* Showcase — mobile */
   .gw-showcase-track { height: 300vh; }
-  .gw-showcase-sticky { height: 100svh; }
+  .gw-showcase-sticky { height: 100svh; padding-top: 8svh; }
   /* full-width inner so right:4px bubbles pin to viewport edge */
   .gw-showcase-inner { width: 100%; height: 100%; }
   /* Pass card — mobile: scale down slightly so bubbles have room */
